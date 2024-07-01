@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { inter, montserrat, karla, oxygen, playball, racing_sans_one, galada, mystery_quest} from '@/font/fonts';
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.variable} ${montserrat.variable} ${karla.variable} ${oxygen.variable} ${playball.variable} ${racing_sans_one.variable} ${galada.variable} ${mystery_quest.variable} `}>
+        {children}
+      </body>
     </html>
   );
 }

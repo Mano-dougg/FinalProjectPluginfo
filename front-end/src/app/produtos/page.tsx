@@ -109,6 +109,10 @@ export default function Produtos() {
           </div>
 
           <button className="edicao">EDIÇÃO</button>
+
+          <button className="filtros-mobile">Filtros</button>
+          <button className="edicao-mobile">Edição</button>
+          
         </div>
 
         <div className="remover-filtros">

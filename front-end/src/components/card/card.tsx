@@ -13,7 +13,7 @@ export default function Card() {
         <h1>Serum Viitalice</h1>
         <h2><span>R$25,99</span> R$ 20,99</h2>
         <p>3x sem juros no cartão de crédito</p>
-        <button> ADICIONE AO CARRINHO <Image src={cart} alt=""/></button>
+        <button> ADICIONE AO CARRINHO <Image src={cart} width={32} alt=""/></button>
     </section>
   );
 }

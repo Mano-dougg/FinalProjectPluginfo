@@ -4,6 +4,13 @@
     flex-direction: column;
     gap:16px;
     max-width: 352px;
+    min-width: 136px;
+    width: 25vw;
+}
+
+.card-img{
+    width: 100%;
+    height: auto;
 }
 
 /* nome do produto */
@@ -66,7 +73,7 @@
     justify-content: space-between;
     padding: 6px;
 
-    width: 346px;
+    max-width: 346px;
     height: 44px;
 
     background: #000000;
@@ -78,5 +85,39 @@
     font-size: 20px;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+
+}
+
+@media (max-width: 1200px){
+    .card button{
+        font-size: 18px;
+    }
+}
+
+@media(max-width:750px){
+    .card {
+        gap:5px
+    }
+    .card button{
+        display: none;
+    }
+    .card p{
+        display: none;
+    }
+
+    .card h2 span{
+        display: none;
+    }
+    .card h2{
+
+        font-weight: 500;
+        font-size: clamp(10px,3vw,20px);
+        color: black;
+    }
+
+    .card h1{
+        font-weight: 600;
+        font-size: clamp(12px,3.5vw,20px);
+    }
 
 }

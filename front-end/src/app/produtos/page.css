@@ -1,0 +1,193 @@
+/* CAPA */
+
+.cover-container{
+    position: relative;
+    display: inline-block;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.cover-container .fundo{
+    object-fit: cover;
+    width: 100vw;
+    height: auto;
+    max-height: 249px;
+    min-height: 105px;
+}
+
+.cover-container h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    font-family: var(--montserrat-font);
+    font-weight: 700;
+    font-size: 35px;
+    letter-spacing: 0.08em;
+
+    color:white;
+
+}
+
+.cover-container  h1 .maior{
+    font-size: 51px;
+    line-height: 100px;
+}
+
+.cover-container  h1 .amarelo{
+    color: var(--yellow);
+}
+
+.cover-container #titulo2{
+    visibility: hidden;
+}
+
+@media (max-width: 1439px){
+    .cover-container h1{
+        font-size: clamp(12px, 3.75vw, 35px);
+    }
+    .cover-container #titulo1{
+        visibility: hidden;
+    }
+    .cover-container #titulo2{
+        visibility: visible;
+    }
+}
+
+
+
+/* PÁGINA */
+.produtos{
+    background-color: var(--grey);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+/* FILTROS-CONTAINER */
+
+/* filtros e remover filtros */
+.filtros-container{
+    align-self: center;
+    display: flex;
+    flex-direction: column; 
+    width: 85%;
+    font-family: var(--montserrat-font);
+
+    margin-bottom: 17px;
+}
+
+
+/* FILTROS-EDIÇÃO (dentro de filtros-container) */
+
+/* filtros e botão de editar */
+.filtros-container .filtros-edicao{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    margin-top: 37px;
+}
+
+/* h1 e categorias de filtros (versão full screen)*/
+.filtros-container .filtros{
+    display: flex;
+    flex-direction: column;
+    gap:37px;
+}
+
+/* titulo "filtros" */
+.filtros-container .filtros h1{
+
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+
+    color: black;
+}
+
+/* botoes de categorias de filtros */
+.filtros-container .categorias{
+    display: flex;
+    flex-direction: row;
+    gap:33px;
+    margin-bottom: 17px;
+}
+
+.filtros-container .categorias button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    width: 159px;
+    height: 44px;
+    background: black;
+    border-radius: 10px;
+
+    font-family: var(--montserrat-font);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    color: white;
+
+}
+
+/* botão de edição */
+.edicao {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 159px;
+    height: 44px;
+    background: black;
+    border-radius: 10px;
+
+    font-family: var(--montserrat-font);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    color: white;
+
+    margin-top: 57px;
+}
+
+/* REMOVER-FILTROS (dentro de filtros-container) */
+.filtros-container .remover-filtros{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap:33px;
+    row-gap: 17px;
+}
+
+.filtros-container .remover-filtros button {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 7px;
+    gap: 10px;
+
+    background: #C4324D;
+    border-radius: 10px;
+
+
+    font-family: var(--montserrat-font);
+    font-weight: 400;
+    font-size: 18px;
+
+    color: white;
+
+}

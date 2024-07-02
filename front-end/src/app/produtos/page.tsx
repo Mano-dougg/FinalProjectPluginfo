@@ -2,9 +2,9 @@
 
 import "./page.css";
 import Image from "next/image";
-import fundo from "@/assets/fundo1.png"
-import seta from "@/assets/seta.png"
-import close from "@/assets/window-close.png"
+import fundo from "@/assets/imgs/fundo1.png"
+import seta from "@/assets/imgs/seta.png"
+import close from "@/assets/imgs/window-close.png"
 
 import { useState } from "react";
 

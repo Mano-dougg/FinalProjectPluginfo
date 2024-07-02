@@ -1,4 +1,5 @@
 'use client'
+import "./globals.css"
 import { inter, montserrat, karla, oxygen, playball, racing_sans_one, galada, mystery_quest } from '@/font/fonts';
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";

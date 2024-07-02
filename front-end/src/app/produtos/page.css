@@ -38,7 +38,7 @@
 }
 
 .cover-container  h1 .amarelo{
-    color: var(--color-yellow);
+    color: var(--yellow);
 }
 
 .cover-container #titulo2{
@@ -61,7 +61,7 @@
 
 /* PÁGINA */
 .produtos{
-    background-color: var(--color-grey);
+    background-color: var(--grey);
     width: 100vw;
     display: flex;
     flex-direction: column;

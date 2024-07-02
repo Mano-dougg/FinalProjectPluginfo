@@ -1,0 +1,82 @@
+/* card do produto */
+.card{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    max-width: 352px;
+}
+
+/* nome do produto */
+.card h1{
+
+    font-family: var(--karla-font);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+
+    color: black;
+}
+
+/* preço novo */
+.card h2{
+
+    font-family: var(--karla-font);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+
+    color: #DA667B;
+}
+
+/* preço riscado */
+.card h2 span{
+
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    text-decoration-line: line-through;
+
+    color: #000000;
+
+    opacity: 0.5;
+
+}
+
+/* dividir no cartão */
+.card p{
+
+    font-family: var(--karla-font);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+
+    color: #000000;
+
+}
+
+/* botão adicionar no carrinho */
+.card button{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+
+    width: 346px;
+    height: 44px;
+
+    background: #000000;
+    border-radius: 10px;
+
+
+    font-family: var(--karla-font);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+
+}

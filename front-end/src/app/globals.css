@@ -1,15 +1,17 @@
 :root {
 --color-rose1:#DA667B;
 --color-rose2:#F18196;
---color-yellow:#FFCC00;
+--color-yelow:#FFCC00;
 --color-black:#000000;
---color-grey:#D9D9D9;
+--color-green:#D9D9D9;
 --color-blue:#2576C1;
---color-green:#04FA49;
+--color-grey:#04FA49;
+
 }
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 0 auto;
   box-sizing: border-box;
+
 }

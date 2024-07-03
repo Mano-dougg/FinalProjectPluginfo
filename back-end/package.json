@@ -12,6 +12,7 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/mime-types": "^2.1.4",
     "@types/multer": "^1.4.11",
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
@@ -19,7 +20,14 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.609.0",
+    "@aws-sdk/s3-request-presigner": "^3.609.0",
+    "@aws-sdk/util-stream-node": "^3.374.0",
+    "@types/mime": "^4.0.0",
+    "aws-sdk": "^2.1653.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "mime": "^4.0.3",
     "multer": "^1.4.5-lts.1",
     "node": "^20.15.0",
     "types": "^0.1.1"

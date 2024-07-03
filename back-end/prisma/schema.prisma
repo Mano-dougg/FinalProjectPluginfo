@@ -13,7 +13,7 @@ datasource db {
 model Produto {
   id Int @unique @id @default(autoincrement())
   nome String @unique
-  imagePath String
+  imagePath imagePath[]
   marca String
 
   // Preço 
@@ -32,4 +32,11 @@ model Produto {
   sombrancelha Boolean @default(false)
   unhas Boolean @default(false)
   original Boolean @default(false)
+}
+
+model imagePath {
+  id         Int      @id @unique @default(autoincrement())
+  url        String
+  produtoId  Int
+  produto    Produto  @relation(fields: [produtoId], references: [id])
 }

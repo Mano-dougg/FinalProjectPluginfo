@@ -16,7 +16,7 @@ class S3Storage {
         });
     }
 
-    async saveFile(filename: string): Promise<void> {
+    async saveFile(filename: string): Promise<string> {
         const originalPath = resolve(multer.directory, filename);
 
         const contentType = lookup(originalPath);
@@ -32,16 +32,20 @@ class S3Storage {
                 Bucket: 'shine-original',
                 Key: filename,
                 Body: fileContent,
+                ACL: 'public-read',
                 ContentType: contentType,
             });
 
-            await this.client.send(command);
+            const data = await this.client.send(command);
 
-            console.log(`File uploaded successfully to shine-original/${filename}`);
-            
+            const url = `${filename}`;
+            console.log(`File uploaded successfully to ${url}`);
+
             await fsPromises.unlink(originalPath);
+
+            return url; // Retorna a URL da imagem após o upload
         } catch (error) {
-            console.error(`Error uploading file`);
+            console.error(`Error uploading file: ${error}`);
             throw error;
         }
     }

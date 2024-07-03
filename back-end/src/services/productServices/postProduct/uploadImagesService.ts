@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import S3Storage from "../../../utils/S3Storage";
 
+const s3Storage = new S3Storage();
+
 class UploadImagesService {
     private s3Storage: S3Storage;
 
@@ -19,29 +21,30 @@ class UploadImagesService {
         }
     }
 
-    async uploadImagesService(req: Request, res: Response) {
+    async uploadImagesService(req: Request, res: Response): Promise<string[]> {
         try {
             console.log('Received request to upload images');
             
             if (!req.files || req.files.length === 0) {
                 console.error('No files uploaded');
-                return res.status(400).json({ error: 'No files uploaded' });
+                throw new Error('No files uploaded');
             }
 
             console.log('Files received:', req.files.length);
 
-            await Promise.all(
-                (req.files as Express.Multer.File[]).map(async (file: Express.Multer.File) => {
-                    const { filename } = file;
-                    await this.execute(filename);
-                })
-            );
+            const uploadPromises = (req.files as Express.Multer.File[]).map(async (file: Express.Multer.File) => {
+                const { filename } = file;
+                const url = await s3Storage.saveFile(filename);
+                return url;
+            });
 
-            console.log('All files uploaded successfully');
-            return res.status(200).json({ msg: 'Images saved successfully' });
+            const urls: string[] = await Promise.all(uploadPromises);
+
+            console.log('All files uploaded successfully:', urls);
+            return urls; // Retorna um array de URLs das imagens enviadas
         } catch (error) {
             console.error('Error uploading files:', error);
-            return res.status(500).json({ error: 'Error uploading files' });
+            throw new Error('Error uploading files');
         }
     }
 }

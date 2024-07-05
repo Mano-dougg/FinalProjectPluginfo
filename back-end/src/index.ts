@@ -1,13 +1,13 @@
 import express from 'express';
-import { Request, Response } from 'express';
+import { routes } from './routes/routes';
+require('dotenv').config();
 
+const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-
-app.get('/', (req: Request, res: Response) => {
-    return res.status(200).json(' Hello world :) ');
-});
+app.use(cors());
+app.use(routes);
 
 const PORT = 3030;
 

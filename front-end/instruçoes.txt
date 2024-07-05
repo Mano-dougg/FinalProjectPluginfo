@@ -1,0 +1,7 @@
+npm install 
+
+
+
+dependencies do prismic:
+npm install -D prismic-ts-codegen
+

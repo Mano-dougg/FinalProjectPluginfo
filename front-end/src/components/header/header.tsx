@@ -1,9 +1,9 @@
-'use client'
 import styled from "styled-components";
 import { colors } from "@/assets/color";
 import PrimaryInputSearchIcon from "./primary-input";
 import CartControll from "./CartControll";
-
+import { useEffect, useState } from "react";
+import { createClient } from "@/prismicio";
 
 interface HeaderProps {}
 
@@ -16,21 +16,18 @@ const TagHeader = styled.header`
   background-color: ${colors.black};
 
   @media screen and (max-width: 768px) {
-  padding: 10px 20px;
-}
-  
+    padding: 10px 20px;
+  }
 `;
 
-
 const Container = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:50px;
-  width:68%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  width: 68%;
+`;
 
-
-`
 const Column1 = styled.div`
   display: flex;
   align-items: center;
@@ -39,11 +36,9 @@ const Column1 = styled.div`
 `;
 
 const Column2 = styled.div`
-  /* Estilos para a segunda coluna, se necessário */
-
   @media screen and (max-width: 768px) {
-  display:none;
-}
+    display: none;
+  }
 `;
 
 const Logo = styled.a`
@@ -64,55 +59,53 @@ const Logo = styled.a`
   }
 `;
 
-
 const MinhaConta = styled.a`
   width: 150px; 
   white-space: nowrap; 
-  
   font-family: 'Oxygen', sans-serif;
   font-size: 1.5vw;
   font-weight: 700;
   line-height: 25.25px;
   letter-spacing: 0.08em;
-  color: var(--white);
   cursor: pointer;
   color: var(--white);
-@media screen and (max-width: 768px) {
-display:none;
-}
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
+
 const Cupons = styled.p`
-font-family: 'Oxygen', sans-serif;
-text-align: center;
-font-size: 1vw;
-font-weight: 700;
-line-height: 18.94px;
-white-space: nowrap; 
+  font-family: 'Oxygen', sans-serif;
+  text-align: center;
+  font-size: 1vw;
+  font-weight: 700;
+  line-height: 18.94px;
+  white-space: nowrap; 
+  color: var(--white);
 
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 
-color: var(--white);
-@media screen and (max-width: 768px) {
-display:none;
-}
-`
-
-
-export default function Header(props: HeaderProps) {
+export default async function Header(props: HeaderProps) {
+  const [data, setData] = useState(null);
+  const prismic  = createClient()
+      const tagheader = await prismic.getByUID("tagheader","main");
+      console.log(tagheader)
   return (
     <TagHeader>
       <Column1>
-        <Logo>SHINE</Logo>
+        <Logo >{tagheader.data.logo}</Logo>
         <Container>
-        <PrimaryInputSearchIcon placeholder="Pesquise na Shine..." />
-        <MinhaConta>Minha conta</MinhaConta>
-        <Cupons> CUPONS DA LOJA/ <br/>CUPONS</Cupons>
-        <CartControll/>
+          <PrimaryInputSearchIcon placeholder="Pesquise na Shine..." />
+          <MinhaConta>{tagheader.data.acount}</MinhaConta>
+          <Cupons> CUPONS DA LOJA/ <br/>CUPONS</Cupons>
+          <CartControll/>
         </Container>
-        
-        
-       
       </Column1>
-      <Column2>Colum2</Column2>
+      <Column2>Column2</Column2>
     </TagHeader>
   );
 }

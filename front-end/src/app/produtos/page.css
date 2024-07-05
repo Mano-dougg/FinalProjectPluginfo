@@ -319,14 +319,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    row-gap: 32px;
+    row-gap: 80px;
     column-gap: 20px;
     margin-bottom: 230px;
 }
 
 @media(max-width:1300px){
     .card-container{
-        row-gap: auto;
+        row-gap: 32px;
     }
 }
 

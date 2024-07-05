@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { resolve } from "path";
 import multer from '../config/multer';
 import { lookup } from 'mime-types';
@@ -46,6 +46,21 @@ class S3Storage {
             return url; // Retorna a URL da imagem após o upload
         } catch (error) {
             console.error(`Error uploading file: ${error}`);
+            throw error;
+        }
+    }
+
+    async deleteFile(filename: string): Promise<void> {
+        const command = new DeleteObjectCommand({
+            Bucket: 'shine-original',
+            Key: filename,
+        });
+
+        try {
+            await this.client.send(command);
+            console.log(`File deleted successfully from ${filename}`);
+        } catch (error) {
+            console.error(`Error deleting file: ${error}`);
             throw error;
         }
     }

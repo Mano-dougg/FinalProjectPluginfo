@@ -1,0 +1,505 @@
+/* plano de fundo overlay */
+.fundo-modal{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height:100vh;
+    top:0;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    background-color: rgba(32, 30, 30, 0.5);
+    overflow-y: scroll;
+}
+
+/* bloco do modal */
+.modal{
+    position: fixed;
+    background: var(--grey);
+    width: clamp(292px,80vw,928px);
+    /* height: 674px; */
+    height: 660px;
+    font-family: var(--montserrat-font);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+@media(max-width:1000px){
+    .modal{
+        gap:3%;
+        width: 90%;
+    }
+    .modal .modal-titulo{
+        font-size: 30px;
+        align-items: center;
+    }
+    .pen-icon{
+        height: 40px;
+        width: auto;
+    }
+    .modal .modal-info{
+        width: 40%;
+        margin-right: 2%;
+    }
+    .modal .modal-imgs{
+        margin-left: 2%;
+    }
+    .modal .modal-img{
+        height: 210px;
+        width: 240px;
+    }
+    .modal .side-img{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media(max-width:600px){
+
+    .modal{
+        flex-direction: column;
+        align-self: center;
+        justify-items: center;
+        align-items: center;
+        gap:0;
+        height:536px;
+        width: 292px;
+    }
+
+    .modal .close-icon{
+        width: 21px;
+        height: 21px;
+        top:3px;
+        right:3px;
+    }
+
+    .modal .modal-titulo{
+        top:13px;
+        font-size: 15px;
+        left: 10%;
+    }
+
+    .modal .novo-produto{
+        top:15px;
+        left: 60%;
+        font-size: 10px;
+    }
+
+    .modal .img-novo-produto{
+        width: 13px;
+        height: 13px;
+    }
+
+    .modal .pen-icon{
+        height: 20px;
+        width: 20px;
+    }
+
+    .modal .modal-info{
+        width: 90%;
+        margin-top: 0;
+    }
+
+    .modal .modal-imgs {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+
+    .modal .modal-imgs .side-imgs{
+        flex-direction: column;
+        margin:auto;
+        height: 100%;
+        order: 0;
+    }
+
+    .modal .modal-imgs .modal-img{
+        height: 152px;
+        width: 180px;
+    }
+
+    .modal .modal-imgs .side-img{
+        height: 34px;
+        width: 34px;
+    }
+
+    .modal .modal-info{
+        margin-top: -60px;
+        gap:5px;
+        width: 80%;
+    }
+
+    .modal .modal-info label{
+        font-size: 8px;
+    }
+
+    .modal .modal-info .nome-produto{
+        height: 20px;
+        width: 100%;
+    }
+
+    .modal .modal-info .modal-preco input{
+        height: 20px;
+    }
+
+    .modal .modal-info .modal-preco{
+        margin-top: -5px;
+        gap:auto;
+        width: 100%;
+    }
+
+    .modal .modal-info .modal-description{
+        height: 80px;
+        margin-top: 2px;
+    }
+
+    .modal .modal-info .tag-marca{
+        margin-top: 10px;
+        height: 22px;
+        gap:10px
+    }
+
+    .modal .modal-info .tag-marca button{
+        font-size: 8px;
+        border: 0.5px solid black;
+    }
+
+    .modal .modal-info .tag-marca input::placeholder{
+        font-size: 8px;
+        text-align: center;
+        color: #000000;
+    }
+
+    .modal .salvar-excluir{
+        bottom: 15px;
+        width: 230px;
+        left:10%;
+    }
+
+    .modal .salvar-excluir button{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        height: 24px;
+        width:24px;
+
+
+        background: #FFFFFF;
+        border: 0.5px solid #000000;
+        border-radius: 5px;
+
+        font-size: 10px;
+    }
+
+    .modal-info .modal-description textarea{
+        font-size: 8px;
+    }
+
+    .modal .modal-info input{
+        font-size: 8px;
+    }
+
+}
+
+
+/* itens fixos */
+
+.novo-produto{
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    top:24px;
+    left:65%;
+}
+
+.close-icon{
+    position: absolute;
+    right:8px;
+    top:8px;
+}
+
+.modal-titulo{
+    display: flex;
+    flex-direction: row;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    gap:8px;
+    
+    position: absolute;
+    top:57px;
+    left: 10%;
+}
+
+.salvar-excluir{
+    position: absolute;
+    bottom: 6%;
+    gap:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.salvar-excluir button{
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 49px;
+    gap: 10px;
+
+    width: 160px;
+    height: 38px;
+
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    font-family: var(--montserrat-font);
+    font-weight: 600;
+    font-size: 15px;
+
+}
+
+
+
+/* imagens do modal */
+.modal-imgs{
+
+    margin-top:130px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+
+.modal-imgs .side-imgs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+
+
+/* informações do modal (inputs labels botoes etc) */
+.modal-info{
+    margin-top:100px;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    width: 352px;
+}
+
+.modal-info label{
+    font-weight: 600;
+    font-size: 14px;
+    color: black;
+}
+
+.modal-info input{
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: none;
+}
+
+.modal-info .tag-marca{
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 100%;
+    right: 2px;
+    gap:15px;
+}
+
+.modal-info .tag-marca input{
+    width: 100%;
+}
+
+.modal-info .tag-marca input::placeholder{
+    text-align: center;
+    font-size: 14px;
+}
+
+.modal-info .tag-marca button{
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--montserrat-font);
+
+}
+
+.modal-info .nome-produto{
+    display: flex;
+    width: auto;
+    height: 42px;
+}
+
+.modal-info .nome-produto{
+    padding-left: 5%;
+}
+
+.modal-info .modal-description{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+
+.modal-info .modal-description textarea{
+    height: 100px;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.modal-info .modal-preco{
+    display: flex;
+    flex-direction: row;
+    height: 55px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-info .modal-preco input{
+    height: 36px;
+    width: 90%;
+    padding-left: 10px;
+}
+
+.modal-info .radio-options{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+
+
+/* HOOVERS */
+
+.novo-produto:hover{
+    cursor: pointer;
+}
+
+.close-icon{
+    cursor: pointer;
+}
+
+
+/* opcções tag e marca */
+
+.brand-options {
+    max-height: 105px;
+    left: 53%;
+    overflow-y: auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: #fff;
+    padding: 10px;
+    z-index: 120;
+    position: absolute;
+    width: 47%;
+  }
+  
+.brand-options label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.brand-options input{
+    height: 12px;
+    width: 12px;
+    margin-right: 3px;
+}
+
+.tag-options {
+    max-height: 105px;
+    right: 53%;
+    overflow-y: auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: #fff;
+    padding: 10px;
+    z-index: 120;
+    position: absolute;
+    width: 47%;
+  }
+  
+.tag-options label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.tag-options input{
+    height: 12px;
+    width: 12px;
+    margin-right: 3px;
+}
+
+.modal .modal-info .tag-marca button{
+    display: flex;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .modal-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    margin-top: -10px;
+}
+
+@media (max-width:600px){
+    .tag-options {
+        max-height: 60px;
+      }
+      
+    .modal .tag-options label {
+        font-size: 8px;
+        margin-bottom: 6px;
+    }
+    .tag-options input{
+        height: 8px;
+        width: 10px;
+        margin-right: 2px;
+    }
+    .modal .modal-row{
+        margin-top: -2px;
+    }
+    .tag-marca-img{
+        height: 6px;
+        width: 8px;
+    }
+    .brand-options {
+        max-height: 60px;
+      }
+      
+    .modal .brand-options label {
+        font-size: 8px;
+        margin-bottom: 6px;
+    }
+    .brand-options input{
+        height: 8px;
+        width: 10px;
+        margin-right: 2px;
+    }
+}

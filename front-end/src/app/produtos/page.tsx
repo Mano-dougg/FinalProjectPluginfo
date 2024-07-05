@@ -2,12 +2,14 @@
 
 import "./page.css";
 import Image from "next/image";
-import fundo from "@/assets/imgs/fundo1.png"
-import seta from "@/assets/imgs/seta.png"
-import close from "@/assets/imgs/window-close.png"
+import fundo from "@/assets/imgs/fundo1.png";
+import seta from "@/assets/imgs/seta.png";
+import close from "@/assets/imgs/window-close.png";
 
 import { useState } from "react";
 import Card from "@/components/card/card";
+import EditModal from "@/components/modal/editModal";
+import CreateModal from "@/components/modal/createModal";
 
 export default function Produtos() {
   // armazena os filtros ativos
@@ -26,8 +28,23 @@ export default function Produtos() {
     setFiltros(filtros.filter(item => item !== filtro));
   };
 
+  const [modalType, setModalType] = useState<"edit" | "create" | null>(null);
+
+  const openEditModal = () => {
+    setModalType("edit");
+  };
+
+  const openCreateModal = () => {
+    setModalType("create");
+  };
+
+  const closeModal = () => {
+    setModalType(null);
+  };
+
   return (
     <section className="produtos">
+
       <div className="cover-container">
         <Image src={fundo} alt="" className="fundo" />
         <h1 id="titulo1"><span className="maior"> PRODUTOS <span className="amarelo">EXCLUSIVOS </span></span><br /> PARA TODOS OS GOSTOS </h1>
@@ -39,7 +56,6 @@ export default function Produtos() {
           <div className="filtros">
             <h1>FILTROS</h1>
             <div className="categorias">
-
               <div className="maquiagem">
                 <button onClick={() => toggleCategory('MAQUIAGEM')}>
                   <Image src={seta} alt="" width={10} />MAQUIAGEM
@@ -104,11 +120,13 @@ export default function Produtos() {
                   </div>
                 )}
               </div>
-
             </div>
           </div>
 
-          <button className="edicao">EDIÇÃO</button>
+          <button className="edicao" onClick={openEditModal}>EDIÇÃO</button>
+
+          <button className="filtros-mobile">Filtros</button>
+          <button className="edicao-mobile" onClick={openEditModal}>Edição</button>
         </div>
 
         <div className="remover-filtros">
@@ -127,17 +145,19 @@ export default function Produtos() {
       </section>
 
       <div className="card-container">
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-    </div>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
+
+      {modalType === "edit" && <EditModal onClose={closeModal} onOpenCreate={openCreateModal} />}
+      {modalType === "create" && <CreateModal onClose={closeModal} onOpenEdit={openEditModal} />}
     </section>
   );
 }
-

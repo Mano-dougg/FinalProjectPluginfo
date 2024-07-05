@@ -1,0 +1,47 @@
+{
+  "format": "custom",
+  "id": "tagheader",
+  "label": "tagHeader",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID",
+          "placeholder": "header"
+        },
+        "type": "UID"
+      },
+      "logo": {
+        "type": "Text",
+        "config": {
+          "label": "logo",
+          "placeholder": ""
+        }
+      },
+      "acount": {
+        "type": "Text",
+        "config": {
+          "label": "acount",
+          "placeholder": ""
+        }
+      },
+      "cart": {
+        "type": "Image",
+        "config": {
+          "label": "cart",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    }
+  }
+}

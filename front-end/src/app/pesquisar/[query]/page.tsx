@@ -7,6 +7,7 @@ import Image from "next/image";
 import fundo from "@/assets/imgs/fundo1.png";
 import seta from "@/assets/imgs/seta.png";
 import close from "@/assets/imgs/window-close.png";
+import setaFechar from "@/assets/imgs/toggle-close.png";
 import Card from "@/components/card/card";
 
 
@@ -23,7 +24,8 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
   const decodedSearch: string = decodeURIComponent(query);
 
   // armazena os filtros ativos
-  const [filtros, setFiltros] = useState<string[]>(['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original', 'Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe']);
+  const [filtros, setFiltros] = useState<string[]>([]);
+  const [preco, setPreco] = useState<[number, number]>([0, 1000]);
 
   // armazena a visibilidade dos filtros para cada categoria
   const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
@@ -33,9 +35,25 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
     setVisibleCategory(visibleCategory === category ? null : category);
   };
 
+  // função para adicionar ou remover filtro
+  const toggleFiltro = (filtro: string) => {
+    setFiltros((prevFiltros) =>
+      prevFiltros.includes(filtro)
+        ? prevFiltros.filter((item) => item !== filtro)
+        : [...prevFiltros, filtro]
+    );
+  };
+
   // função para remoção de filtro
   const removerFiltro = (filtro: string) => {
     setFiltros(filtros.filter(item => item !== filtro));
+  };
+
+
+  const handlePrecoChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newPreco = [...preco];
+    newPreco[index] = parseInt(event.target.value);
+    setPreco([Math.min(newPreco[0], newPreco[1]), Math.max(newPreco[0], newPreco[1])]);
   };
 
   // array de teste -> tipo será produto depois que criar
@@ -45,77 +63,103 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
     <section className="produtos">
 
       <div className="cover-container">
-        <Image src={fundo} alt="" className="fundo" />
+        <Image src={fundo} alt="" className="fundo" priority={false}/>
         <h1 id="titulo1"><span className="maior"> PRODUTOS <span className="amarelo">EXCLUSIVOS </span></span><br /> PARA TODOS OS GOSTOS </h1>
         <h1 id="titulo2">Produtos Exclusivos para todos os <span className="amarelo"> gostos </span> </h1>
       </div>
 
       <section className="filtros-container">
+
         <div className="filtros-edicao">
           <div className="filtros">
             <h1>FILTROS</h1>
+
             <div className="categorias">
+              
               <div className="maquiagem">
-                <button onClick={() => toggleCategory('MAQUIAGEM')}>
-                  <Image src={seta} alt="" width={10} />MAQUIAGEM
+                <button onClick={() => toggleCategory('MAQUIAGEM')} id={visibleCategory === 'MAQUIAGEM' ? 'button-open' : undefined}>
+                  {visibleCategory === 'MAQUIAGEM' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}MAQUIAGEM
                 </button>
                 {visibleCategory === 'MAQUIAGEM' && (
                   <div className="filter-options">
                     {['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original'].map((filtro) => (
-                      <button key={filtro}>{filtro}</button>
+                      <label key={filtro}>
+                        <input
+                          type="checkbox"
+                          value={filtro}
+                          checked={filtros.includes(filtro)}
+                          onChange={() => toggleFiltro(filtro)}
+                        /> {filtro}
+                      </label>
                     ))}
                   </div>
                 )}
               </div>
 
               <div className="marcas">
-                <button onClick={() => toggleCategory('MARCAS')}>
-                  <Image src={seta} alt="" width={10} />MARCAS
+                <button onClick={() => toggleCategory('MARCAS')} id={visibleCategory === 'MARCAS' ? 'button-open' : undefined}>
+                {visibleCategory === 'MARCAS' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}MARCAS
                 </button>
                 {visibleCategory === 'MARCAS' && (
                   <div className="filter-options">
                     {['Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe'].map((filtro) => (
-                      <button key={filtro}>{filtro}</button>
+                      <label key={filtro}>
+                        <input
+                          type="checkbox"
+                          value={filtro}
+                          checked={filtros.includes(filtro)}
+                          onChange={() => toggleFiltro(filtro)}
+                        /> {filtro}
+                      </label>
                     ))}
                   </div>
                 )}
               </div>
 
               <div className="preco">
-                <button onClick={() => toggleCategory('PREÇO')}>
-                  <Image src={seta} alt="" width={10} />PREÇO
+                <button onClick={() => toggleCategory('PREÇO')} id={visibleCategory === 'PREÇO' ? 'button-open' : undefined}>
+                {visibleCategory === 'PREÇO' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}PREÇO
                 </button>
                 {visibleCategory === 'PREÇO' && (
                   <div className="filter-options">
-                    <p>Filtro preço</p>
+                    <div className="preco-slider">
+                      <label> de R$: {preco[0]}</label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1000"
+                          value={preco[0]}
+                          onChange={(event) => handlePrecoChange(event, 0)}
+                        />
+                      <label> até R$: {preco[1]}</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1000"
+                        value={preco[1]}
+                        onChange={(event) => handlePrecoChange(event, 1)}
+                      />
+                    </div>
                   </div>
                 )}
               </div>
 
               <div className="promocao">
-                <button onClick={() => toggleCategory('PROMOÇÃO')}>
-                  <Image src={seta} alt="" width={10} />PROMOÇÃO
+                <button onClick={() => toggleCategory('PROMOÇÃO')} id={visibleCategory === 'PROMOÇÃO' ? 'button-open' : undefined}>
+                {visibleCategory === 'PROMOÇÃO' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}PROMOÇÃO
                 </button>
                 {visibleCategory === 'PROMOÇÃO' && (
                   <div className="filter-options">
-                    <label>
-                      <input type="checkbox" value="Frete grátis" /> Frete grátis
-                    </label>
-                    <label>
-                      <input type="checkbox" value="20% off" /> 20% off
-                    </label>
-                    <label>
-                      <input type="checkbox" value="30% a 40% off" /> 30% a 40% off
-                    </label>
-                    <label>
-                      <input type="checkbox" value="50% off" /> 50% off
-                    </label>
-                    <label>
-                      <input type="checkbox" value="60% off" /> 60% off
-                    </label>
-                    <label>
-                      <input type="checkbox" value="70% a 90% off" /> 70% a 90% off
-                    </label>
+                    {['Frete grátis','20% off', '30% a 40% off', '50% off', '60% off','70% a 90% off'].map((filtro) => (
+                      <label key={filtro}>
+                        <input
+                          type="checkbox"
+                          value={filtro}
+                          checked={filtros.includes(filtro)}
+                          onChange={() => toggleFiltro(filtro)}
+                        /> {filtro}
+                      </label>
+                    ))}
                   </div>
                 )}
               </div>
@@ -139,22 +183,21 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
             </button>
           ))}
         </div>
-      </section>
-      
-      {produtosEncontrados.length === 0 && <section className="sem-resultados">
-          <h1> Nenhum resultado para sua pesquisa por &quot;{decodedSearch}&quot; </h1>
-          <p>Verifique a os termos usados na pesquisa ou utilize frases mais genéricas</p>
-      </section>}
 
-      <h2 className="recomendados"> Recomendações </h2>
-      <div className="recomendados-container">
+      </section>
+
+    {produtosEncontrados.length === 0 && 
+    <section className="sem-resultados">
+      <h1> Nenhum resultado para sua pesquisa por &quot;{decodedSearch}&quot; </h1>
+      <p>Verifique a os termos usados na pesquisa ou utilize frases mais genéricas</p>
+    </section>}
+    <h2 className="recomendados"> Recomendações </h2>
+    <div className="recomendados-container">
         <Card />
         <Card />
         <div className="card-hidden"><Card /></div>
-      </div>
-
+    </div>
     </section>
-  );
-}
+)}
 
 export default ProductPage;

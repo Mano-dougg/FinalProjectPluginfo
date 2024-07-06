@@ -336,3 +336,21 @@
         column-gap: 15px;
     }
 }
+
+
+
+.preco-slider label{
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 13px;
+}
+
+.preco-slider{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+ #button-open {
+    background-color: #DA667B;
+    color: black;
+}

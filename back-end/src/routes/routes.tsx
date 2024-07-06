@@ -6,6 +6,9 @@ import DeleteProduct from '../services/productServices/deleteProduct/deleteProdu
 import GetProducts from '../services/productServices/getProduct/getAll';
 import GetProductsName from '../services/productServices/getProduct/getProductsName';
 import FilterProducts from '../services/productServices/getProduct/FilterProduct';
+import UpdateProduct from '../services/productServices/updateProduct/updateProduct';
+
+
 const routes = Router();    
 const upload = multer(multerConfig);
 
@@ -22,6 +25,10 @@ routes.get('/getAllProducts', GetProducts.getAll);
 routes.get('/getProductsNames', GetProductsName.getProductsName);
 routes.get('/searchProduct', GetProductsName.getProductByname);
 routes.get('/filterProducts', FilterProducts.getFilteredProducts);
+
+routes.put('/editProduct/:id', upload.any(), (req, res) => {
+    UpdateProduct.editProduct(req, res);
+});
 
 export { routes };
 

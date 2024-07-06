@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { resolve } from "path";
 import multer from '../config/multer';
 import { lookup } from 'mime-types';
@@ -16,7 +16,7 @@ class S3Storage {
         });
     }
 
-    async saveFile(filename: string): Promise<void> {
+    async saveFile(filename: string): Promise<string> {
         const originalPath = resolve(multer.directory, filename);
 
         const contentType = lookup(originalPath);
@@ -32,16 +32,35 @@ class S3Storage {
                 Bucket: 'shine-original',
                 Key: filename,
                 Body: fileContent,
+                ACL: 'public-read',
                 ContentType: contentType,
             });
 
-            await this.client.send(command);
+            const data = await this.client.send(command);
 
-            console.log(`File uploaded successfully to shine-original/${filename}`);
-            
+            const url = `${filename}`;
+            console.log(`File uploaded successfully to ${url}`);
+
             await fsPromises.unlink(originalPath);
+
+            return url; // Retorna a URL da imagem após o upload
         } catch (error) {
-            console.error(`Error uploading file`);
+            console.error(`Error uploading file: ${error}`);
+            throw error;
+        }
+    }
+
+    async deleteFile(filename: string): Promise<void> {
+        const command = new DeleteObjectCommand({
+            Bucket: 'shine-original',
+            Key: filename,
+        });
+
+        try {
+            await this.client.send(command);
+            console.log(`File deleted successfully from ${filename}`);
+        } catch (error) {
+            console.error(`Error deleting file: ${error}`);
             throw error;
         }
     }

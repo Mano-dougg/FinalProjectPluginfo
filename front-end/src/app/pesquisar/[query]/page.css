@@ -17,11 +17,11 @@
     align-self: center;
     display: flex;
     flex-direction: column;
-    gap:3vw;
+    gap:2.5vw;
     width: 85%;
     max-width: 1120px;
 
-    margin-top: 5vw;
+    margin-top: 2.5vw;
     margin-bottom: 5vw;
 }
 

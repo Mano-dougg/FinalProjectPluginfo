@@ -1,0 +1,6 @@
+.product-page{
+    background: var(--grey);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

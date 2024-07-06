@@ -1,17 +1,27 @@
-'use client';
+"use client";
 
-import "../produtos/page.css";
+import "@/app/produtos/page.css"
 import "./page.css"
 
 import Image from "next/image";
 import fundo from "@/assets/imgs/fundo1.png";
 import seta from "@/assets/imgs/seta.png";
 import close from "@/assets/imgs/window-close.png";
-
-import { useState } from "react";
 import Card from "@/components/card/card";
 
-export default function Pesquisar() {
+
+import { useState } from "react";
+interface SearchPageProps {
+  params: { query: string };
+}
+
+const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
+
+  const { query } = params;
+  
+  // transforma em string o texto recebido pela url
+  const decodedSearch: string = decodeURIComponent(query);
+
   // armazena os filtros ativos
   const [filtros, setFiltros] = useState<string[]>(['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original', 'Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe']);
 
@@ -132,7 +142,7 @@ export default function Pesquisar() {
       </section>
       
       {produtosEncontrados.length === 0 && <section className="sem-resultados">
-          <h1> Nenhum resultado para sua pesquisa </h1>
+          <h1> Nenhum resultado para sua pesquisa por &quot;{decodedSearch}&quot; </h1>
           <p>Verifique a os termos usados na pesquisa ou utilize frases mais genéricas</p>
       </section>}
 
@@ -146,3 +156,5 @@ export default function Pesquisar() {
     </section>
   );
 }
+
+export default ProductPage;

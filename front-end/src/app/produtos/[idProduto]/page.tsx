@@ -2,14 +2,14 @@ import Produto from "@/components/produto/produto";
 import "./page.css"
 
 interface ProductPageProps {
-  params: { query: string };
+  params: { produtoID: number };
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
-  const { query } = params;
+  const { produtoID } = params;
   return (
     <div className="product-page">
-      <Produto query={query} />
+      <Produto id={produtoID} />
     </div>
   );
 };

@@ -5,19 +5,19 @@ import Image from "next/image";
 import "./produto.css"
 
 interface ProdutoProps {
-    query: string;
+    id: number;
   }
 
 // vai receber como parâmetro o objeto produto com suas informações
 
-const Produto: React.FC<ProdutoProps> = ({ query }) => {
+const Produto: React.FC<ProdutoProps> = ({ id }) => {
     return (
         <section className="pag-individual-produto">
             <div className="individual-produto"> 
                 <Image className="individual-produto-img" src={placeholder} width={736} height={477} alt="imagem do produto"/>
                 
                 <div className="individual-produto-info">
-                    <h1>{query} facial Sensation</h1>  
+                    <h1> Serum facial Sensation</h1>  
                     <div className="row"><h2>(4,9)</h2> <Image src={fiveStars} alt="" width={136} height={24} className="individual-produto-av"/><h2>235 Avaliações</h2></div>   
                     <div className="promocao-frete"><div className="tag1">Promoção</div><div className="tag2">Frete Grátis</div></div>
                     <h3><span>RS 350,00</span></h3>

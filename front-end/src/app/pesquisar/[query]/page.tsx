@@ -9,6 +9,7 @@ import seta from "@/assets/imgs/seta.png";
 import close from "@/assets/imgs/window-close.png";
 import setaFechar from "@/assets/imgs/toggle-close.png";
 import Card from "@/components/card/card";
+import closeIcon from "@/assets/imgs/windoow-close-black.png"
 
 
 import { useState } from "react";
@@ -26,6 +27,8 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
   // armazena os filtros ativos
   const [filtros, setFiltros] = useState<string[]>([]);
   const [preco, setPreco] = useState<[number, number]>([0, 1000]);
+
+  const [filterMobile, setFilterMobile] = useState<boolean>(false);
 
   // armazena a visibilidade dos filtros para cada categoria
   const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
@@ -72,7 +75,10 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
 
         <div className="filtros-edicao">
           <div className="filtros">
-            <h1>FILTROS</h1>
+            <div className="filtros-row">
+                <h1>FILTROS</h1>
+                <button>APLICAR</button>
+              </div>
 
             <div className="categorias">
               
@@ -167,7 +173,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
           </div>
 
 
-          <button className="filtros-mobile">Filtros</button>
+          <button className="filtro-mobile" onClick={() => setFilterMobile(true)}>Filtros</button>
         </div>
 
         <div className="remover-filtros">
@@ -185,6 +191,119 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
         </div>
 
       </section>
+    
+      {filterMobile && <section className="filtros-container-mobile">
+
+        <div className="filtros-mobile">
+          <Image src={closeIcon} alt="" width={25} height={25} className="close-filtros-mobile" onClick={() => setFilterMobile(false)}></Image>
+          <div className="filtros-mobile-row">
+            <div className="filtros-mobile-label">MAQUIAGEM</div>
+
+            <div className="categoria-mobile">
+
+              Tipo de produto... 
+              <button onClick={() => toggleCategory('MAQUIAGEM')} id={visibleCategory === 'MAQUIAGEM' ? 'button-open-mobile' : undefined}>
+                {visibleCategory === 'MAQUIAGEM' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}
+              </button>
+              {visibleCategory === 'MAQUIAGEM' && (
+                <div className="filter-options-mobile">
+                  {['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original'].map((filtro) => (
+                    <label key={filtro}>
+                      <input
+                        type="checkbox"
+                        value={filtro}
+                        checked={filtros.includes(filtro)}
+                        onChange={() => toggleFiltro(filtro)}
+                      /> {filtro}
+                    </label>
+                  ))}
+                </div>
+              )}
+
+            </div>
+          </div>
+
+          <div className="filtros-mobile-row">
+              <div className="filtros-mobile-label"> MARCAS</div>
+
+              <div className="categoria-mobile">
+
+                Tipo de marca... 
+                <button onClick={() => toggleCategory('MARCAS')}>
+                {visibleCategory === 'MARCAS' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}
+                </button>
+                {visibleCategory === 'MARCAS' && (
+                  <div className="filter-options-mobile">
+                    {['Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe'].map((filtro) => (
+                      <label key={filtro}>
+                        <input
+                          type="checkbox"
+                          value={filtro}
+                          checked={filtros.includes(filtro)}
+                          onChange={() => toggleFiltro(filtro)}
+                        /> {filtro}
+                      </label>
+                    ))}
+                  </div>
+                )}
+
+              </div>
+          </div>
+
+          <div className="filtros-mobile-row">
+            <div className="filtros-mobile-label">Preço</div>
+            <div className="preco-slider-mobile">
+                    <label> de R$: {preco[0]}</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1000"
+                        value={preco[0]}
+                        onChange={(event) => handlePrecoChange(event, 0)}
+                      />
+                    <label> até R$: {preco[1]}</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1000"
+                      value={preco[1]}
+                      onChange={(event) => handlePrecoChange(event, 1)}
+                    />
+              </div>
+            
+          </div>
+
+          <div className="filtros-mobile-row">
+            <div className="filtros-mobile-label">Promoção</div>
+
+            <div className="categoria-mobile">
+
+              Tipo de promoção...
+              <button onClick={() => toggleCategory('PROMOÇÃO')}>
+              {visibleCategory === 'PROMOÇÃO' ?  <Image src={setaFechar} alt="" width={10} />: <Image src={seta} alt="" width={10} />}
+              </button>
+              {visibleCategory === 'PROMOÇÃO' && (
+                <div className="filter-options-mobile">
+                  {['Frete grátis','20% off', '30% a 40% off', '50% off', '60% off','70% a 90% off'].map((filtro) => (
+                    <label key={filtro}>
+                      <input
+                        type="checkbox"
+                        value={filtro}
+                        checked={filtros.includes(filtro)}
+                        onChange={() => toggleFiltro(filtro)}
+                      /> {filtro}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
+          </div>
+
+          <button className="aplicar-filtros-mobile">Aplicar Filtros</button>
+        </div>
+
+      </section>}
 
     {produtosEncontrados.length === 0 && 
     <section className="sem-resultados">

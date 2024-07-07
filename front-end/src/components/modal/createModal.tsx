@@ -75,7 +75,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
       <section className="modal">
         <div className="modal-titulo">
           <Image src={pen} alt="" width={58} className="pen-icon" />
-          <h1>EDIÇÃO</h1>
+          <h1>CRIAÇÃO</h1>
         </div>
 
         <div className="novo-produto" onClick={onOpenEdit}>
@@ -120,12 +120,12 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
 
           <div className="modal-preco">
             <div className="preco-atual">
-              <label>Preço Atual</label>
+              <label>Preço Atual (R$)</label>
               <input type="number" min="0" />
             </div>
 
             <div className="preco-alterado">
-              <label>Preço Alterado</label>
+              <label>Preço Alterado (R$)</label>
               <input type="number" min="0"/>
             </div>
           </div>

@@ -18,11 +18,11 @@ model Produto {
 
   // Preço 
   preco Float
-  preco_alterado String
+  preco_alterado Float
   promocao Float
 
   descricao String
-  quantidade_carrinho Int
+  quantidade_carrinho Int @default(0)
 
   // Filtros
   face Boolean @default(false)

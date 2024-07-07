@@ -24,9 +24,9 @@ class GetProductsName {
         const { nomeProduto } = req.params
 
         try {
-            const produto = await prisma.produto.findUnique({where: {nome: nomeProduto}});
+            const produtos = await prisma.produto.findMany({where: {nome: { startsWith: nomeProduto}}});
 
-            return res.status(200).json(produto);
+            return res.status(200).json(produtos);   
         } catch (error) {
             console.log(error);
             res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});

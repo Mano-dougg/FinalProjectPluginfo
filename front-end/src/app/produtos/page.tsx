@@ -14,6 +14,7 @@ import EditModal from "@/components/modal/editModal";
 import CreateModal from "@/components/modal/createModal";
 
 export default function Produtos() {
+
   // armazena os filtros ativos
   const [filtros, setFiltros] = useState<string[]>([]);
   const [preco, setPreco] = useState<[number, number]>([0, 1000]);
@@ -21,9 +22,10 @@ export default function Produtos() {
   // armazena a visibilidade dos filtros para cada categoria
   const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
 
+  // verifica se o modal de filtros mobile está aberto
   const [filterMobile, setFilterMobile] = useState<boolean>(false);
 
-  // função para alternar a visibilidade dos filtros
+  // função para alternar a visibilidade de cada categoria dos filtros
   const toggleCategory = (category: string) => {
     setVisibleCategory(visibleCategory === category ? null : category);
   };
@@ -42,6 +44,7 @@ export default function Produtos() {
     setFiltros(filtros.filter(item => item !== filtro));
   };
 
+  // verifica qual modal está aberto 
   const [modalType, setModalType] = useState<"edit" | "create" | null>(null);
 
   const openEditModal = () => {
@@ -56,11 +59,35 @@ export default function Produtos() {
     setModalType(null);
   };
 
+  // verifica a mudança do range de preços
   const handlePrecoChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newPreco = [...preco];
     newPreco[index] = parseInt(event.target.value);
     setPreco([Math.min(newPreco[0], newPreco[1]), Math.max(newPreco[0], newPreco[1])]);
   };
+
+  // realiza nova pesquisa
+  const applyFilters = () => {
+    // essa função realizará nova pesquisa pelos produtos com os filtros indicados, retornará id dos produtos
+    // chama applyTagFilters
+    // chama applyPromotionFilters
+    // chama applyPriceFilter
+  };
+
+  const applyTagFilters = () => {
+    // essa função realizará nova pesquisa pelos produtos com os filtros indicados
+    // pesquisar marcas e categorias
+  };
+
+  const applyPromotionFilters = () =>{
+    // fazer verificação difente para promoção
+    // ex se filter == "20% off" e o (valor antigo - valor novo / valor antigo === 0,2) -> aplicar filtro 
+    // se o filtro for fréte gratis ignorar
+  }
+
+  const applyPriceFilter = () =>{
+    //verificar valor do usestate de preco minimo e máximo
+  }
 
   return (
     <section className="produtos">
@@ -77,7 +104,7 @@ export default function Produtos() {
           <div className="filtros">
             <div className="filtros-row">
               <h1>FILTROS</h1>
-              <button>APLICAR</button>
+              <button onClick={applyFilters}>APLICAR</button>
             </div>
 
             <div className="categorias">
@@ -324,365 +351,4 @@ export default function Produtos() {
     </section>
   );
 }
-
-
-// 'use client';
-
-// import "./page.css";
-// import Image from "next/image";
-// import fundo from "@/assets/imgs/fundo1.png";
-// import seta from "@/assets/imgs/seta.png";
-// import close from "@/assets/imgs/window-close.png";
-
-// import { useState } from "react";
-// import Card from "@/components/card/card";
-// import EditModal from "@/components/modal/editModal";
-// import CreateModal from "@/components/modal/createModal";
-
-// export default function Produtos() {
-//   const [precoMin, setPrecoMin] = useState<number>(0);
-//   const [precoMax, setPrecoMax] = useState<number>(1000);
-
-//   // armazena os filtros ativos
-//   const [filtros, setFiltros] = useState<string[]>([]);
-
-//   // armazena a visibilidade dos filtros para cada categoria
-//   const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
-
-//   // função para alternar a visibilidade dos filtros
-//   const toggleCategory = (category: string) => {
-//     setVisibleCategory(visibleCategory === category ? null : category);
-//   };
-
-//   // função para adicionar ou remover filtro
-//   const toggleFiltro = (filtro: string) => {
-//     setFiltros((prevFiltros) =>
-//       prevFiltros.includes(filtro)
-//         ? prevFiltros.filter((item) => item !== filtro)
-//         : [...prevFiltros, filtro]
-//     );
-//   };
-
-//   // função para remoção de filtro
-//   const removerFiltro = (filtro: string) => {
-//     setFiltros(filtros.filter(item => item !== filtro));
-//   };
-
-//   const [modalType, setModalType] = useState<"edit" | "create" | null>(null);
-
-//   const openEditModal = () => {
-//     setModalType("edit");
-//   };
-
-//   const openCreateModal = () => {
-//     setModalType("create");
-//   };
-
-//   const closeModal = () => {
-//     setModalType(null);
-//   };
-
-
-//   return (
-//     <section className="produtos">
-
-//       <div className="cover-container">
-//         <Image src={fundo} alt="" className="fundo" priority={false}/>
-//         <h1 id="titulo1"><span className="maior"> PRODUTOS <span className="amarelo">EXCLUSIVOS </span></span><br /> PARA TODOS OS GOSTOS </h1>
-//         <h1 id="titulo2">Produtos Exclusivos para todos os <span className="amarelo"> gostos </span> </h1>
-//       </div>
-
-//       <section className="filtros-container">
-
-//         <div className="filtros-edicao">
-//           <div className="filtros">
-//             <h1>FILTROS</h1>
-
-//             <div className="categorias">
-              
-//               <div className="maquiagem">
-//                 <button onClick={() => toggleCategory('MAQUIAGEM')}>
-//                   <Image src={seta} alt="" width={10} />MAQUIAGEM
-//                 </button>
-//                 {visibleCategory === 'MAQUIAGEM' && (
-//                   <div className="filter-options">
-//                     {['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original'].map((filtro) => (
-//                       <label key={filtro}>
-//                         <input
-//                           type="checkbox"
-//                           value={filtro}
-//                           checked={filtros.includes(filtro)}
-//                           onChange={() => toggleFiltro(filtro)}
-//                         /> {filtro}
-//                       </label>
-//                     ))}
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="marcas">
-//                 <button onClick={() => toggleCategory('MARCAS')}>
-//                   <Image src={seta} alt="" width={10} />MARCAS
-//                 </button>
-//                 {visibleCategory === 'MARCAS' && (
-//                   <div className="filter-options">
-//                     {['Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe'].map((filtro) => (
-//                       <label key={filtro}>
-//                         <input
-//                           type="checkbox"
-//                           value={filtro}
-//                           checked={filtros.includes(filtro)}
-//                           onChange={() => toggleFiltro(filtro)}
-//                         /> {filtro}
-//                       </label>
-//                     ))}
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="preco">
-//                 <button onClick={() => toggleCategory('PREÇO')}>
-//                   <Image src={seta} alt="" width={10} />PREÇO
-//                 </button>
-//                 {visibleCategory === 'PREÇO' && (
-//                   <div className="filter-options">
-//                     <div className="preco-row"><p>+</p><p>-</p></div>
-//                     <div className="preco-row">
-//                       <p>R$</p><input type="number" min="" value={precoMin}/>
-//                       <p>R$</p><input type="number" min="" value={precoMax}/>
-//                     </div>
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="promocao">
-//                 <button onClick={() => toggleCategory('PROMOÇÃO')}>
-//                   <Image src={seta} alt="" width={10} />PROMOÇÃO
-//                 </button>
-                // {visibleCategory === 'PROMOÇÃO' && (
-                //   <div className="filter-options">
-                //     {['Frete grátis','20% off', '30% a 40% off', '50% off', '60% off','70% a 90% off'].map((filtro) => (
-                //       <label key={filtro}>
-                //         <input
-                //           type="checkbox"
-                //           value={filtro}
-                //           checked={filtros.includes(filtro)}
-                //           onChange={() => toggleFiltro(filtro)}
-                //         /> {filtro}
-                //       </label>
-                //     ))}
-                //   </div>
-                // )}
-//               </div>
-//             </div>
-//           </div>
-
-//           <button className="edicao" onClick={openEditModal}>EDIÇÃO</button>
-
-//           <button className="filtros-mobile">Filtros</button>
-//           <button className="edicao-mobile" onClick={openEditModal}>Edição</button>
-//         </div>
-
-//         <div className="remover-filtros">
-//           {filtros.map((filtro) => (
-//             <button key={filtro}>
-//               {filtro.toUpperCase()}
-//               <Image
-//                 src={close}
-//                 alt={`Remover ${filtro}`}
-//                 width={24}
-//                 onClick={() => removerFiltro(filtro)}
-//               />
-//             </button>
-//           ))}
-//         </div>
-
-//       </section>
-
-//       <div className="card-container">
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//       </div>
-
-//       {modalType === "edit" && <EditModal onClose={closeModal} onOpenCreate={openCreateModal} />}
-//       {modalType === "create" && <CreateModal onClose={closeModal} onOpenEdit={openEditModal} />}
-//     </section>
-//   );
-// }
-
-
-// 'use client';
-
-// import "./page.css";
-// import Image from "next/image";
-// import fundo from "@/assets/imgs/fundo1.png";
-// import seta from "@/assets/imgs/seta.png";
-// import close from "@/assets/imgs/window-close.png";
-
-// import { useState } from "react";
-// import Card from "@/components/card/card";
-// import EditModal from "@/components/modal/editModal";
-// import CreateModal from "@/components/modal/createModal";
-
-// export default function Produtos() {
-//   // armazena os filtros ativos
-//   const [filtros, setFiltros] = useState<string[]>(['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original', 'Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe']);
-
-//   // armazena a visibilidade dos filtros para cada categoria
-//   const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
-
-//   // função para alternar a visibilidade dos filtros
-//   const toggleCategory = (category: string) => {
-//     setVisibleCategory(visibleCategory === category ? null : category);
-//   };
-
-//   // função para remoção de filtro
-//   const removerFiltro = (filtro: string) => {
-//     setFiltros(filtros.filter(item => item !== filtro));
-//   };
-
-//   const [modalType, setModalType] = useState<"edit" | "create" | null>(null);
-
-//   const openEditModal = () => {
-//     setModalType("edit");
-//   };
-
-//   const openCreateModal = () => {
-//     setModalType("create");
-//   };
-
-//   const closeModal = () => {
-//     setModalType(null);
-//   };
-
-//   return (
-//     <section className="produtos">
-
-//       <div className="cover-container">
-//         <Image src={fundo} alt="" className="fundo" priority={false}/>
-//         <h1 id="titulo1"><span className="maior"> PRODUTOS <span className="amarelo">EXCLUSIVOS </span></span><br /> PARA TODOS OS GOSTOS </h1>
-//         <h1 id="titulo2">Produtos Exclusivos para todos os <span className="amarelo"> gostos </span> </h1>
-//       </div>
-
-//       <section className="filtros-container">
-
-//         <div className="filtros-edicao">
-//           <div className="filtros">
-//             <h1>FILTROS</h1>
-
-//             <div className="categorias">
-
-//               <div className="maquiagem">
-//                 <button onClick={() => toggleCategory('MAQUIAGEM')}>
-//                   <Image src={seta} alt="" width={10} />MAQUIAGEM
-//                 </button>
-//                 {visibleCategory === 'MAQUIAGEM' && (
-//                   <div className="filter-options">
-//                     {['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original'].map((filtro) => (
-//                       <button key={filtro}>{filtro}</button>
-//                     ))}
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="marcas">
-//                 <button onClick={() => toggleCategory('MARCAS')}>
-//                   <Image src={seta} alt="" width={10} />MARCAS
-//                 </button>
-//                 {visibleCategory === 'MARCAS' && (
-//                   <div className="filter-options">
-//                     {['Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe'].map((filtro) => (
-//                       <button key={filtro}>{filtro}</button>
-//                     ))}
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="preco">
-//                 <button onClick={() => toggleCategory('PREÇO')}>
-//                   <Image src={seta} alt="" width={10} />PREÇO
-//                 </button>
-//                 {visibleCategory === 'PREÇO' && (
-//                   <div className="filter-options">
-//                     <p>Filtro preço</p>
-//                   </div>
-//                 )}
-//               </div>
-
-//               <div className="promocao">
-//                 <button onClick={() => toggleCategory('PROMOÇÃO')}>
-//                   <Image src={seta} alt="" width={10} />PROMOÇÃO
-//                 </button>
-//                 {visibleCategory === 'PROMOÇÃO' && (
-//                   <div className="filter-options">
-//                     <label>
-//                       <input type="checkbox" value="Frete grátis" /> Frete grátis
-//                     </label>
-//                     <label>
-//                       <input type="checkbox" value="20% off" /> 20% off
-//                     </label>
-//                     <label>
-//                       <input type="checkbox" value="30% a 40% off" /> 30% a 40% off
-//                     </label>
-//                     <label>
-//                       <input type="checkbox" value="50% off" /> 50% off
-//                     </label>
-//                     <label>
-//                       <input type="checkbox" value="60% off" /> 60% off
-//                     </label>
-//                     <label>
-//                       <input type="checkbox" value="70% a 90% off" /> 70% a 90% off
-//                     </label>
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-//           </div>
-
-//           <button className="edicao" onClick={openEditModal}>EDIÇÃO</button>
-
-//           <button className="filtros-mobile">Filtros</button>
-//           <button className="edicao-mobile" onClick={openEditModal}>Edição</button>
-//         </div>
-
-//         <div className="remover-filtros">
-//           {filtros.map((filtro) => (
-//             <button key={filtro}>
-//               {filtro.toUpperCase()}
-//               <Image
-//                 src={close}
-//                 alt={`Remover ${filtro}`}
-//                 width={24}
-//                 onClick={() => removerFiltro(filtro)}
-//               />
-//             </button>
-//           ))}
-//         </div>
-
-//       </section>
-
-//       <div className="card-container">
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//         <Card />
-//       </div>
-
-//       {modalType === "edit" && <EditModal onClose={closeModal} onOpenCreate={openCreateModal} />}
-//       {modalType === "create" && <CreateModal onClose={closeModal} onOpenEdit={openEditModal} />}
-//     </section>
-//   );
-// }
 

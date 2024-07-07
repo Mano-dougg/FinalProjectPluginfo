@@ -122,7 +122,25 @@ export async function PostProduct(produto: Produto) {
         const response = await axios.post("http://localhost:3030/PostProduct", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-            },
+            },  
+            data: {
+                nome: nome, 
+                marca: marca, 
+                preco: preco, 
+                preco_alterado: preco_alterado, 
+                promocao: promocao, 
+                descricao: descricao, 
+                quantidade_carrinho: quantidade_carrinho,
+                face: face, 
+                labios: labios, 
+                olhos: olhos, 
+                kits: kits, 
+                sombrancelha: sombrancelha, 
+                unhas: unhas, 
+                original: original,
+                imagePath: imagePath,
+            }
+
         });
 
         console.log(response);

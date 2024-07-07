@@ -122,12 +122,12 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
 
           <div className="modal-preco">
             <div className="preco-atual">
-              <label>Preço Atual</label>
+              <label>Preço Atual (R$)</label>
               <input type="number" min="0" />
             </div>
 
             <div className="preco-alterado">
-              <label>Preço Alterado</label>
+              <label>Preço Alterado (R$)</label>
               <input type="number" min="0"/>
             </div>
           </div>

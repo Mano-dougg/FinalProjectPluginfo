@@ -106,14 +106,16 @@ export async function PostProduct(produto: Produto) {
     formData.append('unhas', produto.unhas.toString());
     formData.append('original', produto.original.toString());
 
+    // Adiciona a mainImage, se existir
     if (produto.mainImage) {
         formData.append('mainImage', produto.mainImage);
     }
 
-    if (produto.sideImages) {
+    // Adiciona as sideImages, se existirem
+    if (produto.sideImages && produto.sideImages.length > 0) {
         produto.sideImages.forEach((image, index) => {
             if (image) {
-                formData.append(`sideImage${index}`, image);
+                formData.append(`sideImages[${index}]`, image);
             }
         });
     }
@@ -122,25 +124,7 @@ export async function PostProduct(produto: Produto) {
         const response = await axios.post("http://localhost:3030/PostProduct", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-            },  
-            data: {
-                nome: nome, 
-                marca: marca, 
-                preco: preco, 
-                preco_alterado: preco_alterado, 
-                promocao: promocao, 
-                descricao: descricao, 
-                quantidade_carrinho: quantidade_carrinho,
-                face: face, 
-                labios: labios, 
-                olhos: olhos, 
-                kits: kits, 
-                sombrancelha: sombrancelha, 
-                unhas: unhas, 
-                original: original,
-                imagePath: imagePath,
-            }
-
+            },
         });
 
         console.log(response);
@@ -148,6 +132,7 @@ export async function PostProduct(produto: Produto) {
         console.log(error);
     }
 }
+
 
 
 // FUNÇÃO DE PESQUISA POR NOME -----------------------------------------------------------------------------------------

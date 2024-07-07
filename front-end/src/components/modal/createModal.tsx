@@ -7,8 +7,8 @@ import imgPlaceholder from "@/assets/imgs/imagem-grande-placeholder.png";
 import sideImgPlaceholder from "@/assets/imgs/side-img-placeholder.png";
 import toggleOpen from "@/assets/imgs/toggle-open.png";
 import toggleClose from "@/assets/imgs/toggle-close.png";
-import { PostProduct } from "@/actions/productActions"; // Atualize o caminho para onde está sua função PostProduct
-import Produto from "@/types/types"; // Atualize o caminho para onde está seu tipo Produto
+import { PostProduct } from "@/actions/productActions"; // Caminho correto para a função PostProduct
+import Produto from "@/types/types"; // Caminho correto para o tipo Produto
 
 import "./modal.css";
 
@@ -18,8 +18,8 @@ interface EditModalProps {
 }
 
 export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
-  const [mainImage, setMainImage] = useState< File | undefined >( undefined );
-  const [sideImages, setSideImages] = useState<( File )[]>(Array(4).fill(undefined));
+  const [mainImage, setMainImage] = useState<File | undefined>(undefined);
+  const [sideImages, setSideImages] = useState<(File | undefined)[]>(Array(4).fill(undefined));
   const [showBrands, setShowBrands] = useState<boolean>(false);
   const [showTags, setShowTags] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -35,31 +35,24 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
   const brands = ['Marter', 'Arthur', 'Ribeiro Wild', 'Joaquim', 'Laura', 'Natanzin', 'Felipe'];
   const tags = ['Face', 'Lábios', 'Olhos', 'Kits', 'Sobrancelha', 'Unhas', 'Shine Original'];
 
+  // Função para lidar com a mudança de imagem
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, index: number | null) => {
-
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
 
       if (index === null) {
         setMainImage(e.target.files[0]);
-
       } else {
-        if (e.target.files[0]){
-          const file = e.target.files[0];
-        } else{
-          const file = undefined;
-        }
-          setSideImages(prevImages => {
-              const newImages = [...prevImages];
-
-                newImages[index] = file;
-                return newImages;
-          });
+        setSideImages(prevImages => {
+          const newImages = [...prevImages];
+          newImages[index] = file;
+          return newImages;
+        });
       }
     }
-
   };
 
+  // Funções para alternar a exibição de marcas e tags
   const toggleBrands = () => {
     setShowBrands(!showBrands);
   };
@@ -68,6 +61,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
     setShowTags(!showTags);
   };
 
+  // Funções para lidar com a seleção de tags e marcas
   const handleTagChange = (tag: string) => {
     setSelectedTags(prevTags =>
       prevTags.includes(tag) ? prevTags.filter(t => t !== tag) : [...prevTags, tag]
@@ -78,36 +72,35 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
     setSelectedBrand(prevBrand => (prevBrand === brand ? null : brand));
   };
 
+  // Função para salvar o produto
   const handleSave = async () => {
     const produto: Produto = {
-        nome,
-        marca: selectedBrand || '',
-        preco,
-        preco_alterado: precoAlterado,
-        promocao,
-        descricao,
-        quantidade_carrinho: quantidadeCarrinho,
-        face: selectedTags.includes('Face'),
-        labios: selectedTags.includes('Lábios'),
-        olhos: selectedTags.includes('Olhos'),
-        kits: selectedTags.includes('Kits'),
-        sombrancelha: selectedTags.includes('Sobrancelha'),
-        unhas: selectedTags.includes('Unhas'),
-        original: selectedTags.includes('Shine Original'),
-        mainImage,
-        sideImages,
+      nome,
+      marca: selectedBrand || '',
+      preco,
+      preco_alterado: precoAlterado,
+      promocao,
+      descricao,
+      quantidade_carrinho: quantidadeCarrinho,
+      face: selectedTags.includes('Face'),
+      labios: selectedTags.includes('Lábios'),
+      olhos: selectedTags.includes('Olhos'),
+      kits: selectedTags.includes('Kits'),
+      sombrancelha: selectedTags.includes('Sobrancelha'),
+      unhas: selectedTags.includes('Unhas'),
+      original: selectedTags.includes('Shine Original'),
+      mainImage,
+      sideImages: sideImages.filter(image => image !== undefined), // Filtra para excluir valores indefinidos
     };
 
     try {
-        await PostProduct(produto);
-        console.log("Produto salvo com sucesso!");
-        onClose();
+      await PostProduct(produto);
+      console.log("Produto salvo com sucesso!");
+      onClose();
     } catch (error) {
-        console.error("Erro ao salvar o produto:", error);
+      console.error("Erro ao salvar o produto:", error);
     }
-};
-
-  
+  };
 
   return (
     <div className="fundo-modal">
@@ -126,7 +119,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
         <div className="modal-imgs">
           <div className="modal-img-container">
             <label htmlFor="main-image-input">
-              <Image src= {mainImage==undefined? imgPlaceholder : URL.createObjectURL(mainImage) } alt="" className="modal-img" width={352} height={243} />
+              <Image src={mainImage ? URL.createObjectURL(mainImage) : imgPlaceholder} alt="" className="modal-img" width={352} height={243} />
             </label>
             <input
               type="file"
@@ -140,7 +133,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
             {sideImages.map((image, index) => (
               <div key={index} className="side-img-container">
                 <label htmlFor={`side-image-input-${index}`}>
-                  <Image className="side-img" src={ image == undefined? sideImgPlaceholder : URL.createObjectURL(image)} alt="" width={60} height={60} />
+                  <Image className="side-img" src={image ? URL.createObjectURL(image) : sideImgPlaceholder} alt="" width={60} height={60} />
                 </label>
                 <input
                   type="file"
@@ -231,7 +224,6 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
             )}
           </div>
         </div>
-
 
         <div className="salvar-excluir">
           <button onClick={handleSave}>SALVAR</button>

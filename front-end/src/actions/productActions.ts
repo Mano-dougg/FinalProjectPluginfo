@@ -1,10 +1,7 @@
 // colocar aqui as requisições para o backend 
 
 
-
-// exemplo:
-
-// import axios from 'axios';
+import axios from "axios";
 
 // A função abaixo irá cadastrar um novo usuário e armazenar token e id no local storage 
 // export async function createUser (name: string, email: string, password: string) {
@@ -56,12 +53,38 @@
 
 
 // FUNÇÃO DE CRIAÇÃO -------------------------------------------------------------------------------------------------
+import Produto from "@/types/types";
 
-// função deve receber nome do produto, preço atual, preço alterado, 
-//se faz parte de um conjunto (boolean), descrição, uma lista de tags(tipos/categorias) 
-//uma lista de marcas e uma lista com urls de imagens;
+export async function PostProduct (
+    {nome, marca, preco, preco_alterado, promocao, descricao, quantidade_carrinho,
+    face, labios, olhos, kits, sombrancelha, unhas, original,
+    imagePath}: Produto ) {
+    
+    try {
+        const response = await axios.post("http://localhost:3030/PostProduct", {
+            nome: nome, 
+            marca: marca, 
+            preco: preco, 
+            preco_alterado: preco_alterado, 
+            promocao: promocao, 
+            descricao: descricao, 
+            quantidade_carrinho: quantidade_carrinho,
+            face: face, 
+            labios: labios, 
+            olhos: olhos, 
+            kits: kits, 
+            sombrancelha: sombrancelha, 
+            unhas: unhas, 
+            original: original,
+            imagePath: imagePath,
+        });
 
-// não deixar criar caso nome seja igual a nome ja existente no banco!
+        console.log(response);
+}
+    catch(error) {
+        console.log(error);
+    }
+};
 
 
 

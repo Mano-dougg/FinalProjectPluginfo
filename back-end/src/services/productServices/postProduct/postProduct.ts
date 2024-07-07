@@ -20,7 +20,6 @@ class PostProduct {
                 throw new Error('Returned URLs are not valid strings');
             }
 
-            // Cria o produto no banco de dados com as URLs das imagens
             const produto = await prisma.produto.create({
                 data: {
                     nome,

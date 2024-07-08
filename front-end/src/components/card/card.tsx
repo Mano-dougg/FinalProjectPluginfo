@@ -31,7 +31,7 @@ export default function Card() {
 
   useEffect(() => {
     const fetchProduto = async () => {
-      const fetchedProduto = await fetchProductById(2);
+      const fetchedProduto = await fetchProductById(1);
       setProduto(fetchedProduto);
     };
 

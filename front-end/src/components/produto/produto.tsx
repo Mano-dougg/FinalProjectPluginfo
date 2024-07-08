@@ -33,15 +33,16 @@ interface Produto {
 
 const Produto: React.FC<ProdutoProps> = ({ id }) => {
     const [produto, setProduto] = useState<Produto | null>(null);
+    console.log(id);
 
     useEffect(() => {
         const fetchProduto = async () => {
-          const fetchedProduto = await fetchProductById(2);
+          const fetchedProduto = await fetchProductById(id);
           setProduto(fetchedProduto);
         };
     
         fetchProduto();
-      }, []);
+      }, [id]);
 
     const imgurl = produto?.imagePath[0]?.url;
     
@@ -55,8 +56,8 @@ const Produto: React.FC<ProdutoProps> = ({ id }) => {
                     <h1> {produto?.nome}</h1>  
                     <div className="row"><h2>(4,9)</h2> <Image src={fiveStars} alt="" width={136} height={24} className="individual-produto-av"/><h2>235 Avaliações</h2></div>   
                     <div className="promocao-frete"><div className="tag1">Promoção</div><div className="tag2">Frete Grátis</div></div>
-                    <h3><span>R${produto?.preco}</span></h3>
-                    <h3>R${produto?.preco_alterado} </h3>
+                    <h3><span>R${(produto?.preco)?.toFixed(2)}</span></h3>
+                    <h3>R${(produto?.preco_alterado)?.toFixed(2)} </h3>
                     <p>OU 3X SEM JUROS NO CARTÃO DE CRÉDITO</p>
                     <label>Quantidade
                         <input type="number" min="0"/>

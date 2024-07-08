@@ -36,5 +36,13 @@ export async function fetchProductByName(nomeProduto: string): Promise<Produto |
   }
 }
 
-
+export async function fetchProductById(idProduto: number): Promise<Produto | null> {
+    try {
+      const response = await axios.get<Produto>(`http://localhost:3030/searchProductId/${idProduto}`);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar o produto:", error);
+      return null;
+    }
+  }
 

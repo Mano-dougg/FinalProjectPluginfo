@@ -24,7 +24,10 @@ class GetProductsName {
         const { lettersProduto } = req.params
 
         try {
-            const produtos = await prisma.produto.findMany({where: {nome: { startsWith: lettersProduto}}});
+            const produtos = await prisma.produto.findMany({
+                where: {nome: { startsWith: lettersProduto}},
+                include: { imagePath: true }
+            });
 
             return res.status(200).json(produtos);   
         } catch (error) {
@@ -33,27 +36,13 @@ class GetProductsName {
         }
     }
 
-    // static async getProductByname(req: Request, res: Response) {
-
-    //     const { nomeProduto } = req.params
-
-    //     try {
-    //         const produto = await prisma.produto.findUnique({where: {nome: nomeProduto }});
-
-    //         return res.status(200).json(produto);   
-    //     } catch (error) {
-    //         console.log(error);
-    //         res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});
-    //     }
-    // }
-
     static async getProductByname(req: Request, res: Response) {
         const { nomeProduto } = req.params;
     
         try {
             const produto = await prisma.produto.findUnique({
                 where: { nome: nomeProduto },
-                include: { imagePath: true }  // Incluir o campo imagePath na consulta
+                include: { imagePath: true }
             });
     
             if (!produto) {

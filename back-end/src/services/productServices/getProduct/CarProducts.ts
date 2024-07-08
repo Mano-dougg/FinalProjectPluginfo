@@ -12,7 +12,8 @@ class CarProducts {
                     quantidade_carrinho: {
                         gt: 0
                     }
-                }
+                },
+                include: { imagePath: true }
             });
 
             return res.status(200).json(produtos);

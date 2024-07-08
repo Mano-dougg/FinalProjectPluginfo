@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import placeholderProduct from "@/assets/imgs/produto-placeholder.png";
 import cart from "@/assets/imgs/shopping-cart-solid.png";
-import { fetchProductById } from "@/actions/getProduct"; // Importe a função fetchProductById
-
-import "./card.css";
 import Link from "next/link";
+import "./card.css";
 
 interface Produto {
   id: number;
@@ -26,37 +24,30 @@ interface Produto {
   imagePath: { id: number; url: string; produtoId: number }[];
 }
 
-export default function Card() {
-  const [produto, setProduto] = useState<Produto | null>(null);
+interface CardProps {
+  produto: Produto;
+}
 
-  useEffect(() => {
-    const fetchProduto = async () => {
-      const fetchedProduto = await fetchProductById(1);
-      setProduto(fetchedProduto);
-    };
-
-    fetchProduto();
-  }, []);
-
-  const imgurl = produto?.imagePath[0]?.url;
-  const id = produto?.id;
+const Card: React.FC<CardProps> = ({ produto }) => {
+  const imgurl = produto.imagePath[0]?.url;
+  const id = produto.id;
 
   return (
     <section className="card">
       <Link href={`/produtos/${id}`} passHref>
         <div className="cover">
           <Image
-            src={imgurl ? `https://shine-original.s3.sa-east-1.amazonaws.com/${imgurl}` : placeholderProduct}
-            alt={produto?.nome || "produto"}
+            src={imgurl ? `https://shine-original.s3.sa-east-1.amazonaws.com/${produto.imagePath[0]?.url}` : placeholderProduct}
+            alt={produto.nome}
             className="card-img"
             width={370}
             height={370}
           />
         </div>
       </Link>
-      <h1>{produto?.nome || "Nome do Produto"}</h1>
+      <h1>{produto.nome}</h1>
       <h2>
-        <span>R${produto?.preco_alterado?.toFixed(2) || "0,00"}</span> R$ {produto?.preco?.toFixed(2) || "0,00"}
+        <span>R${produto.preco?.toFixed(2)}</span> R$ {produto.preco_alterado?.toFixed(2)}
       </h2>
       <p>3x sem juros no cartão de crédito</p>
       <button>
@@ -64,17 +55,18 @@ export default function Card() {
       </button>
     </section>
   );
-}
+};
 
-
+export default Card;
 
 // import React, { useEffect, useState } from "react";
 // import Image from "next/image";
 // import placeholderProduct from "@/assets/imgs/produto-placeholder.png";
 // import cart from "@/assets/imgs/shopping-cart-solid.png";
-// import { fetchProductById } from "@/actions/getProduct"; // Importe a função fetchProductByName
+// import { fetchProductById } from "@/actions/getProduct"; // Importe a função fetchProductById
 
 // import "./card.css";
+// import Link from "next/link";
 
 // interface Produto {
 //   id: number;
@@ -100,29 +92,32 @@ export default function Card() {
 
 //   useEffect(() => {
 //     const fetchProduto = async () => {
-//       const fetchedProduto = await fetchProductById(2);
+//       const fetchedProduto = await fetchProductById(1);
 //       setProduto(fetchedProduto);
 //     };
 
 //     fetchProduto();
 //   }, []);
 
-//   const imgurl = produto?.imagePath[0]?.url
+//   const imgurl = produto?.imagePath[0]?.url;
+//   const id = produto?.id;
 
 //   return (
 //     <section className="card">
-//       <div className="cover">
-//         <Image
-//           src={imgurl? `https://shine-original.s3.sa-east-1.amazonaws.com/${imgurl}` : placeholderProduct}
-//           alt={produto?.nome || "produto"}
-//           className="card-img"
-//           width={370}
-//           height={370}
-//         />
-//       </div>
+//       <Link href={`/produtos/${id}`} passHref>
+//         <div className="cover">
+//           <Image
+//             src={imgurl ? `https://shine-original.s3.sa-east-1.amazonaws.com/${imgurl}` : placeholderProduct}
+//             alt={produto?.nome || "produto"}
+//             className="card-img"
+//             width={370}
+//             height={370}
+//           />
+//         </div>
+//       </Link>
 //       <h1>{produto?.nome || "Nome do Produto"}</h1>
 //       <h2>
-//         <span>R${produto?.preco_alterado.toFixed(2) || "0,00"}</span> R$ {produto?.preco.toFixed(2) || "0,00"}
+//         <span>R${produto?.preco_alterado?.toFixed(2) || "0,00"}</span> R$ {produto?.preco?.toFixed(2) || "0,00"}
 //       </h2>
 //       <p>3x sem juros no cartão de crédito</p>
 //       <button>
@@ -133,22 +128,3 @@ export default function Card() {
 // }
 
 
-// import Image from "next/image";
-// import placeholderProduct from "@/assets/imgs/produto-placeholder.png";
-// import cart from "@/assets/imgs/shopping-cart-solid.png"
-
-// import "./card.css"
-
-// export default function Card() {
-//   return (
-//     <section className="card">
-//         <div className="cover">
-//             <Image src={placeholderProduct} alt="produto" className="card-img"/>
-//         </div>
-//         <h1>Serum Viitalice</h1>
-//         <h2><span>R$25,99</span> R$ 20,99</h2>
-//         <p>3x sem juros no cartão de crédito</p>
-//         <button> ADICIONE AO CARRINHO <Image src={cart} width={32} alt=""/></button>
-//     </section>
-//   );
-// }

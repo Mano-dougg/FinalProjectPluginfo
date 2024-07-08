@@ -74,12 +74,13 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
 
   // Função para salvar o produto
   const handleSave = async () => {
+
     const produto: Produto = {
       nome,
       marca: selectedBrand || '',
       preco,
       preco_alterado: precoAlterado,
-      promocao,
+      promocao: ((preco - precoAlterado)/preco),
       descricao,
       quantidade_carrinho: quantidadeCarrinho,
       face: selectedTags.includes('Face'),
@@ -152,12 +153,12 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
 
           <div className="modal-preco">
             <div className="preco-atual">
-              <label>Preço Atual (R$)</label>
+              <label>Preço Antigo (R$)</label>
               <input type="number" min="0" value={preco} onChange={(e) => setPreco(parseFloat(e.target.value))} />
             </div>
 
             <div className="preco-alterado">
-              <label>Preço Alterado (R$)</label>
+              <label>Preço Atual (R$)</label>
               <input type="number" min="0" value={precoAlterado} onChange={(e) => setPrecoAlterado(parseFloat(e.target.value))} />
             </div>
           </div>

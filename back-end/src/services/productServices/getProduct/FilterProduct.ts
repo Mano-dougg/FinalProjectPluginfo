@@ -29,7 +29,8 @@ class FilterProducts {
             if (original) filters.unhas = Boolean(original);
 
             const produtos = await prisma.produto.findMany({
-                where: filters
+                where: filters,
+                include: { imagePath: true }
             });
 
             res.status(200).json(produtos);

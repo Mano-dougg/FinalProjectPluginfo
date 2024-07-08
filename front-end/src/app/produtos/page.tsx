@@ -330,7 +330,7 @@ export default function Produtos() {
 
             </div>
 
-            <button className="aplicar-filtros-mobile">Aplicar Filtros</button>
+            <button className="aplicar-filtros-mobile" onClick={applyFilters}>Aplicar Filtros</button>
           </div>
 
       </section>}

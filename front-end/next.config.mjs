@@ -4,6 +4,9 @@ const nextConfig = {
     compiler:{
         styledComponents: true
     },
+    images: {
+        domains: ['shine-original.s3.sa-east-1.amazonaws.com'],
+    },
 };
 
 export default nextConfig;

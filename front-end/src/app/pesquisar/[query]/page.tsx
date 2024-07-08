@@ -10,16 +10,53 @@ import close from "@/assets/imgs/window-close.png";
 import setaFechar from "@/assets/imgs/toggle-close.png";
 import Card from "@/components/card/card";
 import closeIcon from "@/assets/imgs/windoow-close-black.png"
+import { useEffect, useState } from "react";
+import { fetchAllProductsByName } from "@/actions/getProduct";
+import { filterGivenProducts } from "@/actions/filterProducts";
 
-
-import { useState } from "react";
 interface SearchPageProps {
   params: { query: string };
 }
 
+interface Produto {
+  id: number;
+  nome: string;
+  marca: string;
+  preco: number;
+  preco_alterado: number;
+  promocao: number;
+  descricao: string;
+  quantidade_carrinho: number;
+  face: boolean;
+  labios: boolean;
+  olhos: boolean;
+  kits: boolean;
+  sombrancelha: boolean;
+  unhas: boolean;
+  original: boolean;
+  imagePath: { id: number; url: string; produtoId: number }[];
+}
+
+
 const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
 
   const { query } = params;
+
+    // armazena a lista de produtos
+    const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [searchResults, setSearchResults] = useState<Produto[]>([]);
+
+    useEffect(() => {
+      const fetchProdutos = async () => {
+        const fetchedProdutos = await fetchAllProductsByName(query);
+        if (fetchedProdutos) {
+          setProdutos(fetchedProdutos);
+          setSearchResults(fetchedProdutos)
+        }
+      };
+  
+      fetchProdutos();
+    }, [query]);
   
   // transforma em string o texto recebido pela url
   const decodedSearch: string = decodeURIComponent(query);
@@ -67,10 +104,14 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
   };
 
   // realiza nova pesquisa
-  const applyFilters = () => {
+  const applyFilters = async () => {
     setAppliedFilters([...filtrosMaquiagem, ...filtrosMarcas, ...filtrosPromocoes]);
     setAppliedPrice(preco);
-    // chamada de função que aplicará os filtros de fato
+
+    const filteredProducts = await filterGivenProducts(searchResults, filtrosMaquiagem, filtrosMarcas, filtrosPromocoes,preco)
+    if (filteredProducts){
+      setProdutos(filteredProducts)
+    }
   };
 
   // array de teste -> tipo será produto depois que criar
@@ -329,17 +370,27 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
 
       </section>}
 
-    {produtosEncontrados.length === 0 && 
+    {produtos.length === 0 && 
     <section className="sem-resultados">
       <h1> Nenhum resultado para sua pesquisa por &quot;{decodedSearch}&quot; </h1>
       <p>Verifique a os termos usados na pesquisa ou utilize frases mais genéricas</p>
     </section>}
+
+    {(produtos.length > 0 ) && 
+    <div className="card-container">
+    {produtos.map((produto) => (
+        <Card key={produto.id} produto={produto} />
+      ))}
+    </div>}
+
     <h2 className="recomendados"> Recomendações </h2>
-    <div className="recomendados-container">
+
+    {/* <div className="recomendados-container">
         <Card />
         <Card />
         <div className="card-hidden"><Card /></div>
-    </div>
+    </div> */}
+
     </section>
 )}
 

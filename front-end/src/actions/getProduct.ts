@@ -46,7 +46,6 @@ export async function fetchProductById(idProduto: number): Promise<Produto | nul
     }
   }
 
-
 export async function fetchAllProducts(): Promise<Produto[] | null> {
   try {
     const response = await axios.get<Produto[]>('http://localhost:3030/searchProduct/all');
@@ -58,3 +57,13 @@ export async function fetchAllProducts(): Promise<Produto[] | null> {
   }
 }
 
+export async function fetchAllProductsByName(letters: string): Promise<Produto[] | null> {
+  try {
+    const response = await axios.get<Produto[]>(`http://localhost:3030/searchProduct/letters/${letters}`);
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar os produtos:', error);
+    return null;
+  }
+}

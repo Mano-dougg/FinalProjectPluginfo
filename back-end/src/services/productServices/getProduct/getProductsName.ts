@@ -19,14 +19,28 @@ class GetProductsName {
         }
     }
 
+    static async getProductByLetters(req: Request, res: Response) {
+
+        const { lettersProduto } = req.params
+
+        try {
+            const produtos = await prisma.produto.findMany({where: {nome: { startsWith: lettersProduto}}});
+
+            return res.status(200).json(produtos);   
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});
+        }
+    }
+
     static async getProductByname(req: Request, res: Response) {
 
         const { nomeProduto } = req.params
 
         try {
-            const produto = await prisma.produto.findUnique({where: {nome: nomeProduto}});
+            const produto = await prisma.produto.findUnique({where: {nome: nomeProduto }});
 
-            return res.status(200).json(produto);
+            return res.status(200).json(produto);   
         } catch (error) {
             console.log(error);
             res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});

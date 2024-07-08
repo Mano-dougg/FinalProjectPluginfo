@@ -53,38 +53,85 @@ import axios from "axios";
 
 
 // FUNÇÃO DE CRIAÇÃO -------------------------------------------------------------------------------------------------
+// import Produto from "@/types/types";
+
+// export async function PostProduct (
+//     {nome, marca, preco, preco_alterado, promocao, descricao, quantidade_carrinho,
+//     face, labios, olhos, kits, sombrancelha, unhas, original,
+//     imagePath}: Produto ) {
+    
+//     try {
+//         const response = await axios.post("http://localhost:3030/PostProduct", {
+//             nome: nome, 
+//             marca: marca, 
+//             preco: preco, 
+//             preco_alterado: preco_alterado, 
+//             promocao: promocao, 
+//             descricao: descricao, 
+//             quantidade_carrinho: quantidade_carrinho,
+//             face: face, 
+//             labios: labios, 
+//             olhos: olhos, 
+//             kits: kits, 
+//             sombrancelha: sombrancelha, 
+//             unhas: unhas, 
+//             original: original,
+//             imagePath: imagePath,
+//         });
+
+//         console.log(response);
+// }
+//     catch(error) {
+//         console.log(error);
+//     }
+// };
+
 import Produto from "@/types/types";
 
-export async function PostProduct (
-    {nome, marca, preco, preco_alterado, promocao, descricao, quantidade_carrinho,
-    face, labios, olhos, kits, sombrancelha, unhas, original,
-    imagePath}: Produto ) {
-    
+export async function PostProduct(produto: Produto) {
+    const formData = new FormData();
+
+    formData.append('nome', produto.nome);
+    formData.append('marca', produto.marca);
+    formData.append('preco', produto.preco.toString());
+    formData.append('preco_alterado', produto.preco_alterado.toString());
+    formData.append('promocao', produto.promocao.toString());
+    formData.append('descricao', produto.descricao);
+    formData.append('quantidade_carrinho', produto.quantidade_carrinho.toString());
+    formData.append('face', produto.face.toString());
+    formData.append('labios', produto.labios.toString());
+    formData.append('olhos', produto.olhos.toString());
+    formData.append('kits', produto.kits.toString());
+    formData.append('sombrancelha', produto.sombrancelha.toString());
+    formData.append('unhas', produto.unhas.toString());
+    formData.append('original', produto.original.toString());
+
+    // Adiciona a mainImage, se existir
+    if (produto.mainImage) {
+        formData.append('mainImage', produto.mainImage);
+    }
+
+    // Adiciona as sideImages, se existirem
+    if (produto.sideImages && produto.sideImages.length > 0) {
+        produto.sideImages.forEach((image, index) => {
+            if (image) {
+                formData.append(`sideImages[${index}]`, image);
+            }
+        });
+    }
+
     try {
-        const response = await axios.post("http://localhost:3030/PostProduct", {
-            nome: nome, 
-            marca: marca, 
-            preco: preco, 
-            preco_alterado: preco_alterado, 
-            promocao: promocao, 
-            descricao: descricao, 
-            quantidade_carrinho: quantidade_carrinho,
-            face: face, 
-            labios: labios, 
-            olhos: olhos, 
-            kits: kits, 
-            sombrancelha: sombrancelha, 
-            unhas: unhas, 
-            original: original,
-            imagePath: imagePath,
+        const response = await axios.post("http://localhost:3030/PostProduct", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
 
         console.log(response);
-}
-    catch(error) {
+    } catch (error) {
         console.log(error);
     }
-};
+}
 
 
 

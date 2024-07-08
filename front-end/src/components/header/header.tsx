@@ -1,3 +1,4 @@
+'use client'
 import styled from "styled-components";
 import { colors } from "@/assets/color";
 import PrimaryInputSearchIcon from "./primary-input";
@@ -89,7 +90,7 @@ const Cupons = styled.p`
   }
 `;
 
-export default async function Header(props: HeaderProps) {
+export async function Header(props: HeaderProps) {
   const [data, setData] = useState(null);
   const prismic  = createClient()
       const tagheader = await prismic.getByUID("tagheader","main");
@@ -109,3 +110,4 @@ export default async function Header(props: HeaderProps) {
     </TagHeader>
   );
 }
+export default Header

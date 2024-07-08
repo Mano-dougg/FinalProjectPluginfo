@@ -383,9 +383,9 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
       ))}
     </div>}
 
-    <h2 className="recomendados"> Recomendações </h2>
+    {/* <h2 className="recomendados"> Recomendações </h2>
 
-    {/* <div className="recomendados-container">
+    <div className="recomendados-container">
         <Card />
         <Card />
         <div className="card-hidden"><Card /></div>

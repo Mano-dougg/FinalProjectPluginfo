@@ -127,7 +127,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
             </div>
 
             <div className="preco-alterado">
-              <label>Preço Altual (R$)</label>
+              <label>Preço Atual (R$)</label>
               <input type="number" min="0"/>
             </div>
           </div>

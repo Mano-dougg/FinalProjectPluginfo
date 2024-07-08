@@ -28,7 +28,7 @@ interface Produto {
 
 export async function fetchProductByName(nomeProduto: string): Promise<Produto | null> {
   try {
-    const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/${nomeProduto}`);
+    const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/name/${nomeProduto}`);
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar o produto:", error);
@@ -38,7 +38,7 @@ export async function fetchProductByName(nomeProduto: string): Promise<Produto |
 
 export async function fetchProductById(idProduto: number): Promise<Produto | null> {
     try {
-      const response = await axios.get<Produto>(`http://localhost:3030/searchProductId/${idProduto}`);
+      const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/id/${idProduto}`);
       return response.data;
     } catch (error) {
       console.error("Erro ao buscar o produto:", error);
@@ -49,7 +49,7 @@ export async function fetchProductById(idProduto: number): Promise<Produto | nul
 
 export async function fetchAllProducts(): Promise<Produto[] | null> {
   try {
-    const response = await axios.get<Produto[]>('http://localhost:3030/getAllProducts');
+    const response = await axios.get<Produto[]>('http://localhost:3030/searchProduct/all');
     console.log(response.data)
     return response.data;
   } catch (error) {

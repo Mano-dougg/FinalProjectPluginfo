@@ -3,29 +3,32 @@ import { Router } from 'express';
 import multerConfig from '../config/multer'
 import PostProduct from '../services/productServices/postProduct/postProduct';
 import DeleteProduct from '../services/productServices/deleteProduct/deleteProdutc';
-import GetProducts from '../services/productServices/getProduct/getAll';
-import GetProductsName from '../services/productServices/getProduct/getProductsName';
-import FilterProducts from '../services/productServices/getProduct/FilterProduct';
+import GetProducts from '../services/productServices/getProduct/getProducts';
+import GetProductsName from '../services/productServices/getProduct/getProductsProperties';
 import UpdateProduct from '../services/productServices/updateProduct/updateProduct';
-import CarProducts from '../services/productServices/getProduct/CarProducts';
-import Cart from '../services/productServices/updateProduct/carProducts';
+import Cart from '../services/productServices/updateProduct/cartProducts';
 
 
 const routes = Router();    
 const upload = multer(multerConfig);
 
+
+// POSTS 
 routes.post('/postProduct', upload.any(), (req, res) => {
     PostProduct.addProduct(req, res)
 });
 
-routes.get('/getAllProducts', GetProducts.getAll);
+// GETS
+routes.get('/searchProduct/all', GetProducts.getAll);
+routes.get('/searchProduct/id/:id', GetProducts.byId);
+routes.get('/searchProduct/name/:nomeProduto', GetProducts.byName);
+routes.get('/searchProduct/letters/:lettersProduto', GetProducts.byLetters);
+routes.get('/searchProduct/cart', GetProducts.cartProducts);
+routes.get('/filterProducts', GetProducts.filteredProducts);
 routes.get('/getProductsNames', GetProductsName.getProductsName);
-routes.get('/searchProduct/:nomeProduto', GetProductsName.getProductByname);
-routes.get('/searchProductId/:id', GetProducts.getProductById);
-routes.get('/searchProduct/:lettersProduto', GetProductsName.getProductByLetters)
-routes.get('/filterProducts', FilterProducts.getFilteredProducts);
-routes.get('/carProducts', CarProducts.getCarProducts);
 
+
+// PUTS
 routes.put('/editProduct/:id', upload.any(), (req, res) => {
     UpdateProduct.editProduct(req, res);
 });
@@ -33,6 +36,7 @@ routes.put('/editProduct/:id', upload.any(), (req, res) => {
 routes.put('/updateCart', Cart.updateCartProducts);
 
 
+// DELETES
 routes.delete('/deleteProduct/:id', (req, res) => {
     DeleteProduct.deleteProduct(req, res);
 });

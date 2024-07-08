@@ -21,6 +21,7 @@ routes.post('/postProduct', upload.any(), (req, res) => {
 routes.get('/getAllProducts', GetProducts.getAll);
 routes.get('/getProductsNames', GetProductsName.getProductsName);
 routes.get('/searchProduct/:nomeProduto', GetProductsName.getProductByname);
+routes.get('/searchProductId/:id', GetProducts.getProductById);
 routes.get('/searchProduct/:lettersProduto', GetProductsName.getProductByLetters)
 routes.get('/filterProducts', FilterProducts.getFilteredProducts);
 routes.get('/carProducts', CarProducts.getCarProducts);

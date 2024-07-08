@@ -324,7 +324,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
 
             </div>
 
-            <button className="aplicar-filtros-mobile">Aplicar Filtros</button>
+            <button className="aplicar-filtros-mobile" onClick={applyFilters}>Aplicar Filtros</button>
           </div>
 
       </section>}

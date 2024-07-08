@@ -10,8 +10,15 @@
 
 .card-img{
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
+
+.cover{
+    width: clamp(136px,25vw,352px);
+    height: clamp(136px,26vw,370px);
+}
+
 
 /* nome do produto */
 .card h1{

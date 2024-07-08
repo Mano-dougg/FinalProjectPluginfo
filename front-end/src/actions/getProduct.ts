@@ -28,9 +28,7 @@ interface Produto {
 
 export async function fetchProductByName(nomeProduto: string): Promise<Produto | null> {
   try {
-    // const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/${nomeProduto}`);
-    const teste = "creme"
-    const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/${teste}`);
+    const response = await axios.get<Produto>(`http://localhost:3030/searchProduct/${nomeProduto}`);
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar o produto:", error);

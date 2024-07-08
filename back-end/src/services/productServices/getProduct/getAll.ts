@@ -5,17 +5,33 @@ const prisma = new PrismaClient();
 
 class GetProducts {
 
-    static async getAll (req: Request ,res: Response) {
+    // static async getAll (req: Request ,res: Response) {
+    //     try {
+    //         const produtos = await prisma.produto.findMany()
+
+    //         return res.status(200).json(produtos)
+    //     } catch (error) {
+    //         console.log(error)
+    //         res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"})
+
+    //     }
+    // }
+
+    static async getAll(req: Request, res: Response) {
         try {
-            const produtos = await prisma.produto.findMany()
-
-            return res.status(200).json(produtos)
+            const produtos = await prisma.produto.findMany({
+                include: {
+                    imagePath: true,
+                },
+            });
+    
+            return res.status(200).json(produtos);
         } catch (error) {
-            console.log(error)
-            res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"})
-
+            console.log(error);
+            res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde" });
         }
     }
+    
 
     static async getProductById(req: Request, res: Response) {
         const { id } = req.params;

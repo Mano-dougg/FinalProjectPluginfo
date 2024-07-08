@@ -33,19 +33,40 @@ class GetProductsName {
         }
     }
 
+    // static async getProductByname(req: Request, res: Response) {
+
+    //     const { nomeProduto } = req.params
+
+    //     try {
+    //         const produto = await prisma.produto.findUnique({where: {nome: nomeProduto }});
+
+    //         return res.status(200).json(produto);   
+    //     } catch (error) {
+    //         console.log(error);
+    //         res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});
+    //     }
+    // }
+
     static async getProductByname(req: Request, res: Response) {
-
-        const { nomeProduto } = req.params
-
+        const { nomeProduto } = req.params;
+    
         try {
-            const produto = await prisma.produto.findUnique({where: {nome: nomeProduto }});
-
-            return res.status(200).json(produto);   
+            const produto = await prisma.produto.findUnique({
+                where: { nome: nomeProduto },
+                include: { imagePath: true }  // Incluir o campo imagePath na consulta
+            });
+    
+            if (!produto) {
+                return res.status(404).json({ msg: "Produto não encontrado" });
+            }
+    
+            return res.status(200).json(produto);
         } catch (error) {
             console.log(error);
-            res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"});
+            res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde" });
         }
     }
+    
 }
 
 export default GetProductsName;

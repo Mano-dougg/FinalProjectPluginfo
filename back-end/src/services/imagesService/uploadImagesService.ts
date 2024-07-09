@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import S3Storage from "../../../utils/S3Storage";
+import S3Storage from "../../utils/S3Storage";
 
 const s3Storage = new S3Storage();
 
@@ -12,25 +12,20 @@ class UploadImagesService {
 
     async execute(filename: string): Promise<void> {
         try {
-            // console.log('Saving file to S3:', filename);
             await this.s3Storage.saveFile(filename);
-            // console.log('File saved successfully:', filename);
+
         } catch (error) {
             console.error('Error saving file to S3:', error);
             throw new Error('Error saving file to S3');
         }
     }
 
-    async uploadImagesService(req: Request, res: Response): Promise<string[]> {
-        try {
-            // console.log('Received request to upload images');
-            
+    async saveImages(req: Request, res: Response): Promise<string[]> {
+        try {           
             if (!req.files || req.files.length === 0) {
                 console.error('No files uploaded');
                 throw new Error('No files uploaded');
             }
-
-            // console.log('Files received:', req.files.length);
 
             const uploadPromises = (req.files as Express.Multer.File[]).map(async (file: Express.Multer.File) => {
                 const { filename } = file;
@@ -40,7 +35,6 @@ class UploadImagesService {
 
             const urls: string[] = await Promise.all(uploadPromises);
 
-            // console.log('All files uploaded successfully:', urls);
             return urls; 
         } catch (error) {
             console.error('Error uploading files:', error);
@@ -48,7 +42,7 @@ class UploadImagesService {
         }
     }
 
-    async deleteImagesService(imagePaths: string | string[]): Promise<void> {
+    async deleteImages(imagePaths: string | string[]): Promise<void> {
         const filenames = Array.isArray(imagePaths) ? imagePaths : [imagePaths];
 
         const deletePromises = filenames.map(filename => this.s3Storage.deleteFile(filename));

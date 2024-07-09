@@ -53,38 +53,6 @@ import axios from "axios";
 
 
 // FUNÇÃO DE CRIAÇÃO -------------------------------------------------------------------------------------------------
-// import Produto from "@/types/types";
-
-// export async function PostProduct (
-//     {nome, marca, preco, preco_alterado, promocao, descricao, quantidade_carrinho,
-//     face, labios, olhos, kits, sombrancelha, unhas, original,
-//     imagePath}: Produto ) {
-    
-//     try {
-//         const response = await axios.post("http://localhost:3030/PostProduct", {
-//             nome: nome, 
-//             marca: marca, 
-//             preco: preco, 
-//             preco_alterado: preco_alterado, 
-//             promocao: promocao, 
-//             descricao: descricao, 
-//             quantidade_carrinho: quantidade_carrinho,
-//             face: face, 
-//             labios: labios, 
-//             olhos: olhos, 
-//             kits: kits, 
-//             sombrancelha: sombrancelha, 
-//             unhas: unhas, 
-//             original: original,
-//             imagePath: imagePath,
-//         });
-
-//         console.log(response);
-// }
-//     catch(error) {
-//         console.log(error);
-//     }
-// };
 
 import Produto from "@/types/types";
 
@@ -141,12 +109,29 @@ export async function PostProduct(produto: Produto) {
 
 
 // FUNÇÃO DE EDIÇÃO ----------------------------------------------------------------------------------------------------
-// função deve receber nome do produto (não será alterado)
-// receber novo preço atual, preço alterado, 
-// se faz parte de um conjunto (boolean), descrição, uma lista de tags(tipos/categorias) 
-// uma lista de marcas, uma lista com urls de imagens e atualizar no produto informado;
+
+/**
+     * Recebe o ID para buscar o produto e os dados que serão atualizados.
+     * Recebe todos os atributos do produto.
+     * @param imagesToDelete - url das imagens que vão ser apagadas
+     * @param newImageUrls - recebe o arquivo das novas imagens 
+     * 
+     */
 
 
+export async function editProduct(produto: Produto) {
+    try {
+        const response = await axios.put(`http://localhost:3030/editProduct/:id`, /*formData*/ {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // FUNÇÃO DE EXCLUSÃO--------------------------------------------------------------------------------------------------
 // função deve receber nome de produto e realizar a exclusão dele no banco

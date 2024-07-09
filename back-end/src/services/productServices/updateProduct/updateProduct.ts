@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import UploadImagesService from "../postProduct/uploadImagesService";
+import UploadImagesService from "../../imagesService/uploadImagesService";
 
 const prisma = new PrismaClient()
 
@@ -19,7 +19,6 @@ class UpdateProduct {
      * @throws {Error} Se ocorrer algum erro durante o processo, envia uma resposta com status 500.
      */
     static async editProduct (req: Request, res: Response) {
-        
         try {
             const { id } = req.params;
             const {
@@ -37,10 +36,10 @@ class UpdateProduct {
 
              // Deleta as imagens especificadas do S3 e do banco de dados
              if (imagesToDelete && imagesToDelete.length > 0) {
-                await UploadImagesService.deleteImagesService(imagesToDelete);
+                await UploadImagesService.deleteImages(imagesToDelete);
             }
 
-            const newImageUrls = await UploadImagesService.uploadImagesService(req, res);
+            const newImageUrls = await UploadImagesService.saveImages(req, res);
 
             // Verifica se newImageUrls é um array de strings antes de prosseguir
             if (!Array.isArray(newImageUrls) || newImageUrls.some(url => typeof url !== 'string')) {

@@ -4,8 +4,20 @@ import UploadImagesService from "../postProduct/uploadImagesService";
 
 const prisma = new PrismaClient()
 
+/**
+ * Classe UpdateProduct para lidar com operações de atualização de produto.
+ */
 class UpdateProduct {
 
+    /**
+     * Recebe o ID para buscar o produto e os dados que serão atualizados.
+     * Retorna uma mensagem de resposta.
+     * @param imagesToDelete - url das imagens 
+     * @param {Request} req - Objeto de solicitação do Express
+     * @param {Response} res - Objeto de resposta do Express
+     * @returns {Promise<void>}
+     * @throws {Error} Se ocorrer algum erro durante o processo, envia uma resposta com status 500.
+     */
     static async editProduct (req: Request, res: Response) {
         
         try {
@@ -13,14 +25,14 @@ class UpdateProduct {
             const {
                 nome, marca, preco, preco_alterado, promocao, descricao,
                 quantidade_carrinho, face, labios, olhos, kits, sombrancelha, unhas, original,
-                imagesToKeep, imagesToDelete
+                imagesToDelete
             } = req.body;
 
             let produto = await prisma.produto.findUnique({where: { id: Number(id) }});
 
             // CHECK IF PRODUCT EXISTS
             if (!produto) {
-                return res.status(422).json({ msg: "Não foi possível encontrar esse membro"})
+                return res.status(422).json({ msg: "Nenhum produto foi encontrado"})
             }
 
              // Deleta as imagens especificadas do S3 e do banco de dados
@@ -28,50 +40,32 @@ class UpdateProduct {
                 await UploadImagesService.deleteImagesService(imagesToDelete);
             }
 
-            // Chama o serviço de upload para obter as URLs das novas imagens
             const newImageUrls = await UploadImagesService.uploadImagesService(req, res);
 
             // Verifica se newImageUrls é um array de strings antes de prosseguir
             if (!Array.isArray(newImageUrls) || newImageUrls.some(url => typeof url !== 'string')) {
-                throw new Error('newImageUrls must be an array of strings');
+                throw new Error('newImageUrls precisa ser um array de strings');
             }
-
-            // Filtra apenas os campos que estão presentes no req.body
-            const updateData: any = {};
-            if (nome) updateData.nome = nome;
-            if (marca) updateData.marca = marca;
-            if (preco) updateData.preco = preco;
-            if (preco_alterado) updateData.preco_alterado = preco_alterado;
-            if (promocao) updateData.promocao = promocao;
-            if (descricao) updateData.descricao = descricao;
-            if (quantidade_carrinho) updateData.quantidade_carrinho = quantidade_carrinho;
-            if (face) updateData.face = face;
-            if (labios) updateData.labios = labios;
-            if (olhos) updateData.olhos = olhos;
-            if (kits) updateData.kits = kits;
-            if (sombrancelha) updateData.sombrancelha = sombrancelha;
-            if (unhas) updateData.unhas = unhas;
-            if (original) updateData.original = original;
-
 
             produto = await prisma.produto.update({ 
                 where: { id: Number(id) },
                 data: { nome,
                     marca,
-                    preco,
-                    preco_alterado,
-                    promocao,
+                    preco: parseFloat(preco),
+                    preco_alterado: parseFloat(preco_alterado),
+                    promocao: parseFloat(promocao),
                     descricao,
-                    quantidade_carrinho,
-                    face,
-                    labios,
-                    olhos,
-                    kits,
-                    sombrancelha,
-                    unhas,
-                    original,imagePath: {
+                    quantidade_carrinho: parseInt(quantidade_carrinho),
+                    face: (face) === 'true',
+                    labios : (labios) === 'true',
+                    olhos: (olhos) === 'true',
+                    kits: (kits) === 'true',
+                    sombrancelha: (sombrancelha) === 'true',
+                    unhas: (unhas) === 'true',
+                    original: (original) === 'true',
+                    imagePath: {
                         deleteMany: {
-                            url: { notIn: imagesToKeep }
+                            url: { in: imagesToDelete }
                         },
                         createMany: {
                             data: newImageUrls.map(url => ({ url })),

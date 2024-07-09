@@ -13,8 +13,8 @@ export  function Marca1() {
   return (
     <Image
       src={arthur}
-      width={352}
-      height={352}
+      width={300}
+      height={300}
       alt="Picture of the author"
     />
   )
@@ -24,8 +24,8 @@ export function Marca2() {
   return (
     <Image
       src={joaquim}
-      width={352}
-      height={353}
+      width={300}
+      height={300}
       alt="Picture of the author"
     />
   )
@@ -36,8 +36,8 @@ export function Marca3() {
   return (
     <Image
       src={laura}
-      width={352}
-      height={352}
+      width={300}
+      height={300}
       alt="Picture of the author"
     />
   )

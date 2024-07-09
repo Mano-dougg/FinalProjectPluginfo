@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import styled from "styled-components";
 import { Marca1, Marca2, Marca3 } from "../assets/imgs";
@@ -17,7 +18,7 @@ const Container = styled.div`
 const Imagens = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 65px;
   margin-top: -5rem; 
   z-index: 9999;
 

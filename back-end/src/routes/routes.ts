@@ -33,7 +33,7 @@ routes.put('/editProduct/:id', upload.any(), (req, res) => {
     UpdateProduct.editProduct(req, res);
 });
 
-routes.put('/updateCart', Cart.updateCartProducts);
+routes.put('/updateCart/:id', Cart.updateCartProducts);
 
 
 // DELETES

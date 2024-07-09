@@ -48,18 +48,13 @@ class UploadImagesService {
         }
     }
 
-    async deleteImagesService(imagePaths: string[]): Promise<void> {
+    async deleteImagesService(imagePaths: string | string[]): Promise<void> {
+        const filenames = Array.isArray(imagePaths) ? imagePaths : [imagePaths];
+
+        const deletePromises = filenames.map(filename => this.s3Storage.deleteFile(filename));
+
         try {
-            const deletePromises = imagePaths.map(async (path) => {
-                const filename = path.split('/').pop();
-                if (filename) {
-                    await this.s3Storage.deleteFile(filename);
-                }
-            });
-
             await Promise.all(deletePromises);
-
-            // console.log('All files deleted successfully');
         } catch (error) {
             console.error('Error deleting files from S3:', error);
             throw new Error('Error deleting files from S3');

@@ -1,10 +1,17 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import UploadImagesService from '../postProduct/uploadImagesService';
+import UploadImagesService from '../../imagesService/uploadImagesService';
 
 const prisma = new PrismaClient();
 
 class DeleteProduct {
+    
+    /**
+     * Recebe o ID e apaga o produto correspondente.
+     * @param {Request} req - Objeto de solicitação do Express
+     * @param {Response} res - Objeto de resposta do Express
+     * @returns {Promise<void>}
+     */
     static async deleteProduct(req: Request, res: Response) {
         try {
             const { id } = req.params;
@@ -20,7 +27,7 @@ class DeleteProduct {
 
             const imagePaths = product.imagePath.map(image => image.url);
 
-            await UploadImagesService.deleteImagesService(imagePaths);
+            await UploadImagesService.deleteImages(imagePaths);
 
             await prisma.produto.delete({
                 where: { id: Number(id) }

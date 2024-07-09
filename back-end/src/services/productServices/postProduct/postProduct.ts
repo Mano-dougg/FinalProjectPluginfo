@@ -1,10 +1,17 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import UploadImagesService from './uploadImagesService';
+import UploadImagesService from '../../imagesService/uploadImagesService';
 
 const prisma = new PrismaClient();
 
 class PostProduct {
+
+    /**
+     * Recebe os atributos do produto e cria o produto.
+     * @param {Request} req - Objeto de solicitação do Express
+     * @param {Response} res - Objeto de resposta do Express
+     * @returns {Promise<void>}
+     */
     static async addProduct(req: Request, res: Response) {
         try {
             const {
@@ -13,7 +20,7 @@ class PostProduct {
             } = req.body;
 
             // Chama o serviço de upload para obter as URLs das imagens
-            const imageUrls = await UploadImagesService.uploadImagesService(req, res)
+            const imageUrls = await UploadImagesService.saveImages(req, res)
 
             // Verifica se imageUrls é um array de strings antes de prosseguir
             if (!Array.isArray(imageUrls) || imageUrls.some(url => typeof url !== 'string')) {

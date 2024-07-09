@@ -6,6 +6,8 @@ import Slider1 from "@/components/home/componets/slider1";
 import Slider2 from "@/components/home/componets/slider2";
 import Slider3 from "@/components/home/componets/slider3";
 import Kits from "@/components/home/componets/kits";
+import Conheca from "@/components/home/componets/conheca";
+
 
 
 
@@ -19,6 +21,8 @@ export async function Home() {
     <Slider3/>
     <Slider2/>
     <Kits/>
+    <Conheca/>
+  
     
    
      

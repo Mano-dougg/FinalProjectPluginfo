@@ -2,6 +2,7 @@
 import styled from "styled-components"
 import Mapa from "./retangle";
 import FooterMobile from "./footerMobile";
+import "./css.css"
 
 
 const TagFooter = styled.div`
@@ -71,7 +72,7 @@ const Text2 = styled.a`
 
 const Span = styled.a`
   font-family: 'Montserrat', sans-serif;
-  font-size: 30px;
+  font-size: 1.9vw;
   font-weight: 700;
   line-height: 36.57px;
   letter-spacing: 0.02em;
@@ -89,7 +90,7 @@ padding: 19px 63px 19px 63px;
 const Text3 = styled.h1`
   color: var(--white);
   font-family: 'Montserrat', sans-serif;
-  font-size: 35px;
+  font-size: 2vw;
   font-weight: 700;
   line-height: 42.67px;
   letter-spacing: 0.02em;
@@ -97,7 +98,7 @@ const Text3 = styled.h1`
 `;
 const Despription = styled.p`
 font-family: 'Montserrat', sans-serif;
-font-size: 20px;
+font-size: 2vw;
 font-weight: 700;
 line-height: 24.38px;
 letter-spacing: 0.02em;
@@ -106,9 +107,23 @@ text-align: left;
 color:var(--white);
 `
 
+const MapWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+`;
+
+const MapaStyled = styled.div`
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+`;
+
 export default function Footer() {
   return (
     
+
 
     <TagFooter> 
       <FooterMobile/>
@@ -130,7 +145,11 @@ export default function Footer() {
       <Table2>
         <ContainerTable>
             <Text3>Existe beleza em todos os lugares</Text3>
-            <Mapa/>
+            <MapWrapper>
+              <MapaStyled>
+                <Mapa />
+              </MapaStyled>
+            </MapWrapper>
             <Despription>Uma Shine perto de você</Despription>
         </ContainerTable>
       </Table2>

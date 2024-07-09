@@ -3,6 +3,7 @@ import { IconCart, IconHome, IconShop, IconUser } from "./assets/icons";
 
 const Container = styled.div`
   display: none;
+  background:var(--black);
 
   @media (max-width: 768px) {
     display: flex;

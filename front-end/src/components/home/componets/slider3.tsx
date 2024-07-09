@@ -1,7 +1,9 @@
+'use client'
 import React, { useState } from "react";
 import styled from "styled-components";
 import Image from 'next/image';
 import { Component17, Component18, Component19, Component20 } from "../assets/imgs";
+import "../css.css"
 
 const SliderWrapper = styled.div`
   display: flex;
@@ -50,6 +52,12 @@ const RightArrow = styled(Arrow)`
 const Slide = styled.div`
   min-width: 100%;
   flex: 0 0 auto;
+
+
+  .ajustimg img {
+    width: 100vw; 
+    max-width: 100%;
+  }
 `;
 
 const Slider3 = () => {
@@ -72,10 +80,28 @@ const Slider3 = () => {
       <Container>
         <LeftArrow onClick={handlePrevSlide}>{"<"}</LeftArrow>
         <div style={{ transform: `translateX(-${slideIndex * 100}%)`, display: 'flex', transition: 'transform 1s' }}>
-          <Slide><Component17 /></Slide>
-          <Slide><Component18 /></Slide>
-          <Slide><Component19 /></Slide>
-          <Slide><Component20 /></Slide>
+          <Slide>
+            <div className="ajustimg"> 
+            <Component17 />
+            </div>
+            </Slide>
+            <Slide>
+            <div className="ajustimg"> 
+            <Component18 />
+            </div>
+            </Slide>
+            <Slide>
+            <div className="ajustimg"> 
+            <Component19 />
+            </div>
+            </Slide>
+
+            <Slide>
+            <div className="ajustimg"> 
+            <Component20 />
+            </div>
+            </Slide>
+
         </div>
         <RightArrow onClick={handleNextSlide}>{">"}</RightArrow>
       </Container>

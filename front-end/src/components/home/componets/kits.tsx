@@ -7,7 +7,7 @@ const Container = styled.div`
   background: var(--black);
   margin-top: 4rem;
   @media (max-width: 768px){
-  margin-top:2rem;
+  margin-top: 2rem;
 }
 `;
 
@@ -19,6 +19,7 @@ const Text = styled.h1`
   line-height: 37.88px;
   letter-spacing: 0.05em;
   text-align: left;
+  
   @media (max-width: 768px){
   
   font-family: 'Montserrat', sans-serif  ;
@@ -43,6 +44,7 @@ const Itens = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
+  margin-top:4rem;
 
   @media (max-width: 768px) {
   margin-top: 20px;

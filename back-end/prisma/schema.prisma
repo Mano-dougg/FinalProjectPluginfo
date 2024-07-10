@@ -40,3 +40,10 @@ model imagePath {
   produtoId  Int
   produto    Produto  @relation(fields: [produtoId], references: [id])
 }
+
+model User {
+  id Int @id @unique @default(autoincrement())
+  nome String
+  email String @unique
+  senha String
+}

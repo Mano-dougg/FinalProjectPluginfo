@@ -5,7 +5,7 @@ import { Seta } from "../assets/imgs";
 const Container = styled.div`
   width: 100%;
   height: 297px;
-  background-image: var(--background-section);
+  background-image: var(--background-section2);
   background-repeat: no-repeat; 
   background-size: cover; 
   margin-top: 2rem; 
@@ -96,12 +96,12 @@ const Text = styled.div`
 
 const Row = styled.div``;
 
-export async function Conheca() {
+export async function Conheca2() {
   return (
     <Container>
       <ContainerText>
-        <Title>Frequency Luan</Title>
-        <TagP>Depois que começa, não para</TagP>
+        <Title>Ribeiro Wild</Title>
+        <TagP>O perfume da liberdade</TagP>
         <Link>
           <Seta/>
           <Text>Conheça</Text>
@@ -111,4 +111,4 @@ export async function Conheca() {
   );
 }
 
-export default Conheca;
+export default Conheca2;

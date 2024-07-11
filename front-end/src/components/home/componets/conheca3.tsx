@@ -1,23 +1,20 @@
-'use client';
 import styled from "styled-components";
 import { Seta } from "../assets/imgs";
 
+
 const Container = styled.div`
   width: 100%;
-  height: 297px;
-  background-image: var(--background-section);
-  background-repeat: no-repeat; 
+  height: 320px;
+  background-image: var(--background-section3); 
   background-size: cover; 
   margin-top: 2rem; 
   margin-bottom: 2rem; 
 
   @media (max-width: 768px) {
-    height: 200px;
+    height: 100%;
   }
 
-  @media (max-width: 480px) {
-    height: 150px;
-  }
+ 
 `;
 
 const ContainerText = styled.div`
@@ -37,16 +34,16 @@ const Title = styled.h1`
   font-size: 45px;
   font-weight: 600;
   line-height: 116.06px;
-  text-align: left;
-  color: var(--white);
+  text-align: end; 
+  color: var(--black);
 
   @media (max-width: 768px) {
-    font-size: 35px;
+    font-size: 12px;
     line-height: 90px;
   }
 
   @media (max-width: 480px) {
-    font-size: 25px;
+    font-size: 12px;
     line-height: 70px;
   }
 `;
@@ -54,14 +51,14 @@ const Title = styled.h1`
 const TagP = styled.p`
   margin-top: -2rem;
   font-family: 'Montserrat';
-  font-size: 2vw;
+  font-size: 3vw;
   font-weight: 400;
   line-height: 36.57px;
-  text-align: left;
-  color: var(--white);
+  text-align: end; 
+  color: var(--black);
 
   @media (max-width: 768px) {
-    font-size: 3vw;
+    font-size: 10px;
   }
 
   @media (max-width: 480px) {
@@ -72,17 +69,24 @@ const TagP = styled.p`
 const Link = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: 0.5rem; 
   margin-top: 1rem; 
+  margin-right: 10rem;
+  @media (max-width: 768px) {
+margin-right: 5vw;
+}
 `;
 
 const Text = styled.div`
   font-family: 'Montserrat', sans-serif;
+  display:flex;
+  flex-direction:row-reverse;
   font-size: 2.5vw;
   font-weight: 400;
   line-height: 36.57px;
-  text-align: left;
+  text-align: end;
+  
   color: var(--white);
 
   @media (max-width: 768px) {
@@ -94,21 +98,19 @@ const Text = styled.div`
   }
 `;
 
-const Row = styled.div``;
-
-export async function Conheca() {
+export async function Conheca3() {
   return (
     <Container>
       <ContainerText>
-        <Title>Frequency Luan</Title>
-        <TagP>Depois que começa, não para</TagP>
-        <Link>
-          <Seta/>
-          <Text>Conheça</Text>
-        </Link>
+        <Title>Coleção Raibow Pride</Title>
+        <TagP>Celebre quem você é</TagP>
       </ContainerText>
+      <Link>
+        <Text>Conheça</Text>
+        <Seta />
+      </Link>
     </Container>
   );
 }
 
-export default Conheca;
+export default Conheca3;

@@ -7,7 +7,11 @@ import Slider2 from "@/components/home/componets/slider2";
 import Slider3 from "@/components/home/componets/slider3";
 import Kits from "@/components/home/componets/kits";
 import Conheca from "@/components/home/componets/conheca";
-import Categorias from "@/components/home/categorias";
+import Categorias from "@/components/home/componets/categorias";
+import Recomendados from "@/components/home/componets/recomendados";
+import Conheca2 from "@/components/home/componets/conheca2";
+import Conheca3 from "@/components/home/componets/conheca3";
+
 
 
 
@@ -24,6 +28,11 @@ export async function Home() {
     <Kits/>
     <Conheca/>
     <Categorias/>
+    <Recomendados/>
+    <Conheca2/>
+
+    <Conheca3/>
+
     
     </>
   );

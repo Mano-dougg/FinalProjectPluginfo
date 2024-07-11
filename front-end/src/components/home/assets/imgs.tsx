@@ -16,7 +16,9 @@ import pinceis from './pincel.svg'
 import skincare from './face.svg'
 import unhas from './mao.svg'
 import produto1 from './Frame 31.svg'
-
+import imgteste from './Rectangle 133.png'
+import star from './star-solid.svg'
+import cart from './shopping-cart-solid.svg'
  
 
 
@@ -174,3 +176,34 @@ export function Produto1() {
     />
   )
 }
+
+
+export function ImgTeste() {
+  return (
+    <Image
+      src={imgteste} 
+      width={200}
+      height={155}
+      alt="Picture of the author"
+    />
+  );
+}
+export function Star() {
+  return (
+    <Image
+      src={star} 
+      width={24}
+      height={24}
+      alt="Picture of the author"
+    />
+  );
+}
+export function CartR() {
+  return (
+    <Image
+      src={cart} 
+      alt="Picture of the author"
+    />
+  );
+}
+

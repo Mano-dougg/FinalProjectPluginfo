@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { Battons, Olhos, Pincel, SkinCare, Sombrancelha, Unhas } from './assets/imgs';
+import { Battons, Olhos, Pincel, SkinCare, Sombrancelha, Unhas } from '../assets/imgs';
 
 const Container = styled.div`
   width: 100%;
-  height: 400px;
+  height: 300px;
 `;
 
 const Title = styled.h1`
@@ -72,13 +72,13 @@ export function Categorias() {
 
   const scrollLeft = () => {
     if (itemsRef.current) {
-      itemsRef.current.scrollBy({ left: -150, behavior: 'smooth' });
+      itemsRef.current.scrollBy({ left: -500, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (itemsRef.current) {
-      itemsRef.current.scrollBy({ left: 150, behavior: 'smooth' });
+      itemsRef.current.scrollBy({ left: 500, behavior: 'smooth' });
     }
   };
 
@@ -86,9 +86,11 @@ export function Categorias() {
     <Container>
       <Content>
         <Title>Nossas Categorias</Title>
+          <div className="ajustimg">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <ArrowButton onClick={scrollLeft}>{'<'}</ArrowButton>
           <Items ref={itemsRef}>
+            
             <Item>
               <AjustImgContainer>
                   <Battons />
@@ -133,8 +135,10 @@ export function Categorias() {
               </AjustImgContainer>
               <ItemText>Unhas</ItemText>
             </Item>
+        
           </Items>
           <ArrowButton onClick={scrollRight}>{'>'}</ArrowButton>
+        </div>
         </div>
       </Content>
     </Container>

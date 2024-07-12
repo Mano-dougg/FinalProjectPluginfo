@@ -66,7 +66,7 @@ class UpdateProduct {
                     original: (original) === 'true',
                     imagePath: {
                         deleteMany: {
-                            url: { in: imagesToDelete }
+                            url: { in: Array.isArray(imagesToDelete) ? imagesToDelete : [] }
                         },
                         createMany: {
                             data: newImageUrls.map(url => ({ url })),

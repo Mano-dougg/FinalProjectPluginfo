@@ -10,7 +10,7 @@ import toggleOpen from "@/assets/imgs/toggle-open.png";
 import toggleClose from "@/assets/imgs/toggle-close.png";
 import "./modal.css";
 import { fetchAllProductsByName } from "@/actions/getProduct";
-import { updateProduct } from "@/actions/updateProducts";
+import { updateProduct, deleteProduct } from "@/actions/updateProducts";
 
 interface EditModalProps {
   onClose: () => void;
@@ -214,6 +214,22 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
     }
   };
 
+  const handleDelete = async () => {
+    if (id && selectedProduct) {
+      const idProduto = selectedProduct.id;
+      try {
+        await deleteProduct(idProduto);
+        alert("Produto deletado com sucesso!");
+        onClose();
+      } catch (error) {
+        alert("Erro ao deletar o produto:");
+        console.error(error);
+      }
+    } else {
+      alert("Primeiro selecione um produto");
+    }
+  };
+
   return (
     <div className="fundo-modal">
       <section className="modal">
@@ -372,7 +388,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
 
         <div className="salvar-excluir">
           <button onClick={handleSave}>SALVAR</button>
-          <button>EXCLUIR</button>
+          <button onClick={handleDelete}>EXCLUIR</button>
         </div>
       </section>
     </div>

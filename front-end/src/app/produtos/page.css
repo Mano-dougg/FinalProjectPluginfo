@@ -349,27 +349,35 @@
 .card-container{
     margin:16px 0;
     max-width: 1120px;
-    width: 90%;
+    width: 85%;
     align-self: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     row-gap: 80px;
-    column-gap: 20px;
+    column-gap: 30px;
+    /* column-gap: 5%; */
     margin-bottom: 230px;
 }
 
 @media(max-width:1300px){
     .card-container{
         row-gap: 32px;
+        column-gap: 5%;
     }
 }
 
 @media(max-width:750px){
     .card-container{
         row-gap: 15px;
-        column-gap: 15px;
+        column-gap: 5%;
+    }
+}
+
+@media(max-width:540px){
+    .card-container{
+        justify-content: space-evenly;
     }
 }
 

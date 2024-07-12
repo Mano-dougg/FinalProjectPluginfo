@@ -57,3 +57,18 @@ interface Produto {
     }
   };
   
+
+export async function deleteProduct(productId: number) {
+  try {
+    const response = await axios.delete(`http://localhost:3030/deleteProduct/${productId}`);
+
+    if (response.status !== 200) {
+      throw new Error('Erro ao deletar produto');
+    }
+
+    console.log(response.data.msg);
+    // Adicione mais lógica aqui para atualizar a interface do usuário, se necessário
+  } catch (error) {
+    console.error('Erro:', error);
+  }
+}

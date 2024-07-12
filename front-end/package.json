@@ -10,6 +10,7 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@prisma/client": "^5.16.2",
     "@prismicio/client": "^7.6.0",
     "@prismicio/next": "^1.6.0",
     "@prismicio/react": "^2.8.0",

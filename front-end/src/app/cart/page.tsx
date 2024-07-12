@@ -1,16 +1,34 @@
-'use client';
-import React, { useState } from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ElipseComponent from './components/Ellipse 7';
 import ImgTeste from './imgsteste/imgsTsx';
 import ClearIcon from './imgsteste/clear';
+import axios from 'axios';
+
+interface Cart {
+  id: number;
+  nome: string;
+  imagePath: string[];
+  preco: number;
+  preco_alterado: number;
+  frete: boolean;
+  quantidade_carrinho: number;
+}
 
 const Container = styled.div`
+  display: flex;
   padding: 50px;
   margin-top: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+`;
+
+const LeftColumn = styled.div`
+  flex: 1;
+  margin-right: 50px;
+`;
+
+const RightColumn = styled.div`
+  width: 300px;
 `;
 
 const TextCart = styled.h1`
@@ -25,24 +43,25 @@ const TextCart = styled.h1`
 
 const Table = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 100px;
+  flex-direction: column;
+  gap: 25px;
 `;
 
 const Itens = styled.div`
-  width: 600px;
+  width: 50vw;
   height: 197px;
   border-radius: 10px;
   background-color: var(--white);
   display: flex;
   align-items: flex-start;
   padding: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const Cupom = styled.div`
-  flex: 1;
-  padding: 10px;
+  padding: 20px;
+  background-color: var(--grey);
+  border-radius: 10px;
 `;
 
 const Item = styled.div`
@@ -71,6 +90,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h1`
+width:18vw;
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -162,79 +182,89 @@ const Button = styled.button`
   }
 `;
 
-export default function Cart() {
-    //depois trocar pelo useState do Banco
-    const [quantity, setQuantity] = useState(1);
+const Loading = () => (
+  <Container>
+    <TextCart> carrinho vazio</TextCart>
+  </Container>
+);
 
-    const incrementQuantity = () => {
-      setQuantity(quantity + 1);
-    };
-    
-    const decrementQuantity = () => {
-      if (quantity > 1) {
-        setQuantity(quantity - 1);
+const Cart = () => {
+  const [produtos, setProdutos] = useState<Cart[]>([]);
+  const [quantity, setQuantity] = useState();
+
+  useEffect(() => {
+    async function fetchProdutos() {
+      try {
+        const response = await axios.get(
+          "http://localhost:3030/searchProduct/cart"
+        );
+        const dados = response.data; 
+        console.log(dados.marca)
+        setProdutos(dados);
+        console.log(dados)
+        
+      } catch (error) {
+        console.error("Erro ao buscar pedidos:", error);
       }
-    };
+    }
+    fetchProdutos();
+
+    if (typeof window !== 'undefined') {
+      fetchProdutos();
+    }
+  }, []);
+
+  if (!produtos.length) {
+    return <Loading />;
+  }
 
   return (
     <Container>
-      <TextCart>Seu Carrinho</TextCart>
-      <Table>
-        <Itens>
-          <Item>
-            <Elipese><ElipseComponent /></Elipese>
-            <TagImg><ImgTeste /></TagImg>
-            <Details>
-              <Info>
-                <Row1>
-                  <Title>Hidrante facial Sensatoins</Title>
-                  <ClearIcon/>
-                </Row1>
-                <Price>
-                  <PrincePadrao>R$350,00</PrincePadrao>
-                  <PriceDescont>R$300,00</PriceDescont>
-                </Price>
-                <Frete>Frete Gratis</Frete>
-                <Quantidade>
-                  <Quant>Quant</Quant>
-                  <Button onClick={decrementQuantity} disabled={quantity === 1}>-</Button>
-                  <Quant>{quantity}</Quant>
-                  <Button onClick={incrementQuantity}>+</Button>
-                </Quantidade>
-              </Info>
-            </Details>
-          </Item>
-        </Itens>
-        
+      <LeftColumn>
+        <TextCart>Seu Carrinho</TextCart>
+        <Table>
+          {produtos.map((produto) => (
+            <Itens key={produto?.id}>
+              <Item>
+                <Elipese>
+                  <ElipseComponent />
+                </Elipese>
+                <TagImg>
+                  <ImgTeste />
+                </TagImg>
+                <Details>
+                  <Info>
+                    <Row1>
+                      <Title>{produto?.nome}</Title>
+                      <ClearIcon />
+                    </Row1>
+                    <Price>
+                      <PrincePadrao>R${produto?.preco}</PrincePadrao>
+                      <PriceDescont>
+                        R${produto?.preco_alterado}
+                      </PriceDescont>
+                    </Price>
+                    {produto?.frete && <Frete>Frete Grátis</Frete>}
+                    <Quantidade>
+                      <Quant>Quant</Quant>
+                      <Button>
+                        -
+                      </Button>
+                      <Quant>{quantity}</Quant>
+                      <Button >+</Button>
+                    </Quantidade>
+                  </Info>
+                </Details>
+              </Item>
+            </Itens>
+          ))}
+        </Table>
+      </LeftColumn>
+      <RightColumn>
         <Cupom>Cupom de desconto aqui...</Cupom>
-
-        
-      </Table>
-      <Itens>
-          <Item>
-            <Elipese><ElipseComponent /></Elipese>
-            <TagImg><ImgTeste /></TagImg>
-            <Details>
-              <Info>
-                <Row1>
-                  <Title>Hidrante facial Sensatoins</Title>
-                  <ClearIcon/>
-                </Row1>
-                <Price>
-                  <PrincePadrao>R$350,00</PrincePadrao>
-                  <PriceDescont>R$300,00</PriceDescont>
-                </Price>
-                <Frete>Frete Gratis</Frete>
-                <Quantidade>
-                  <Quant>Quant</Quant>
-                  <Button onClick={decrementQuantity} disabled={quantity === 1}>-</Button>
-                  <Quant>{quantity}</Quant>
-                  <Button onClick={incrementQuantity}>+</Button>
-                </Quantidade>
-              </Info>
-            </Details>
-          </Item>
-        </Itens>
+      </RightColumn>
     </Container>
   );
-}
+};
+
+export default Cart;

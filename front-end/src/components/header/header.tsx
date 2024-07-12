@@ -5,6 +5,7 @@ import CartControll from "./CartControll";
 import { useEffect, useState } from "react";
 import { createClient } from "@/prismicio";
 import MenuBurger from "../home/componets/modalCategory";
+import Link from "next/link";
 
 interface HeaderProps {}
 
@@ -114,7 +115,7 @@ const ContainerMenu2 = styled.div`
   gap: 35px;
 `;
 
-const TextColum2 = styled.a`
+const TextColum2 = styled.p`
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -162,7 +163,9 @@ const Header: React.FC<HeaderProps> = () => {
         </ContainerMenu>
 
         <ContainerMenu2>
-          <TextColum2>PRODUTOS</TextColum2>
+          <Link href="/produtos" passHref>
+            <TextColum2>PRODUTOS</TextColum2>
+          </Link>
           <TextColum2>MARCAS</TextColum2>
           <TextColum2>CUPONS</TextColum2>
           <TextColum2>NACIONAL</TextColum2>

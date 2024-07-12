@@ -42,6 +42,28 @@ class UploadImagesService {
         }
     }
 
+    async updateImages(req: Request, res: Response): Promise<string[]> {
+        try {
+            if (!req.files || req.files.length === 0) {
+                console.log('No files uploaded for update');
+                return [];
+            }
+
+            const uploadPromises = (req.files as Express.Multer.File[]).map(async (file: Express.Multer.File) => {
+                const { filename } = file;
+                const url = await s3Storage.saveFile(filename);
+                return url;
+            });
+
+            const urls: string[] = await Promise.all(uploadPromises);
+
+            return urls; 
+        } catch (error) {
+            console.error('Error uploading files:', error);
+            throw new Error('Error uploading files');
+        }
+    }
+
     async deleteImages(imagePaths: string | string[]): Promise<void> {
         const filenames = Array.isArray(imagePaths) ? imagePaths : [imagePaths];
 

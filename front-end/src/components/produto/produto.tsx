@@ -35,6 +35,7 @@ interface Produto {
 const Produto: React.FC<ProdutoProps> = ({ id }) => {
   const [produto, setProduto] = useState<Produto | null>(null);
   const [quantidade, setQuantidade] = useState<number>(0);
+  const [indice, setIndice]=useState<number>(0);
 
   useEffect(() => {
     const fetchProduto = async () => {
@@ -59,12 +60,20 @@ const Produto: React.FC<ProdutoProps> = ({ id }) => {
     }
   };
 
-  const imgurl = produto?.imagePath[0]?.url;
+  const handleIndice = () => {
+    if (produto && ((indice+1)< produto?.imagePath.length)){
+      setIndice(indice+1)
+    } else{
+      setIndice(0);
+    }
+
+  };
+
 
   return (
     <section className="pag-individual-produto">
       <div className="individual-produto">
-        <Image className="individual-produto-img" src={imgurl ? `https://shine-original.s3.sa-east-1.amazonaws.com/${imgurl}` : placeholder} width={736} height={477} alt="imagem do produto"/>
+        <Image onClick={handleIndice} className="individual-produto-img" src={ produto?.imagePath[indice]?.url ? `https://shine-original.s3.sa-east-1.amazonaws.com/${produto?.imagePath[indice]?.url}` : placeholder} width={736} height={477} alt="imagem do produto"/>
         
         <div className="individual-produto-info">
           <h1>{produto?.nome}</h1>  

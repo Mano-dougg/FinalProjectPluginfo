@@ -65,6 +65,7 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 
 
@@ -358,7 +359,7 @@
     row-gap: 80px;
     column-gap: 30px;
     /* column-gap: 5%; */
-    margin-bottom: 230px;
+    margin-bottom: 8vw;
 }
 
 @media(max-width:1300px){

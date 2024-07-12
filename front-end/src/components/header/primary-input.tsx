@@ -1,7 +1,7 @@
 'use client'
 import React, { InputHTMLAttributes, useRef } from "react";
 import styled from "styled-components";
-import { useRouter } from "next/navigation"; // Use 'next/navigation' in Next.js 13
+import { useRouter } from "next/navigation"; 
 import { SearchIcon } from "./search-icon";
 
 export const Search = styled.input`
@@ -76,9 +76,9 @@ export function PrimaryInputSearchIcon(props: InputProps) {
   const router = useRouter();
 
   const handleSearch = () => {
-    if (inputRef.current) {
+    if (inputRef.current && inputRef.current.value.trim() !== '') {
       router.push(`/pesquisar/${inputRef.current.value}`);
-    }
+    } 
   };
 
   return (
@@ -86,7 +86,7 @@ export function PrimaryInputSearchIcon(props: InputProps) {
       <Search
         {...props}
         ref={inputRef}
-        onKeyPress={(event) => {
+        onKeyDown={(event) => {
           if (event.key === 'Enter') {
             handleSearch();
           }

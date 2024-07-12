@@ -270,12 +270,12 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
           {!searchOpen && 
           <div className="editando-agora"> Você esta editando: {selectedProduct?.nome} <Image src={sair} alt="sair" width={15} onClick={() => handleSearch()}/></div>}
           
-          <label>Nome do produto</label>
+          <label>{searchOpen? "Pesquisar por produto": "Nome do produto"}</label>
           <div className="search-input">
               <input
               type={searchOpen? "search" : "text"}
               className="nome-produto"
-              placeholder={searchOpen? "Pesquisar por produto" : ""}
+              placeholder={searchOpen? "Digite o nome do produto" : ""}
               value={searchOpen? searchQuery : nome}
               onChange={searchOpen? handleSearchChange :  (e) => setNome(e.target.value)}
               />
@@ -312,16 +312,6 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
               />
             </div>
           </div>
-
-          {/* <label>Este produto faz parte de um conjunto?</label>
-          <div className="radio-options">
-            <label>
-              <input type="radio" name="conjunto" value="sim" /> Sim
-            </label>
-            <label>
-              <input type="radio" name="conjunto" value="nao" /> Não
-            </label>
-          </div> */}
 
           <label className="modal-description">
             Descrição do produto

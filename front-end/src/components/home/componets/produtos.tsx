@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
+import { createClient } from "@/prismicio";
 import { CartR, ImgTeste, Star } from "../assets/imgs";
-import axios from 'axios';
 
 const Container = styled.div`
   margin-top: -2rem;
@@ -47,6 +46,12 @@ const Itens = styled.div`
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
 `;
 
 const ContainerCard = styled.div`
@@ -67,6 +72,16 @@ const Preco = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+`;
+
+const CardTitle = styled.div`
+  cursor: pointer;
+  color: blue;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Promotion = styled.h2`
@@ -114,12 +129,12 @@ const Compra = styled.div`
   }
 
   .ajustcart {
-    width: 24px;
-    height: 24px;
+    width: 24px; 
+    height: 24px; 
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain; 
     }
   }
 `;
@@ -143,49 +158,31 @@ const TextCart = styled.h1`
   padding: 5px;
 `;
 
-const StarContainer = styled.div`
-  display: flex;
-`;
-
-const Produtos = () => {
-  const [produtos, setProdutos] = useState([]);
-
-  useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const response = await axios.get('/searchProduct/all');
-        if (!response.data || response.status !== 200) {
-          throw new Error('Erro ao buscar produtos');
-        }
-        setProdutos(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
-        setProdutos([]);
-      }
-    };
-
-    fetchProdutos();
-  }, []);
+export async function Produtos() {
+  const prismic = createClient();
+  const section1 = await prismic.getByUID("section1", "main");
 
   return (
-    <Container>
-      <Conteudo>
-        <Text>RECOMENDADOS</Text>
-        <Itens>
-          {produtos.map((produto, index) => (
-            <ContainerCard key={index}>
+    <>
+      <Container>
+        <Conteudo>
+          <Text>RECOMENDADOS</Text>
+          <Itens>
+            <ContainerCard>
               <div className="ajustimgRecomendados">
-                <ImgTeste src={produto.imagePath} alt={produto.nome} />
+                <ImgTeste />
               </div>
-              <StarContainer>
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} />
-                ))}
-              </StarContainer>
-              <Title>{produto.nome}</Title>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
               <Preco>
-                <Promotion>R${produto.preco_original}</Promotion>
-                <Price>R${produto.preco_promocao}</Price>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
               </Preco>
               <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
               <Compra>
@@ -195,11 +192,131 @@ const Produtos = () => {
                 </div>
               </Compra>
             </ContainerCard>
-          ))}
-        </Itens>
-      </Conteudo>
-    </Container>
+            <ContainerCard>
+              <div className="ajustimgRecomendados">
+                <ImgTeste />
+              </div>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
+              <Preco>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
+              </Preco>
+              <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
+              <Compra>
+                <TextCart>ADICIONAR AO CARRINHO</TextCart>
+                <div className="ajustcart">
+                  <CartR />
+                </div>
+              </Compra>
+            </ContainerCard>
+            <ContainerCard>
+              <div className="ajustimgRecomendados">
+                <ImgTeste />
+              </div>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
+              <Preco>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
+              </Preco>
+              <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
+              <Compra>
+                <TextCart>ADICIONAR AO CARRINHO</TextCart>
+                <div className="ajustcart">
+                  <CartR />
+                </div>
+              </Compra>
+            </ContainerCard>
+            <ContainerCard>
+              <div className="ajustimgRecomendados">
+                <ImgTeste />
+              </div>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
+              <Preco>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
+              </Preco>
+              <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
+              <Compra>
+                <TextCart>ADICIONAR AO CARRINHO</TextCart>
+                <div className="ajustcart">
+                  <CartR />
+                </div>
+              </Compra>
+            </ContainerCard>
+            <ContainerCard>
+              <div className="ajustimgRecomendados">
+                <ImgTeste />
+              </div>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
+              <Preco>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
+              </Preco>
+              <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
+              <Compra>
+                <TextCart>ADICIONAR AO CARRINHO</TextCart>
+                <div className="ajustcart">
+                  <CartR />
+                </div>
+              </Compra>
+            </ContainerCard>
+            <ContainerCard>
+              <div className="ajustimgRecomendados">
+                <ImgTeste />
+              </div>
+              <Estrelas>
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+                <Star />
+              </Estrelas>
+              <Title>Serum Viitallice</Title>
+              <Preco>
+                <Promotion>R$350,00</Promotion>
+                <Price>R$299,00</Price>
+              </Preco>
+              <Parcelamento>3x sem juros no cartão de crédito</Parcelamento>
+              <Compra>
+                <TextCart>ADICIONAR AO CARRINHO</TextCart>
+                <div className="ajustcart">
+                  <CartR />
+                </div>
+              </Compra>
+            </ContainerCard>
+          </Itens>
+        </Conteudo>
+      </Container>
+    </>
   );
-};
+}
 
 export default Produtos;

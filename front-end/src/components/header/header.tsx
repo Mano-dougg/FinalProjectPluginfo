@@ -5,6 +5,7 @@ import PrimaryInputSearchIcon from "./primary-input";
 import CartControll from "./CartControll";
 import { useEffect, useState } from "react";
 import { createClient } from "@/prismicio";
+import MenuBurger from "../home/componets/modalCategory";
 
 interface HeaderProps {}
 
@@ -35,8 +36,13 @@ const Column1 = styled.div`
   justify-content: space-between; 
   width: 100%;
 `;
-
 const Column2 = styled.div`
+  display: flex;
+  gap: 50px;
+  flex-direction: row;
+  align-items: center; 
+
+
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -50,6 +56,8 @@ const Logo = styled.a`
   letter-spacing: 0.02em;
   text-align: left;
   color: ${colors.rose1};
+  cursor:pointer;
+  text-decoration:none;
 
   @media screen and (max-width: 768px) {
     font-family: "Montserrat", sans-serif;
@@ -90,6 +98,41 @@ const Cupons = styled.p`
   }
 `;
 
+const ContainerMenu = styled.div`
+background: var(--rose1);
+border-radius:60px;
+display: flex;
+flex-direction:row;
+
+`
+
+const LinkContainer = styled.a`
+
+`
+const ContainerMenu2 = styled.div`
+
+display:flex;
+flex-direction:row;
+gap: 35px;
+`
+const TextColum2 = styled.a`
+   font-family: 'Montserrat',sans-serif;
+font-size: 14px;
+font-weight: 500;
+line-height: 17.07px;
+letter-spacing: 0.08em;
+text-align: center;
+color:var(--white);
+cursor:pointer;
+ &:hover{
+ color:var(--rose2);
+ }
+
+
+`
+
+
+
 export async function Header(props: HeaderProps) {
   const [data, setData] = useState(null);
   const prismic  = createClient()
@@ -98,15 +141,32 @@ export async function Header(props: HeaderProps) {
   return (
     <TagHeader>
       <Column1>
-        <Logo >{tagheader.data.logo}</Logo>
+        <Logo href="/">{tagheader.data.logo}</Logo>
         <Container>
           <PrimaryInputSearchIcon placeholder="Pesquise na Shine..." />
           <MinhaConta>{tagheader.data.acount}</MinhaConta>
           <Cupons> CUPONS DA LOJA/ <br/>CUPONS</Cupons>
+          <LinkContainer href="/cart">
           <CartControll/>
+          </LinkContainer>
         </Container>
       </Column1>
-      <Column2>Column2</Column2>
+
+
+      <Column2>
+    <ContainerMenu>
+      <MenuBurger/>  
+    </ContainerMenu>
+
+
+    <ContainerMenu2>
+    <TextColum2>PRODUTOS</TextColum2>
+    <TextColum2>MARCAS</TextColum2>
+    <TextColum2>CUPONS</TextColum2>
+    <TextColum2>NACIONAL</TextColum2>
+    </ContainerMenu2>
+      
+      </Column2>
     </TagHeader>
   );
 }

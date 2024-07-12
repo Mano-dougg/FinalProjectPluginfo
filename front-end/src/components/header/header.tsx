@@ -216,7 +216,7 @@ const Header: React.FC<HeaderProps> = () => {
             </SearchResults>
           )}
 
-          <MinhaConta>{tagheader?.account}</MinhaConta>
+          <MinhaConta>{tagheader?.acount}</MinhaConta>
           <Cupons>CUPONS DA LOJA/ <br />CUPONS</Cupons>
           <LinkContainer href="/cart">
             <CartControll />

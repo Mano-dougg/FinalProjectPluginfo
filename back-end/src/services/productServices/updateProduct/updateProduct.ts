@@ -47,10 +47,12 @@ class UpdateProduct {
 
             const newImageUrls = await UploadImagesService.saveImages(req, res);
 
-            // Verifica se newImageUrls é um array de strings antes de prosseguir
-            if (!Array.isArray(newImageUrls) || newImageUrls.some(url => typeof url !== 'string')) {
-                throw new Error('newImageUrls precisa ser um array de strings');
-            }
+            if (Array.isArray(imagesToDelete) && imagesToDelete.length > 0) {
+
+                // filtra as strings vazias
+                const filteredImagesToDelete = imagesToDelete.filter(url => url.trim() !== '');
+                if (filteredImagesToDelete.length > 0) {
+                    await UploadImagesService.deleteImages(filteredImagesToDelete);
 
             produto = await prisma.produto.update({ 
                 where: { id: Number(id) },

@@ -301,7 +301,6 @@
     flex-direction: column;
     gap:15px;
     width: 352px;
-    position: relative;
 }
 
 .modal-info label{
@@ -353,7 +352,6 @@
 
 .modal-info .nome-produto{
     padding-left: 5%;
-    width: 100%;
 }
 
 .modal-info .modal-description{
@@ -503,61 +501,4 @@
         width: 10px;
         margin-right: 2px;
     }
-
-    .modal-info .editando-agora{
-        font-size: 10px;
-        gap:5px;
-    }
-
-    .modal-info .editando-agora img{
-        width: 13px;
-        height: auto;
-    }
-
-    .search-input .search-results div{
-        font-weight: 500;
-        font-size:8px;
-        margin: 5px;
-    }
 }
-
-
-.editando-agora{
-    font-weight: 600;
-    font-size: 14px;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap:10px;
-}
-
-.search-input{
-    width: 100%;
-    position: relative;
-}
-
-.modal-imgs img{
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.search-input .search-results{
-    max-height: 300px;
-    width: 95%;
-    margin-left: 2.5%;
-    margin-top:  5px;
-    overflow-y: auto;
-    position: absolute;
-    background: #FFFFFF;
-    border: 1.5px solid  black;
-    border-radius: 0 0 10px 10px;
-}
-
-.search-results div{
-    font-weight: 600;
-    font-size:12px;
-    margin: 10px;
-    color: black;
-}
-

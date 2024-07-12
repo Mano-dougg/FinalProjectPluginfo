@@ -35,16 +35,24 @@ class UpdateProduct {
             }
 
              // Deleta as imagens especificadas do S3 e do banco de dados
-             if (imagesToDelete && imagesToDelete.length > 0) {
-                await UploadImagesService.deleteImages(imagesToDelete);
+            if (Array.isArray(imagesToDelete) && imagesToDelete.length > 0) {
+
+                // filtra as strings vazias mandadas no form-data
+                const filteredImagesToDelete = imagesToDelete.filter(url => url.trim() !== '');
+                
+                if (filteredImagesToDelete.length > 0) {
+                    await UploadImagesService.deleteImages(filteredImagesToDelete);
+                } 
             }
 
             const newImageUrls = await UploadImagesService.saveImages(req, res);
 
-            // Verifica se newImageUrls é um array de strings antes de prosseguir
-            if (!Array.isArray(newImageUrls) || newImageUrls.some(url => typeof url !== 'string')) {
-                throw new Error('newImageUrls precisa ser um array de strings');
-            }
+            if (Array.isArray(imagesToDelete) && imagesToDelete.length > 0) {
+
+                // filtra as strings vazias
+                const filteredImagesToDelete = imagesToDelete.filter(url => url.trim() !== '');
+                if (filteredImagesToDelete.length > 0) {
+                    await UploadImagesService.deleteImages(filteredImagesToDelete);
 
             produto = await prisma.produto.update({ 
                 where: { id: Number(id) },

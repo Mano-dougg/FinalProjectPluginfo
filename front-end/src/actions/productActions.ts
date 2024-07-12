@@ -1,6 +1,5 @@
 // colocar aqui as requisições para o backend 
 
-
 import axios from "axios";
 
 // A função abaixo irá cadastrar um novo usuário e armazenar token e id no local storage 

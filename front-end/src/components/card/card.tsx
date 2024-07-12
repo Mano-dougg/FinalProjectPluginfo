@@ -4,7 +4,9 @@ import placeholderProduct from "@/assets/imgs/produto-placeholder.png";
 import cart from "@/assets/imgs/shopping-cart-solid.png";
 import Link from "next/link";
 import "./card.css";
-import { updateCartProduct } from "@/actions/cartActions"; // Certifique-se de que este caminho está correto
+import { updateCartProduct } from "@/actions/cartActions"; 
+import alta from "@/assets/imgs/em-alta.png"
+import fiveStars from "@/assets/imgs/FIVE STARS.png";
 
 interface Produto {
   id: number;
@@ -50,6 +52,7 @@ const Card: React.FC<CardProps> = ({ produto }) => {
     <section className="card">
       <Link href={`/produtos/${id}`} passHref>
         <div className="cover">
+          <Image src={alta} alt="" className="em-alta" width={300}/>
           <Image
             src={imgurl ? `https://shine-original.s3.sa-east-1.amazonaws.com/${produto.imagePath[0]?.url}` : placeholderProduct}
             alt={produto.nome}
@@ -59,11 +62,13 @@ const Card: React.FC<CardProps> = ({ produto }) => {
           />
         </div>
       </Link>
+      <Image src={fiveStars} alt="" className="estrelas"/>
       <h1>{produto.nome}</h1>
       <h2>
         <span>R${produto.preco?.toFixed(2)}</span> R$ {produto.preco_alterado?.toFixed(2)}
       </h2>
       <p>3x sem juros no cartão de crédito</p>
+      
       <button onClick={handleAddToCart}>
         ADICIONE AO CARRINHO <Image src={cart} width={32} alt="" />
       </button>

@@ -3,7 +3,7 @@ import { IconCart, IconHome, IconShop, IconUser } from "./assets/icons";
 
 const Container = styled.div`
   display: none;
-  background:var(--black);
+  background: var(--black);
 
   @media (max-width: 768px) {
     display: flex;
@@ -21,9 +21,10 @@ const Container = styled.div`
   }
 `;
 
-const Icon = styled.span`
+const IconLink = styled.a`
   cursor: pointer;
   color: white;
+  text-decoration: none;
 
   &:active {
     color: pink;
@@ -34,10 +35,18 @@ const Icon = styled.span`
 export function FooterMobile() {
   return (
     <Container>
-      <IconHome/>
-      <IconShop/>
-      <IconCart/>
-      <IconUser/>
+      <IconLink href="/">
+        <IconHome />
+      </IconLink>
+      <IconLink href="/produtos">
+        <IconShop />
+      </IconLink>
+      <IconLink href="/cart">
+        <IconCart />
+      </IconLink>
+      <IconLink href="/user">
+        <IconUser />
+      </IconLink>
     </Container>
   );
 }

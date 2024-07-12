@@ -11,6 +11,7 @@ import Categorias from "@/components/home/componets/categorias";
 import Recomendados from "@/components/home/componets/recomendados";
 import Conheca2 from "@/components/home/componets/conheca2";
 import Conheca3 from "@/components/home/componets/conheca3";
+import Produtos from "@/components/home/componets/produtos";
 
 
 
@@ -30,7 +31,7 @@ export async function Home() {
     <Categorias/>
     <Recomendados/>
     <Conheca2/>
-
+    <Produtos/>
     <Conheca3/>
 
     

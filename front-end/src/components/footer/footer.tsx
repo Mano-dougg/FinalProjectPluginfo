@@ -1,20 +1,20 @@
-'use client'
-import styled from "styled-components"
+'use client';
+
+import styled from "styled-components";
 import Mapa from "./retangle";
 import FooterMobile from "./footerMobile";
-import "./css.css"
+import "./css.css";
 
+const TagFooter = styled.div``;
 
-const TagFooter = styled.div`
-
-`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 500px;
   background: var(--black);
-   @media (max-width: 768px) {
-    display:none;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -33,15 +33,13 @@ const Table2 = styled.div`
 const Colum1 = styled.div``;
 
 const Campos = styled.div`
-  padding: 19px 63px 19px 63px;
+  padding: 19px 63px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-
- 
 `;
 
-const Text = styled.div`
+const Text = styled.a`
   color: var(--white);
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
@@ -50,11 +48,16 @@ const Text = styled.div`
   line-height: 36.57px;
   letter-spacing: 0.02em;
   text-align: left;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Colum2 = styled.div`
   color: var(--white);
-  padding: 19px 63px 19px 63px;
+  padding: 19px 63px;
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -67,7 +70,13 @@ const Text2 = styled.a`
   font-weight: 700;
   line-height: 70.14px;
   letter-spacing: 0.02em;
-  cursor:pointer;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--white);
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Span = styled.a`
@@ -77,16 +86,22 @@ const Span = styled.a`
   line-height: 36.57px;
   letter-spacing: 0.02em;
   text-align: left;
-  cursor:pointer;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--white);
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const ContainerTable = styled.div`
-    display: flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 30px;
+  padding: 19px 63px;
+`;
 
-padding: 19px 63px 19px 63px;
-`
 const Text3 = styled.h1`
   color: var(--white);
   font-family: 'Montserrat', sans-serif;
@@ -96,16 +111,16 @@ const Text3 = styled.h1`
   letter-spacing: 0.02em;
   text-align: left;
 `;
-const Despription = styled.p`
-font-family: 'Montserrat', sans-serif;
-font-size: 2vw;
-font-weight: 700;
-line-height: 24.38px;
-letter-spacing: 0.02em;
-text-align: left;
 
-color:var(--white);
-`
+const Despription = styled.p`
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2vw;
+  font-weight: 700;
+  line-height: 24.38px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: var(--white);
+`;
 
 const MapWrapper = styled.div`
   position: relative;
@@ -122,28 +137,25 @@ const MapaStyled = styled.div`
 
 export default function Footer() {
   return (
-    
-
-
-    <TagFooter> 
-      <FooterMobile/>
-    <Container>
-      <Table1>
-        <Colum1>
-          <Campos>
-            <Text>Home</Text>
-            <Text>Loja</Text>
-            <Text>Carrinho</Text>
-            <Text>Marcas</Text>
-          </Campos>
-        </Colum1>
-        <Colum2>
-          <Text2>SHINE</Text2>
-          <Span>@shineOficial</Span>
-        </Colum2>
-      </Table1>
-      <Table2>
-        <ContainerTable>
+    <TagFooter>
+      <FooterMobile />
+      <Container>
+        <Table1>
+          <Colum1>
+            <Campos>
+              <Text href="/">Home</Text>
+              <Text href="/produtos">Loja</Text>
+              <Text href="/cart">Carrinho</Text>
+              <Text href="/">Marcas</Text>
+            </Campos>
+          </Colum1>
+          <Colum2>
+            <Text2 href="/">SHINE</Text2>
+            <Span href="https://www.instagram.com/shineOficial">@shineOficial</Span>
+          </Colum2>
+        </Table1>
+        <Table2>
+          <ContainerTable>
             <Text3>Existe beleza em todos os lugares</Text3>
             <MapWrapper>
               <MapaStyled>
@@ -151,9 +163,9 @@ export default function Footer() {
               </MapaStyled>
             </MapWrapper>
             <Despription>Uma Shine perto de você</Despription>
-        </ContainerTable>
-      </Table2>
-    </Container>
+          </ContainerTable>
+        </Table2>
+      </Container>
     </TagFooter>
   );
 }

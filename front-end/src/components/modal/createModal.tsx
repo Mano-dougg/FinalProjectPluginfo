@@ -22,12 +22,12 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
   const [sideImages, setSideImages] = useState<(File | undefined)[]>(Array(4).fill(undefined));
   const [showBrands, setShowBrands] = useState<boolean>(false);
   const [showTags, setShowTags] = useState<boolean>(false);
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [nome, setNome] = useState<string>('');
   const [preco, setPreco] = useState<number>(0);
   const [precoAlterado, setPrecoAlterado] = useState<number>(0);
-  const [promocao, setPromocao] = useState<number>(0);
   const [descricao, setDescricao] = useState<string>('');
   const [quantidadeCarrinho, setQuantidadeCarrinho] = useState<number>(0);
   const [conjunto, setConjunto] = useState<boolean>(false);

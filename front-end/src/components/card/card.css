@@ -17,6 +17,7 @@
 .cover{
     width: clamp(136px,25vw,352px);
     height: clamp(136px,26vw,370px);
+    position: relative;
 }
 
 
@@ -126,5 +127,24 @@
         font-weight: 600;
         font-size: clamp(12px,3.5vw,20px);
     }
+    .em-alta{
+        display: none;
+    }
+    .estrelas{
+        display: none;
+    }
 
+}
+
+.em-alta{
+    position: absolute;
+    z-index: 50;
+    top:10%;
+    width: 40%;
+    height: auto;
+}
+
+.estrelas{
+    width: 50%;
+    height: auto;
 }

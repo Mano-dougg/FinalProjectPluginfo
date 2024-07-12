@@ -19,6 +19,7 @@ import produto1 from './Frame 31.svg'
 import imgteste from './Rectangle 133.png'
 import star from './star-solid.svg'
 import cart from './shopping-cart-solid.svg'
+import menuicon from './menu-regular-24(1).png'
  
 
 
@@ -206,4 +207,11 @@ export function CartR() {
     />
   );
 }
-
+export function MenuIconComponent() {
+  return (
+    <Image
+      src={menuicon} 
+      alt="Picture of the author"
+    />
+  );
+}

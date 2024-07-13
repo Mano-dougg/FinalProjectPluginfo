@@ -321,3 +321,14 @@
   transform: translateX(-100%);
   opacity: 0;
 }
+
+#qtd-input-label{
+    font-size: clamp(10px,2vw,22px);
+}
+#qtd-input{
+    font-size: clamp(10px,1.5vw,23px);
+    font-weight: 600;
+    border: 1.5px solid black;
+    padding-left: 3%;
+    padding-right: 3%;
+}

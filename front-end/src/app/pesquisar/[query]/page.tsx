@@ -222,7 +222,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
                 </button>
                 {visibleCategory === 'PROMOÇÃO' && (
                   <div className="filter-options">
-                    {['Frete grátis','20% off', '30% a 40% off', '50% off', '60% off','70% a 90% off'].map((filtro) => (
+                    {['20% off', '30% a 40% off', '50% off', '60% off','70% a 90% off'].map((filtro) => (
                       <label key={filtro}>
                         <input
                           type="checkbox"

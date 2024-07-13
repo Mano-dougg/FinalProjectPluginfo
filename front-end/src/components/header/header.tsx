@@ -7,7 +7,7 @@ import { createClient } from "@/prismicio";
 import MenuBurger from "../home/componets/modalCategory";
 import Link from "next/link";
 
-interface HeaderProps {}
+interface HeaderProps { }
 
 const TagHeader = styled.header`
   display: flex;
@@ -115,7 +115,7 @@ const ContainerMenu2 = styled.div`
   gap: 35px;
 `;
 
-const TextColum2 = styled.p`
+const TextColum2 = styled.a`
   font-family: var(--montserrat-font);
   font-size: 14px;
   font-weight: 500;
@@ -124,6 +124,7 @@ const TextColum2 = styled.p`
   text-align: center;
   color: var(--white);
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     color: var(--rose2);
@@ -156,16 +157,12 @@ const Header: React.FC<HeaderProps> = () => {
           </LinkContainer>
         </Container>
       </Column1>
-
       <Column2>
         <ContainerMenu>
           <MenuBurger />
         </ContainerMenu>
-
         <ContainerMenu2>
-          <Link href="/produtos" passHref>
-            <TextColum2>PRODUTOS</TextColum2>
-          </Link>
+          <TextColum2 href="/produtos">PRODUTOS</TextColum2>
           <TextColum2>MARCAS</TextColum2>
           <TextColum2>CUPONS</TextColum2>
           <TextColum2>NACIONAL</TextColum2>

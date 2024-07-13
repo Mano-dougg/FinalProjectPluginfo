@@ -19,12 +19,15 @@ const routes: prismic.ClientConfig["routes"] = [
   	type: "tagheader",
   	path: "/",
   },
-  
   {
   	type: "section1",
   	path: "/",
   },
-
+  {
+  	type: "categorias",
+  	path: "/",
+  },
+  
 ];
 
 /**

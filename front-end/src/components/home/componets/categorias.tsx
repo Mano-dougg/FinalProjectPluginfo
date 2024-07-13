@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, RefObject } from 'react';
 import styled from 'styled-components';
 import { Battons, Olhos, Pincel, SkinCare, Sombrancelha, Unhas } from '../assets/imgs';
+import { createClient } from '@/prismicio';
 
 const Container = styled.div`
   width: 100%;
@@ -8,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  text-align: flex-start;
+  text-align: start;
   margin-bottom: 20px;
 `;
 
@@ -46,8 +47,8 @@ const ArrowButton = styled.button`
   border: none;
   font-size: 24px;
   cursor: pointer;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
   padding: 5px 5px;
 
   &:disabled {
@@ -55,7 +56,7 @@ const ArrowButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    display: none;
+    display: ;
   }
 `;
 
@@ -68,7 +69,8 @@ const AjustImgContainer = styled.div`
 `;
 
 export function Categorias() {
-  const itemsRef = useRef(null);
+
+  const itemsRef: RefObject<HTMLDivElement> = useRef(null);
 
   const scrollLeft = () => {
     if (itemsRef.current) {
@@ -86,59 +88,62 @@ export function Categorias() {
     <Container>
       <Content>
         <Title>Nossas Categorias</Title>
-          <div className="ajustimg">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <ArrowButton onClick={scrollLeft}>{'<'}</ArrowButton>
-          <Items ref={itemsRef}>
-            
-            <Item>
-              <AjustImgContainer>
+        <div className="ajustimg">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <ArrowButton onClick={scrollLeft}>{'<'}</ArrowButton>
+            <Items ref={itemsRef}>
+              <Item>
+                <AjustImgContainer>
+                  <div className='imgcategory'> 
+                    
                   <Battons />
-                  
-              </AjustImgContainer>
-              
-              <ItemText>Batom</ItemText>
-              
-            </Item>
-            <Item>
-              <AjustImgContainer>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Batom</ItemText>
+              </Item>
+              <Item>
+                <AjustImgContainer>
+                <div className='imgcategory'> 
                   <Olhos />
-                
-              </AjustImgContainer>
-              <ItemText>Olhos</ItemText>
-            </Item>
-            <Item>
-              <AjustImgContainer>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Olhos</ItemText>
+              </Item>
+              <Item>
+                <AjustImgContainer>
+                <div className='imgcategory'> 
                   <Pincel />
-                
-              </AjustImgContainer>
-              <ItemText>Pinceis</ItemText>
-            </Item>
-            <Item>
-              <AjustImgContainer>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Pinceis</ItemText>
+              </Item>
+              <Item>
+                <AjustImgContainer>
+                <div className='imgcategory'> 
                   <SkinCare />
-                
-              </AjustImgContainer>
-              <ItemText>Cuidados com a Pele</ItemText>
-            </Item>
-            <Item>
-              <AjustImgContainer>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Cuidados com a Pele</ItemText>
+              </Item>
+              <Item>
+                <AjustImgContainer>
+                <div className='imgcategory'> 
                   <Sombrancelha />
-                
-              </AjustImgContainer>
-              <ItemText>Sobrancelha</ItemText>
-            </Item>
-            <Item>
-              <AjustImgContainer>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Sobrancelha</ItemText>
+              </Item>
+              <Item>
+                <AjustImgContainer>
+                <div className='imgcategory'> 
                   <Unhas />
-                
-              </AjustImgContainer>
-              <ItemText>Unhas</ItemText>
-            </Item>
-        
-          </Items>
-          <ArrowButton onClick={scrollRight}>{'>'}</ArrowButton>
-        </div>
+                  </div>
+                </AjustImgContainer>
+                <ItemText>Unhas</ItemText>
+              </Item>
+            </Items>
+            <ArrowButton onClick={scrollRight}>{'>'}</ArrowButton>
+          </div>
         </div>
       </Content>
     </Container>

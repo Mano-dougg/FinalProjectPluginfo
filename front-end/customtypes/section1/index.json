@@ -20,6 +20,30 @@
           "placeholder": ""
         }
       },
+      "img1": {
+        "type": "Image",
+        "config": {
+          "label": "img1",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "img2": {
+        "type": "Image",
+        "config": {
+          "label": "img2",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "img3": {
+        "type": "Image",
+        "config": {
+          "label": "img3",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
       "campo2": {
         "type": "Text",
         "config": {

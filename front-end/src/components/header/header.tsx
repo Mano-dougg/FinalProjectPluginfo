@@ -73,7 +73,7 @@ const Logo = styled.a`
 const MinhaConta = styled.a`
   width: 150px;
   white-space: nowrap;
-  font-family: 'Oxygen', sans-serif;
+  font-family: var(--oxygen-font);
   font-size: 1.5vw;
   font-weight: 700;
   line-height: 25.25px;
@@ -87,7 +87,7 @@ const MinhaConta = styled.a`
 `;
 
 const Cupons = styled.p`
-  font-family: 'Oxygen', sans-serif;
+  font-family: var(--oxygen-font);
   text-align: center;
   font-size: 1vw;
   font-weight: 700;
@@ -116,7 +116,7 @@ const ContainerMenu2 = styled.div`
 `;
 
 const TextColum2 = styled.p`
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--montserrat-font);
   font-size: 14px;
   font-weight: 500;
   line-height: 17.07px;

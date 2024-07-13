@@ -14,11 +14,6 @@ import Conheca3 from "@/components/home/componets/conheca3";
 import Produtos from "@/components/home/componets/produtos";
 
 
-
-
-
-
-
 export async function Home() {
   
   console.log()

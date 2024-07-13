@@ -159,7 +159,14 @@ export default function Footer() {
             <Text3>Existe beleza em todos os lugares</Text3>
             <MapWrapper>
               <MapaStyled>
-                <Mapa />
+              <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.53811549159!2d-38.51220542856487!3d-13.00136733235298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x716049fc0d1034b%3A0x8b8c3d93f8fda741!2sInfoJr%20-%20UFBA!5e0!3m2!1spt-BR!2sbr!4v1720884959917!5m2!1spt-BR!2sbr"
+                  width="400"
+                  height="300"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </MapaStyled>
             </MapWrapper>
             <Despription>Uma Shine perto de você</Despription>

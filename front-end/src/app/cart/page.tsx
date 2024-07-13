@@ -7,6 +7,8 @@ import ClearIcon from './imgsteste/clear';
 import axios from 'axios';
 import Image from 'next/image';
 import './css.css'
+import imagemCarrinho from "@/assets/imgs/carrinhoVazio.png";
+import Link from 'next/link';
 
 interface CartItem {
   id: number;
@@ -294,9 +296,12 @@ const TextQuant = styled.div`
 
 
 const Loading = () => (
-  <Container>
-    <TextCart> carrinho vazio</TextCart>
-  </Container>
+  <div className='carrinho-vazio'>
+    <div className='carrinho-vazio-img'><Image src={imagemCarrinho} alt="carrinho" width={300} height={300}/></div>
+    <h1>Seu carrinho está vazio</h1>
+    <h2>Explore nossos produtos e preencha com suas preferencias</h2>
+    <Link href="/produtos"><button>Explorar</button></Link>
+  </div>
 );
 
 const Cart = () => {
@@ -344,6 +349,7 @@ const Cart = () => {
     } catch (error) {
       console.error("Erro ao limpar quantidade no carrinho:", error);
     }
+    window.location.reload();
   };
 
   const handleQuantityChange = (id: number, delta: number) => {

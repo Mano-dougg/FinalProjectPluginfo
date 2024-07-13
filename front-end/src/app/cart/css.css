@@ -1,0 +1,14 @@
+.imgproduct img{
+    width: clamp(75px , 25vw, 253px );
+    height: clamp(63px , 25vw, 192px );
+    object-fit: cover;
+}
+.blockslipse img {
+    display: flex;
+  }
+  
+  @media (min-width: 768px) {
+    .blockslipse img {
+      display: none; 
+    }
+  }

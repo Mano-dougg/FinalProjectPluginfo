@@ -16,6 +16,7 @@
     "@prismicio/react": "^2.8.0",
     "axios": "^1.7.2",
     "next": "14.2.4",
+    "prismic-reactjs": "^1.3.4",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.11"

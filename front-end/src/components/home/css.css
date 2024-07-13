@@ -3,3 +3,6 @@
     height: auto;
     max-width: 100vw;
 }
+.imgcategory img{
+    height: clamp(50px, 16vw, 160px) ;
+}

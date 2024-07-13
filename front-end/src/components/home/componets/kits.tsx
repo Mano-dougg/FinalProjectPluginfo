@@ -1,6 +1,10 @@
+'use client'
 import styled from "styled-components";
 import { createClient } from "@/prismicio";
 import { KitImg } from "../assets/imgs";
+import { PrismicImage } from '@prismicio/react'
+
+
 
 const Container = styled.div`
   background: var(--black);
@@ -61,15 +65,17 @@ const Itens = styled.div`
 export async function Kits() {
   const prismic = createClient();
   const section1 = await prismic.getByUID("section1", "main");
+
+  
   return (
     <> 
       <Container>
         <Conteudo> 
           <Text>{section1.data.campo1}</Text>
           <Itens>
-            <KitImg />
-            <KitImg />
-            <KitImg />
+          <PrismicImage field={section1.data.img1} />
+          <PrismicImage field={section1.data.img2} />
+          <PrismicImage field={section1.data.img3} />
           </Itens>
         </Conteudo>
       </Container>

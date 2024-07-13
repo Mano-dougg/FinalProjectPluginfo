@@ -1,0 +1,31 @@
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 70vh;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .loader {
+    max-width: 50px;
+    max-height: 50px;
+    width: 8vw;
+    height: 8vw;
+    border: 10px solid black; /* Light grey */
+    border-top: 10px solid var(--rose1); /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

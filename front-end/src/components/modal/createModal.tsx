@@ -11,6 +11,7 @@ import { PostProduct } from "@/actions/productActions"; // Caminho correto para 
 import Produto from "@/types/types"; // Caminho correto para o tipo Produto
 
 import "./modal.css";
+import { fetchProductByName } from "@/actions/getProduct";
 
 interface EditModalProps {
   onClose: () => void;
@@ -98,11 +99,17 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
     };
 
     const filteredSideImages = sideImages.filter(image => image !== undefined);
+    const productExists = await fetchProductByName(nome);
     
     if (produto.mainImage===undefined && filteredSideImages.length===0){
       alert("Primeiro selecione uma imagem para o produto")
-    } 
-    else{
+
+      // verifica se o nome já esta sendo utilizado
+    } else if (productExists){
+      alert("Nome já cadastrado, tente novamente com outro nome!");
+
+      // tenta criar o produto
+    } else{
 
         try {
           await PostProduct(produto);

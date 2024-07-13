@@ -105,7 +105,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
       alert("Primeiro selecione uma imagem para o produto")
 
       // verifica se o nome já esta sendo utilizado
-    } else if (productExists){
+    } else if (productExists && productExists?.nome===nome){
       alert("Nome já cadastrado, tente novamente com outro nome!");
 
       // tenta criar o produto

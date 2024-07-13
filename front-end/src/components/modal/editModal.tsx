@@ -207,7 +207,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
 
       var productExists = await fetchProductByName(nome);
 
-      if(productExists?.id!=id){
+      if(productExists?.id!=id && productExists?.nome===nome){
         alert("Nome já cadastrado, tente novamente com outro nome!")
       } 
       else if(nome===""){
@@ -238,7 +238,6 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
       const idProduto = selectedProduct.id;
       try {
         await deleteProduct(idProduto);
-        alert("Produto deletado com sucesso!");
         onClose();
         window.location.reload();
       } catch (error) {

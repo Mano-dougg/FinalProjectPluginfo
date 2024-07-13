@@ -55,6 +55,10 @@ const TextCart = styled.h1`
   @media (max-width: 768px) {
     display:none;
   }
+  span{
+  font-size:clamp(12px,2vw,20px);
+  color:var(--green);
+  }
 `;
 
 const Table = styled.div`
@@ -77,7 +81,7 @@ const ItemContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: row;
-    background-color: grey;
+    background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 `;
@@ -229,12 +233,14 @@ const Quantidade = styled.div`
   justify-content: center;
   align-items: baseline;
   gap: 5px; 
-  margin-bottom: 10px; 
+  margin-top: 10px;
+  max-width:170px; 
 
   @media (max-width: 768px) {
     flex-direction: row; 
     align-items: center; 
-    text-align: center; 
+    text-align: center;
+    max-width:100px; 
   }
 `;
 
@@ -257,17 +263,18 @@ const Button = styled.button`
   background: var(--grey); 
   border-radius: 50px; 
   font-size: 16px;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-weight:600;
   
   @media (max-width: 768px) {
     font-size: 10px; 
-    width: 20px;
-    height: 20px; 
+    width: 18px;
+    height: 18px; 
   }
 `;
 
@@ -383,7 +390,7 @@ const Cart = () => {
                       <Title>{produto.nome}</Title>
                       <ClearIcon onClick={() => handleClear(produto.id)} />
                     </Row1>
-                <TextCart>Frete gratis</TextCart>
+                <TextCart><span>Frete gratis</span></TextCart>
 
                     <Price>
                       <PrincePadrao>R${produto.preco}</PrincePadrao>
@@ -411,7 +418,7 @@ const Cart = () => {
       </LeftColumn>
       <RightColumn>
         <Cupom>Criar component cupons </Cupom>
-      </RightColumn>
+      </RightColumn> 
     </Container>
   );
 };

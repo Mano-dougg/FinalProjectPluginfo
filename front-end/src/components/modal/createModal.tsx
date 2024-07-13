@@ -7,8 +7,8 @@ import imgPlaceholder from "@/assets/imgs/imagem-grande-placeholder.png";
 import sideImgPlaceholder from "@/assets/imgs/side-img-placeholder.png";
 import toggleOpen from "@/assets/imgs/toggle-open.png";
 import toggleClose from "@/assets/imgs/toggle-close.png";
-import { PostProduct } from "@/actions/productActions"; // Caminho correto para a função PostProduct
-import Produto from "@/types/types"; // Caminho correto para o tipo Produto
+import { PostProduct } from "@/actions/productActions"; 
+import Produto from "@/types/types"; 
 
 import "./modal.css";
 import { fetchProductByName } from "@/actions/getProduct";

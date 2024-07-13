@@ -4,6 +4,235 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type CategoriasDocumentDataSlicesSlice = never;
+
+/**
+ * Content for categorias documents
+ */
+interface CategoriasDocumentData {
+  /**
+   * img1 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img1: prismic.ImageField<never>;
+
+  /**
+   * text1 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text1: prismic.RichTextField;
+
+  /**
+   * img2 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img2: prismic.ImageField<never>;
+
+  /**
+   * text2 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text2: prismic.RichTextField;
+
+  /**
+   * img3 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img3
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img3: prismic.ImageField<never>;
+
+  /**
+   * text3 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text3
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text3: prismic.RichTextField;
+
+  /**
+   * img4 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img4
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img4: prismic.ImageField<never>;
+
+  /**
+   * text4 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text4
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text4: prismic.RichTextField;
+
+  /**
+   * img5 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img5
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img5: prismic.ImageField<never>;
+
+  /**
+   * text5 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text5
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text5: prismic.RichTextField;
+
+  /**
+   * img6 field in *categorias*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.img6
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img6: prismic.ImageField<never>;
+
+  /**
+   * text6 field in *categorias*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.text6
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text6: prismic.RichTextField;
+
+  /**
+   * `slices` field in *categorias*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: categorias.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CategoriasDocumentDataSlicesSlice>;
+}
+
+/**
+ * categorias document from Prismic
+ *
+ * - **API ID**: `categorias`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CategoriasDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<CategoriasDocumentData>,
+    "categorias",
+    Lang
+  >;
+
+type MarcasDocumentDataSlicesSlice = never;
+
+/**
+ * Content for marcas documents
+ */
+interface MarcasDocumentData {
+  /**
+   * marca1 field in *marcas*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marcas.marca1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  marca1: prismic.ImageField<never>;
+
+  /**
+   * marca2 field in *marcas*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marcas.marca2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  marca2: prismic.ImageField<never>;
+
+  /**
+   * marca3 field in *marcas*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marcas.marca3
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  marca3: prismic.ImageField<never>;
+
+  /**
+   * Slice Zone field in *marcas*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: marcas.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<MarcasDocumentDataSlicesSlice>;
+}
+
+/**
+ * marcas document from Prismic
+ *
+ * - **API ID**: `marcas`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MarcasDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<MarcasDocumentData>, "marcas", Lang>;
+
 type Section1DocumentDataSlicesSlice = never;
 
 /**
@@ -68,6 +297,372 @@ export type Section1Document<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
     Simplify<Section1DocumentData>,
     "section1",
+    Lang
+  >;
+
+type Section2DocumentDataSlicesSlice = never;
+
+/**
+ * Content for section2 documents
+ */
+interface Section2DocumentData {
+  /**
+   * marca field in *section2*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section2.marca
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  marca: prismic.RichTextField;
+
+  /**
+   * detalhes field in *section2*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section2.detalhes
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  detalhes: prismic.RichTextField;
+
+  /**
+   * botton field in *section2*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section2.botton
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  botton: prismic.RichTextField;
+
+  /**
+   * arrow field in *section2*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section2.arrow
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  arrow: prismic.ImageField<never>;
+
+  /**
+   * `slices` field in *section2*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section2.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<Section2DocumentDataSlicesSlice>;
+}
+
+/**
+ * section2 document from Prismic
+ *
+ * - **API ID**: `section2`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type Section2Document<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<Section2DocumentData>,
+    "section2",
+    Lang
+  >;
+
+type Section3recomendadosDocumentDataSlicesSlice = never;
+
+/**
+ * Content for section3Recomendados documents
+ */
+interface Section3recomendadosDocumentData {
+  /**
+   * title field in *section3Recomendados*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section3recomendados.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * `slices` field in *section3Recomendados*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section3recomendados.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<Section3recomendadosDocumentDataSlicesSlice>;
+}
+
+/**
+ * section3Recomendados document from Prismic
+ *
+ * - **API ID**: `section3recomendados`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type Section3recomendadosDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<Section3recomendadosDocumentData>,
+    "section3recomendados",
+    Lang
+  >;
+
+type Section4DocumentDataSlicesSlice = never;
+
+/**
+ * Content for section4 documents
+ */
+interface Section4DocumentData {
+  /**
+   * title field in *section4*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section4.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * detalhes field in *section4*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section4.detalhes
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  detalhes: prismic.RichTextField;
+
+  /**
+   * botton field in *section4*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section4.botton
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  botton: prismic.RichTextField;
+
+  /**
+   * `slices` field in *section4*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section4.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<Section4DocumentDataSlicesSlice>;
+}
+
+/**
+ * section4 document from Prismic
+ *
+ * - **API ID**: `section4`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type Section4Document<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<Section4DocumentData>,
+    "section4",
+    Lang
+  >;
+
+type Section5DocumentDataSlicesSlice = never;
+
+/**
+ * Content for section5 documents
+ */
+interface Section5DocumentData {
+  /**
+   * title field in *section5*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section5.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * detalhes field in *section5*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section5.detalhes
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  detalhes: prismic.RichTextField;
+
+  /**
+   * button field in *section5*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section5.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  button: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *section5*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section5.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<Section5DocumentDataSlicesSlice>;
+}
+
+/**
+ * section5 document from Prismic
+ *
+ * - **API ID**: `section5`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type Section5Document<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<Section5DocumentData>,
+    "section5",
+    Lang
+  >;
+
+/**
+ * Content for tagfooter documents
+ */
+interface TagfooterDocumentData {
+  /**
+   * link1 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.link1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link1: prismic.RichTextField;
+
+  /**
+   * link2 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.link2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link2: prismic.RichTextField;
+
+  /**
+   * link3 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.link3
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link3: prismic.RichTextField;
+
+  /**
+   * link4 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.link4
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  link4: prismic.RichTextField;
+
+  /**
+   * logo field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  logo: prismic.RichTextField;
+
+  /**
+   * span field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.span
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  span: prismic.RichTextField;
+
+  /**
+   * titleTable2 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.titletable2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  titletable2: prismic.RichTextField;
+
+  /**
+   * descriptionTable2 field in *tagfooter*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tagfooter.descriptiontable2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  descriptiontable2: prismic.RichTextField;
+}
+
+/**
+ * tagfooter document from Prismic
+ *
+ * - **API ID**: `tagfooter`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TagfooterDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TagfooterDocumentData>,
+    "tagfooter",
     Lang
   >;
 
@@ -138,7 +733,16 @@ export type TagheaderDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = Section1Document | TagheaderDocument;
+export type AllDocumentTypes =
+  | CategoriasDocument
+  | MarcasDocument
+  | Section1Document
+  | Section2Document
+  | Section3recomendadosDocument
+  | Section4Document
+  | Section5Document
+  | TagfooterDocument
+  | TagheaderDocument;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -150,9 +754,29 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      CategoriasDocument,
+      CategoriasDocumentData,
+      CategoriasDocumentDataSlicesSlice,
+      MarcasDocument,
+      MarcasDocumentData,
+      MarcasDocumentDataSlicesSlice,
       Section1Document,
       Section1DocumentData,
       Section1DocumentDataSlicesSlice,
+      Section2Document,
+      Section2DocumentData,
+      Section2DocumentDataSlicesSlice,
+      Section3recomendadosDocument,
+      Section3recomendadosDocumentData,
+      Section3recomendadosDocumentDataSlicesSlice,
+      Section4Document,
+      Section4DocumentData,
+      Section4DocumentDataSlicesSlice,
+      Section5Document,
+      Section5DocumentData,
+      Section5DocumentDataSlicesSlice,
+      TagfooterDocument,
+      TagfooterDocumentData,
       TagheaderDocument,
       TagheaderDocumentData,
       TagheaderDocumentDataSlicesSlice,

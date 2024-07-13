@@ -167,6 +167,25 @@
 
 }
 
+.filtros-container .categorias button:hover{
+    background: #C4324D;
+    color: white;
+}
+
+.filtros-container .edicao:hover{
+    background: var(--rose2);
+    border: 2px solid black;
+    color: black;
+    font-weight: 600;
+}
+
+.filtros-container .filtros-row button:hover{
+    background: var(--rose2);
+    border: 2px solid black;
+    color: black;
+    font-weight: 600;
+}
+
 /* botão de edição */
 .filtros-container .edicao{
 

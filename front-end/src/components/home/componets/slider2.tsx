@@ -18,13 +18,13 @@ const Container = styled.div`
 const Imagens = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 65px;
+  gap: 3%;
   margin-top: -5rem; 
   z-index: 9999;
 
   img {
-    width: 100%; 
-    height: 300px; 
+    width:20vw;
+    height: auto; 
     max-width: 100%; 
   }
 

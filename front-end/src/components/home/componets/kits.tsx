@@ -1,4 +1,3 @@
-'use client';
 import styled from "styled-components";
 import { createClient } from "@/prismicio";
 import { KitImg } from "../assets/imgs";
@@ -42,8 +41,8 @@ const Conteudo = styled.div`
 const Itens = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: space-evenly;
+  gap: 3%;
   margin-top:4rem;
 
   @media (max-width: 768px) {
@@ -53,7 +52,7 @@ const Itens = styled.div`
   }
 
   img {
-    width: 100%;
+    width: clamp(84px,22vw,349px);
     height: auto;
     max-width: 100%;
   }

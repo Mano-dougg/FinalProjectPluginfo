@@ -40,13 +40,13 @@ text-align: center;
 color:var(--white);
 `;
 
-const MenuItems = styled.div<{ isOpen: boolean }>`
+const MenuItems = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: 120%;
   left:0;
   right: 0;
   z-index: 1;
-  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   flex-direction: row;
   flex-wrap: no-wrap;
   gap: 15px; 
@@ -117,7 +117,7 @@ const MenuBurger: React.FC<MenuBurgerProps> = ({ className }) => {
           <MenuIconText>Nossas Categorias</MenuIconText>
           {isOpen ? '▴' : '▾'}
         </MenuIcon>
-        <MenuItems isOpen={isOpen}>
+        <MenuItems $isOpen={isOpen}>
           <MenuItem>
             <MenuContent>
               <MenuTitle>Labios</MenuTitle>

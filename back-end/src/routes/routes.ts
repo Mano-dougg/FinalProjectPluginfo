@@ -7,6 +7,7 @@ import GetProducts from '../services/productServices/getProduct/getProducts';
 import GetProductsName from '../services/productServices/getProduct/getProductsProperties';
 import UpdateProduct from '../services/productServices/updateProduct/updateProduct';
 import Cart from '../services/productServices/updateProduct/cartProducts';
+import { optionalUpload } from '../config/multerOptional';
 
 
 const routes = Router();    

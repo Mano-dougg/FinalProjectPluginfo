@@ -222,6 +222,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
         await deleteProduct(idProduto);
         alert("Produto deletado com sucesso!");
         onClose();
+        window.location.reload();
       } catch (error) {
         alert("Erro ao deletar o produto:");
         console.error(error);

@@ -292,7 +292,7 @@ const Cart = () => {
         </Table>
       </LeftColumn>
       <RightColumn>
-        <Cupom>Cupom de desconto aqui...</Cupom>
+        <Cupom>Criar component cupons </Cupom>
       </RightColumn>
     </Container>
   );

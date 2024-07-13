@@ -9,7 +9,7 @@ import sideImgPlaceholder from "@/assets/imgs/side-img-placeholder.png";
 import toggleOpen from "@/assets/imgs/toggle-open.png";
 import toggleClose from "@/assets/imgs/toggle-close.png";
 import "./modal.css";
-import { fetchAllProductsByName } from "@/actions/getProduct";
+import { fetchAllProductsByName, fetchProductByName } from "@/actions/getProduct";
 import { updateProduct, deleteProduct } from "@/actions/updateProducts";
 
 interface EditModalProps {
@@ -172,6 +172,10 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
   };
 
   const handleSave = async () => {
+
+    var promocao : number;
+    preco >= 0 ? promocao = ((preco - precoAlterado) / preco) : promocao = 0;
+
     if (id && selectedProduct) {
       const produto: Produto = {
         id,
@@ -179,7 +183,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
         marca: selectedBrand || '',
         preco,
         preco_alterado: precoAlterado,
-        promocao: ((preco - precoAlterado) / preco),
+        promocao: promocao,
         descricao,
         quantidade_carrinho: quantidadeCarrinho,
         face: selectedTags.includes('Face'),
@@ -201,15 +205,29 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
         }
       }
 
-      try {
-        await updateProduct(produto, imagesToDelete, imagesToSave.filter(image => image !== undefined) as File[]);
-        alert("Produto salvo com sucesso!");
-        onClose();
-        window.location.reload();
-      } catch (error) {
-        alert("Erro ao salvar o produto:");
-        console.error(error);
+      var productExists = await fetchProductByName(nome);
+
+      if(productExists?.id!=id && productExists?.nome===nome){
+        alert("Nome já cadastrado, tente novamente com outro nome!")
+      } 
+      else if(nome===""){
+        alert("Digite um nome para continuar")
       }
+      else if (preco ===0 || promocao===0){
+        alert("Preço inválido");
+      }
+      else{
+
+        try {
+          await updateProduct(produto, imagesToDelete, imagesToSave.filter(image => image !== undefined) as File[]);
+          onClose();
+          window.location.reload();
+        } catch (error) {
+          alert("Erro ao salvar o produto:");
+          console.error(error);
+        }
+
+      }  
     } else {
       alert("Primeiro selecione um produto");
     }
@@ -220,7 +238,6 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
       const idProduto = selectedProduct.id;
       try {
         await deleteProduct(idProduto);
-        alert("Produto deletado com sucesso!");
         onClose();
         window.location.reload();
       } catch (error) {

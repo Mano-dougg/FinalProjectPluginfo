@@ -561,3 +561,21 @@
     color: black;
 }
 
+.modal .modal-info .tag-marca button:hover{
+    background-color: var(--rose2);
+    border: 3px solid black;
+    font-weight: 700;
+}
+
+.modal .novo-produto:hover{
+    transform: scale(1.05);
+}
+.modal-imgs img:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+}
+.modal .salvar-excluir button:hover{
+    background-color: black;
+    font-weight: 700;
+    color:white;
+}

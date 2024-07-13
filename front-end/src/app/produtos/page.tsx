@@ -14,6 +14,7 @@ import EditModal from "@/components/modal/editModal";
 import CreateModal from "@/components/modal/createModal";
 import { fetchAllProducts } from "@/actions/getProduct"; 
 import { filterAllProducts } from "@/actions/filterProducts";
+import Loader from "@/components/loader/loader";
 
 interface Produto {
   id: number;
@@ -39,7 +40,10 @@ export default function Produtos() {
   // armazena a lista de produtos
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
+  const[loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
+    setLoading(true);
     const fetchProdutos = async () => {
       const fetchedProdutos = await fetchAllProducts();
       if (fetchedProdutos) {
@@ -48,6 +52,7 @@ export default function Produtos() {
     };
 
     fetchProdutos();
+    setLoading(false);
   }, []);
 
   // armazena os filtros ativos
@@ -55,6 +60,8 @@ export default function Produtos() {
   const [filtrosMarcas, setFiltrosMarcas] = useState<string[]>([]);
   const [filtrosPromocoes, setFiltrosPromocoes] = useState<string[]>([]);
   const [preco, setPreco] = useState<[number, number]>([0, 1000]);
+
+
 
   // armazena os filtros aplicados
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
@@ -117,6 +124,10 @@ export default function Produtos() {
       setProdutos(filteredProducts)
     }
   };
+
+  if (loading){
+    return (<Loader/>)
+  } else{
 
   return (
     <section className="produtos">
@@ -384,6 +395,7 @@ export default function Produtos() {
       {modalType === "create" && <CreateModal onClose={closeModal} onOpenEdit={openEditModal} />}
     </section>
   );
+}  
 }
 
 

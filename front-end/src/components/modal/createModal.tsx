@@ -84,7 +84,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
       marca: selectedBrand || '',
       preco,
       preco_alterado: precoAlterado,
-      promocao: (promocao),
+      promocao: promocao,
       descricao,
       quantidade_carrinho: quantidadeCarrinho,
       face: selectedTags.includes('Face'),
@@ -109,11 +109,17 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
       alert("Nome já cadastrado, tente novamente com outro nome!");
 
       // tenta criar o produto
-    } else{
+    }       
+    else if(nome===""){
+      alert("Digite um nome para continuar")
+    }
+    else if (preco===0 || promocao===0){
+      alert("Preço inválido");
+    }
+    else{
 
         try {
           await PostProduct(produto);
-          alert("Produto salvo com sucesso")
           onClose();
           window.location.reload();
         } catch (error) {
@@ -159,7 +165,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
                 </label>
                 <input
                   type="file"
-                  accept="image/jpeg,image/png,image/gif"
+                  // accept="image/jpeg,image/png,image/gif"
                   id={`side-image-input-${index}`}
                   style={{ display: 'none' }}
                   onChange={(e) => handleImageChange(e, index)}

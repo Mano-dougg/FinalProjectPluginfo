@@ -6,7 +6,7 @@ import ImgTeste from './imgsteste/imgsTsx';
 import ClearIcon from './imgsteste/clear';
 import axios from 'axios';
 
-interface Cart {
+interface CartItem {
   id: number;
   nome: string;
   imagePath: string[];
@@ -18,22 +18,27 @@ interface Cart {
 
 const Container = styled.div`
   display: flex;
-  padding: 50px;
-  margin-top: 25px;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex: 1;
-  margin-right: 50px;
 `;
 
 const RightColumn = styled.div`
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
 `;
 
 const TextCart = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.22;
   letter-spacing: 0.05em;
@@ -47,8 +52,9 @@ const Table = styled.div`
   gap: 25px;
 `;
 
-const Itens = styled.div`
-  width: 50vw;
+const ItemContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
   height: 197px;
   border-radius: 10px;
   background-color: var(--white);
@@ -90,33 +96,32 @@ const Info = styled.div`
 `;
 
 const Title = styled.h1`
-width:18vw;
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 24.38px;
+  line-height: 24px;
   text-align: start;
+  margin-bottom: 10px;
 `;
 
 const Row1 = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  gap: 30px;
+  align-items: center;
+  gap: 10px;
 `;
 
 const Price = styled.div`
   display: flex;
-  flex-direction: row;
-  margin-top: 0.7rem;
-  gap: 30px;
+  align-items: center;
+  gap: 10px;
 `;
 
 const PrincePadrao = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 24.38px;
+  line-height: 20px;
   letter-spacing: 0.05em;
   text-align: left;
   color: var(--grey);
@@ -125,19 +130,18 @@ const PrincePadrao = styled.h1`
 
 const PriceDescont = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 24.38px;
+  line-height: 20px;
   letter-spacing: 0.05em;
   text-align: left;
 `;
 
 const Frete = styled.h1`
-  margin-top: 0.7rem;
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
-  line-height: 18.29px;
+  line-height: 16px;
   letter-spacing: 0.05em;
   text-align: left;
   color: var(--green);
@@ -146,36 +150,30 @@ const Frete = styled.h1`
 const Quantidade = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 0.7rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24.38px;
-  letter-spacing: 0.05em;
-  text-align: left;
+  margin-top: 10px;
 `;
 
 const Quant = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 24.38px;
+  line-height: 20px;
   letter-spacing: 0.05em;
   text-align: left;
+  margin: 0 5px;
 `;
 
 const Button = styled.button`
   background: var(--grey); 
   border-radius: 50px; 
-  font-size: 20px;
-  margin: 0 10px;
-  cursor: pointer;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
-  width: 30px;  
-  height: 30px; 
-
+  cursor: pointer;
+  
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
@@ -189,30 +187,62 @@ const Loading = () => (
 );
 
 const Cart = () => {
-  const [produtos, setProdutos] = useState<Cart[]>([]);
-  const [quantity, setQuantity] = useState();
+  const [produtos, setProdutos] = useState<CartItem[]>([]);
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const response = await axios.get(
-          "http://localhost:3030/searchProduct/cart"
-        );
-        const dados = response.data; 
-        console.log(dados.marca)
+        const response = await axios.get("http://localhost:3030/searchProduct/cart");
+        const dados = response.data;
         setProdutos(dados);
+        
         console.log(dados)
         
+        const initialQuantities = dados.reduce((acc: { [key: number]: number }, produto: CartItem) => {
+          acc[produto.id] = produto.quantidade_carrinho;
+          return acc;
+        }, {});
+        setQuantities(initialQuantities);
       } catch (error) {
-        console.error("Erro ao buscar pedidos:", error);
+        console.error("Erro ao buscar produtos:", error);
       }
     }
     fetchProdutos();
-
-    if (typeof window !== 'undefined') {
-      fetchProdutos();
-    }
   }, []);
+
+  const updateQuantityInDB = async (id: number, newQuantity: number) => {
+    try {
+      await axios.put(`http://localhost:3030/updateCart/${id}`, {
+        quantidade_carrinho: newQuantity
+      });
+    } catch (error) {
+      console.error("Erro ao atualizar quantidade:", error);
+    }
+  };
+
+  const handleClear = async (id: number) => {
+    try {
+      await updateQuantityInDB(id, 0);
+      setQuantities(prevQuantities => ({
+        ...prevQuantities,
+        [id]: 0
+      }));
+    } catch (error) {
+      console.error("Erro ao limpar quantidade no carrinho:", error);
+    }
+  };
+
+  const handleQuantityChange = (id: number, delta: number) => {
+    setQuantities(prevQuantities => {
+      const newQuantity = Math.max(0, prevQuantities[id] + delta);
+      updateQuantityInDB(id, newQuantity);
+      return {
+        ...prevQuantities,
+        [id]: newQuantity
+      };
+    });
+  };
 
   if (!produtos.length) {
     return <Loading />;
@@ -224,7 +254,7 @@ const Cart = () => {
         <TextCart>Seu Carrinho</TextCart>
         <Table>
           {produtos.map((produto) => (
-            <Itens key={produto?.id}>
+            <ItemContainer key={produto.id}>
               <Item>
                 <Elipese>
                   <ElipseComponent />
@@ -235,28 +265,29 @@ const Cart = () => {
                 <Details>
                   <Info>
                     <Row1>
-                      <Title>{produto?.nome}</Title>
-                      <ClearIcon />
+                      <Title>{produto.nome}</Title>
+                      <ClearIcon onClick={() => handleClear(produto.id)} />
                     </Row1>
                     <Price>
-                      <PrincePadrao>R${produto?.preco}</PrincePadrao>
+                      <PrincePadrao>R${produto.preco}</PrincePadrao>
                       <PriceDescont>
-                        R${produto?.preco_alterado}
+                        R${produto.preco_alterado}
                       </PriceDescont>
                     </Price>
-                    {produto?.frete && <Frete>Frete Grátis</Frete>}
+                    {produto.frete && <Frete>Frete Grátis</Frete>}
                     <Quantidade>
-                      <Quant>Quant</Quant>
-                      <Button>
+                      <Button onClick={() => handleQuantityChange(produto.id, -1)}>
                         -
                       </Button>
-                      <Quant>{quantity}</Quant>
-                      <Button >+</Button>
+                      <Quant>{quantities[produto.id]}</Quant>
+                      <Button onClick={() => handleQuantityChange(produto.id, 1)}>
+                        +
+                      </Button>
                     </Quantidade>
                   </Info>
                 </Details>
               </Item>
-            </Itens>
+            </ItemContainer>
           ))}
         </Table>
       </LeftColumn>

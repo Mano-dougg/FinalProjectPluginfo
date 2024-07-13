@@ -11,6 +11,7 @@ import { PostProduct } from "@/actions/productActions"; // Caminho correto para 
 import Produto from "@/types/types"; // Caminho correto para o tipo Produto
 
 import "./modal.css";
+import { fetchProductByName } from "@/actions/getProduct";
 
 interface EditModalProps {
   onClose: () => void;
@@ -72,15 +73,18 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
     setSelectedBrand(prevBrand => (prevBrand === brand ? null : brand));
   };
 
-  // Função para salvar o produto
+  // Função para salvar produto
   const handleSave = async () => {
+
+    var promocao : number;
+    preco >= 0 ? promocao = ((preco - precoAlterado) / preco) : promocao = 0;
 
     const produto: Produto = {
       nome,
       marca: selectedBrand || '',
       preco,
       preco_alterado: precoAlterado,
-      promocao: ((preco - precoAlterado)/preco),
+      promocao: (promocao),
       descricao,
       quantidade_carrinho: quantidadeCarrinho,
       face: selectedTags.includes('Face'),
@@ -94,14 +98,30 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
       sideImages: sideImages.filter(image => image !== undefined), // Filtra para excluir valores indefinidos
     };
 
-    try {
-      await PostProduct(produto);
-      console.log("Produto salvo com sucesso!");
-      onClose();
-    } catch (error) {
-      console.error("Erro ao salvar o produto:", error);
+    const filteredSideImages = sideImages.filter(image => image !== undefined);
+    const productExists = await fetchProductByName(nome);
+    
+    if (produto.mainImage===undefined && filteredSideImages.length===0){
+      alert("Primeiro selecione uma imagem para o produto")
+
+      // verifica se o nome já esta sendo utilizado
+    } else if (productExists){
+      alert("Nome já cadastrado, tente novamente com outro nome!");
+
+      // tenta criar o produto
+    } else{
+
+        try {
+          await PostProduct(produto);
+          alert("Produto salvo com sucesso")
+          onClose();
+          window.location.reload();
+        } catch (error) {
+          alert("Erro ao salvar o produto")
+        }
+    }    
     }
-  };
+
 
   return (
     <div className="fundo-modal">
@@ -124,6 +144,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
             </label>
             <input
               type="file"
+              accept="image/jpeg,image/png,image/gif"
               id="main-image-input"
               style={{ display: 'none' }}
               onChange={(e) => handleImageChange(e, null)}
@@ -138,6 +159,7 @@ export default function CreateModal({ onClose, onOpenEdit }: EditModalProps) {
                 </label>
                 <input
                   type="file"
+                  accept="image/jpeg,image/png,image/gif"
                   id={`side-image-input-${index}`}
                   style={{ display: 'none' }}
                   onChange={(e) => handleImageChange(e, index)}

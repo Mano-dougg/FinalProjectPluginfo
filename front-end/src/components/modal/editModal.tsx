@@ -205,6 +205,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
         await updateProduct(produto, imagesToDelete, imagesToSave.filter(image => image !== undefined) as File[]);
         alert("Produto salvo com sucesso!");
         onClose();
+        window.location.reload();
       } catch (error) {
         alert("Erro ao salvar o produto:");
         console.error(error);
@@ -221,6 +222,7 @@ export default function EditModal({ onClose, onOpenCreate }: EditModalProps) {
         await deleteProduct(idProduto);
         alert("Produto deletado com sucesso!");
         onClose();
+        window.location.reload();
       } catch (error) {
         alert("Erro ao deletar o produto:");
         console.error(error);

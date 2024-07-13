@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { fetchAllProductsByName } from "@/actions/getProduct";
 import { filterGivenProducts } from "@/actions/filterProducts";
 import Recomendados from "@/components/recomendados/recomendados";
+import Loader from "@/components/loader/loader";
 
 interface SearchPageProps {
   params: { query: string };
@@ -43,11 +44,14 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
 
   const { query } = params;
 
+  const[loading, setLoading] = useState<boolean>(true);
+
     // armazena a lista de produtos
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const [searchResults, setSearchResults] = useState<Produto[]>([]);
 
     useEffect(() => {
+      setLoading(true);
       const fetchProdutos = async () => {
         const fetchedProdutos = await fetchAllProductsByName(query);
         if (fetchedProdutos) {
@@ -57,6 +61,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
       };
   
       fetchProdutos();
+      setLoading(false);
     }, [query]);
   
   // transforma em string o texto recebido pela url
@@ -109,14 +114,19 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
     setAppliedFilters([...filtrosMaquiagem, ...filtrosMarcas, ...filtrosPromocoes]);
     setAppliedPrice(preco);
 
+    setLoading(true)
     const filteredProducts = await filterGivenProducts(searchResults, filtrosMaquiagem, filtrosMarcas, filtrosPromocoes,preco)
     if (filteredProducts){
       setProdutos(filteredProducts)
+      setLoading(false);
     }
   };
 
-  // array de teste -> tipo será produto depois que criar
-  const produtosEncontrados: string[] = [];
+  if (loading){
+    return (<Loader/>)
+  } 
+
+  else{
 
   return (
     <section className="produtos">
@@ -374,7 +384,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
     {produtos.length === 0 && 
     <section className="sem-resultados">
       <h1> Nenhum resultado para sua pesquisa por &quot;{decodedSearch}&quot; </h1>
-      <p>Verifique a os termos usados na pesquisa ou utilize frases mais genéricas</p>
+      <p>Verifique os filtros usados na pesquisa ou utilize frases mais genéricas</p>
     </section>}
 
     {(produtos.length > 0 ) && 
@@ -392,6 +402,7 @@ const ProductPage: React.FC<SearchPageProps> = ({ params }) => {
       <div className="recomendados2"><Recomendados quantidade={2}/></div>
     </section>
 )}
+}
 
 export default ProductPage;
 

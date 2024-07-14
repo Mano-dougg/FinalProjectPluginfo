@@ -27,7 +27,7 @@ const Container = styled.div`
   padding: 20px;
   gap: 20px;
   
-  @media (min-width: 768px) {
+  @media (min-width: 904px) {
     padding: 63px 130px;
     flex-direction: row;
   }
@@ -40,6 +40,7 @@ const LeftColumn = styled.div`
 const RightColumn = styled.div`
   width: 100%;
   max-width: 300px;
+  margin-bottom:30px;
 
   @media (max-width: 768px) {
     max-width: none;
@@ -308,6 +309,7 @@ const Loading = () => (
 const Cart = () => {
   const [produtos, setProdutos] = useState<CartItem[]>([]);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  const [cartTotal, setCartTotal] = useState<number>(0);
 
   useEffect(() => {
     async function fetchProdutos() {
@@ -315,8 +317,6 @@ const Cart = () => {
         const response = await axios.get("http://localhost:3030/searchProduct/cart");
         const dados = response.data;
         setProdutos(dados);
-        
-        console.log(dados)
         
         const initialQuantities = dados.reduce((acc: { [key: number]: number }, produto: CartItem) => {
           acc[produto.id] = produto.quantidade_carrinho;
@@ -329,6 +329,18 @@ const Cart = () => {
     }
     fetchProdutos();
   }, []);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const total = produtos.reduce((acc, produto) => {
+        const quantidade = quantities[produto.id] || 0;
+        return acc + (produto.preco_alterado * quantidade);
+      }, 0);
+      setCartTotal(total);
+    };
+
+    calculateTotal();
+  }, [quantities, produtos]);
 
   const updateQuantityInDB = async (id: number, newQuantity: number) => {
     try {
@@ -425,7 +437,7 @@ const Cart = () => {
       </LeftColumn>
       <RightColumn>
         <Cupom>
-        <Cupons/>
+        <Cupons cartTotal={cartTotal}/>
         </Cupom>
       </RightColumn> 
     </Container>

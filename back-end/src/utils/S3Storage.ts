@@ -22,7 +22,7 @@ class S3Storage {
         const contentType = lookup(originalPath);
 
         if (!contentType) {
-            throw new Error("File not found");
+            throw new Error("Arquivo não encontrado");
         }
 
         const fileContent = await fsPromises.readFile(originalPath);
@@ -39,13 +39,11 @@ class S3Storage {
             const data = await this.client.send(command);
 
             const url = `${filename}`;
-            console.log(`File uploaded successfully to ${url}`);
 
             await fsPromises.unlink(originalPath);
 
             return url; // Retorna a URL da imagem após o upload
         } catch (error) {
-            console.error(`Error uploading file: ${error}`);
             throw error;
         }
     }
@@ -58,9 +56,7 @@ class S3Storage {
 
         try {
             await this.client.send(command);
-            console.log(`File deleted successfully from ${filename}`);
         } catch (error) {
-            console.error(`Error deleting file: ${error}`);
             throw error;
         }
     }

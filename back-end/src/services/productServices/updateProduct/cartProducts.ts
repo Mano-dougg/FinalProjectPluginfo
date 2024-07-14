@@ -28,10 +28,8 @@ class Cart {
                 }
             });
             
-
             return res.status(200).json({ msg: "Carrinho atualizado com sucesso"});
         } catch (error) {
-            console.error("Erro ao adicionar ao carrinho", error);
             res.status(500).json({ msg: "Erro ao adicionar ao carrinho" });
         }
     }

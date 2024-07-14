@@ -10,8 +10,8 @@ const Container = styled.div`
   background-color: var(--grey2);
 
   @media (max-width: 768px) {
-    max-width: 100%;
     border-radius: 0;
+    max-width:400px;
   }
 `;
 
@@ -38,7 +38,8 @@ const InputGroup = styled.div`
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  font-family: var(--montserrat-font);
+  font-weight:  700;
 `;
 
 const InputWrapper = styled.div`
@@ -53,6 +54,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+  font-family: var(--montserrat-font);
   padding: 8px 10px;
   background-color: var(--rose1);
   color: white;
@@ -60,6 +62,7 @@ const Button = styled.button`
   border-radius: 60px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight:700;
 
   &:hover {
     background-color: #0056b3;
@@ -67,6 +70,7 @@ const Button = styled.button`
 `;
 
 const FecharPedidoButton = styled(Button)`
+  font-family: var(--montserrat-font);
     margin-top: -20px;
   background-color: var(--rose2); 
   &:hover {
@@ -74,7 +78,7 @@ const FecharPedidoButton = styled(Button)`
   }
 `;
 const TextCupon = styled.div`
-font-family: 'Montserrat', sans-serif;
+font-family: var(--montserrat-font);
 font-size: 13px;
 font-weight: 600;
 line-height: 24.38px;
@@ -82,7 +86,12 @@ letter-spacing: 0.05em;
 text-align: left;
 
 `
-export function Cupons() {
+
+interface CuponsProps {
+  cartTotal: number;
+}
+
+export const Cupons: React.FC<CuponsProps> = ({ cartTotal }) => {
   return (
     <Container>
       <Conteudo>
@@ -105,10 +114,10 @@ export function Cupons() {
           <Button>OK</Button>
         </InputGroup>
         <div>
-          <TextCupon>SUB-TOTAL: R$ 100,00</TextCupon>
+          <TextCupon>SUB-TOTAL: R$ {(cartTotal).toFixed(2)}</TextCupon>
           <TextCupon>Frete: R$ 10,00</TextCupon>
           <hr />
-          <TextCupon>Total: R$ 110,00</TextCupon>
+          <TextCupon>Total: R$ {(cartTotal + 10).toFixed(2)}</TextCupon>
           <hr />
         </div>
         <FecharPedidoButton>Fechar Pedido</FecharPedidoButton>

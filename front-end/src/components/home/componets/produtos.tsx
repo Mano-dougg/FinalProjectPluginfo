@@ -66,6 +66,9 @@ const Estrelas = styled.div`
   display: flex;
   flex-direction: row;
   width: 40%;
+   @media (max-width: 768px) {
+    display:none;
+  }
 `;
 
 const Preco = styled.div`
@@ -93,6 +96,9 @@ const Promotion = styled.h2`
   letter-spacing: 0.02em;
   text-align: left;
   text-decoration: line-through;
+  @media (max-width: 768px) {
+    display:none;
+  }
 `;
 
 const Price = styled.h2`
@@ -103,6 +109,17 @@ const Price = styled.h2`
   letter-spacing: 0.02em;
   text-align: left;
   color: var(--rose2);
+  @media (max-width: 768px) {
+  color: var(--black);
+
+  font-family: 'Montserrat',sans-serif;
+font-size: 10px;
+font-weight: 500;
+line-height: 12.19px;
+letter-spacing: 0.02em;
+text-align: left;
+
+  }
 `;
 
 const Title = styled.h3`
@@ -137,6 +154,11 @@ const Compra = styled.div`
       object-fit: contain; 
     }
   }
+
+   @media (max-width: 768px) {
+    display:none;
+  }
+
 `;
 
 const Parcelamento = styled.h1`
@@ -146,6 +168,10 @@ const Parcelamento = styled.h1`
   line-height: 17.54px;
   letter-spacing: 0.02em;
   text-align: left;
+   @media (max-width: 768px) {
+    display:none;
+  }
+  
 `;
 
 const TextCart = styled.h1`
@@ -166,7 +192,7 @@ export async function Produtos() {
     <>
       <Container>
         <Conteudo>
-          <Text>RECOMENDADOS</Text>
+          <Text>Perfumes sedutores</Text>
           <Itens>
             <ContainerCard>
               <div className="ajustimgRecomendados">

@@ -24,7 +24,6 @@ class GetProducts {
 
             return res.status(200).json(produtos);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     };
@@ -49,7 +48,6 @@ class GetProducts {
 
             return res.status(200).json(produto);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     };
@@ -74,7 +72,6 @@ class GetProducts {
 
             return res.status(200).json(produto);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     };
@@ -99,7 +96,6 @@ class GetProducts {
 
             return res.status(200).json(produtos);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     };
@@ -126,7 +122,6 @@ class GetProducts {
 
             return res.status(200).json(produtos);
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     };
@@ -168,7 +163,6 @@ class GetProducts {
             res.status(200).json(produtos);
         }
         catch (error) {
-            console.error("Erro ao buscar produtos:", error);
             res.status(500).json({ msg: "Erro ao buscar produtos" });
         }
     };

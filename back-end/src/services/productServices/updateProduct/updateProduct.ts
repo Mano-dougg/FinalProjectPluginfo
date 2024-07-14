@@ -79,7 +79,6 @@ class UpdateProduct {
             res.status(200).json({ msg: 'Produto atualizado com sucesso' });
         }
         catch (error) {
-            console.error(error);
             res.status(500).json({ msg: 'Aconteceu um erro no servidor, tente novamente mais tarde' });
         }
     }

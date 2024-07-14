@@ -22,7 +22,6 @@ class GetProductsProperties {
             return res.status(200).json(nomesDosProdutos);
 
         } catch (error) {
-            console.log(error);
             res.status(500).json({ msg: "Erro ao buscar produtos:" });
         }
     }   

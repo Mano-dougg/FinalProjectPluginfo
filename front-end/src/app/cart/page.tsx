@@ -9,6 +9,7 @@ import Image from 'next/image';
 import './css.css'
 import imagemCarrinho from "@/assets/imgs/carrinhoVazio.png";
 import Link from 'next/link';
+import Cupons from './components/cupons';
 
 interface CartItem {
   id: number;
@@ -423,7 +424,9 @@ const Cart = () => {
         </Table>
       </LeftColumn>
       <RightColumn>
-        <Cupom>Criar component cupons </Cupom>
+        <Cupom>
+        <Cupons/>
+        </Cupom>
       </RightColumn> 
     </Container>
   );

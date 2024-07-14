@@ -15,7 +15,7 @@ class UploadImagesService {
             await this.s3Storage.saveFile(filename);
 
         } catch (error) {
-            throw new Error('Error saving file to S3');
+            throw new Error('Erro ao salvar as imagens no S3');
         }
     }
 

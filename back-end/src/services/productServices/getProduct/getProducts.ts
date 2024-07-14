@@ -140,7 +140,7 @@ class GetProducts {
                 face, labios, olhos, kits, sombrancelha, unhas, original
             } = req.query;
 
-            // // Filtrar apenas os campos que estão presentes no req.query
+            // Filtrar apenas os campos que estão presentes no req.query
             const filters: any = {};
             if (marca) filters.marca = { contains: String(marca), mode: 'insensitive' };
             if (preco_min) filters.preco = { ...filters.preco, gte: Number(preco_min) };

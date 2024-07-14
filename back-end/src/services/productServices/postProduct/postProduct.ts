@@ -53,7 +53,6 @@ class PostProduct {
 
             res.status(200).json({ msg: 'Produto criado com sucesso', produto });
         } catch (error) {
-            console.error(error);
             res.status(500).json({ msg: 'Aconteceu um erro no servidor, tente novamente mais tarde' });
         }
     }

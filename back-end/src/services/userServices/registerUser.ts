@@ -33,7 +33,6 @@ class Register {
             return res.status(201).json({ msg: "Usúario criado com sucesso"})
         }
         catch (error) {
-            console.log(error)
             res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"})
         }
     };

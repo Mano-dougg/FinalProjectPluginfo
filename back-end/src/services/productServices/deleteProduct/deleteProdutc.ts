@@ -27,22 +27,18 @@ class DeleteProduct {
 
             const imagePaths = product.imagePath.map(image => image.url);
 
-            // Delete images associated with the product
             await UploadImagesService.deleteImages(imagePaths);
 
-            // Remove references to the product in the ImagePath table
             await prisma.imagePath.deleteMany({
                 where: { produtoId: Number(id) }
             });
 
-            // Now delete the product
             await prisma.produto.delete({
                 where: { id: Number(id) }
             });
 
             res.status(200).json({ msg: 'Produto deletado com sucesso' });
         } catch (error) {
-            console.error(error);
             res.status(500).json({ msg: 'Aconteceu um erro no servidor, tente novamente mais tarde' });
         }
     }

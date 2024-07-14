@@ -23,7 +23,6 @@ class Login {
             await this.checkPassword(senha, user, res)
         }
         catch (error) {
-            console.log(error)
             res.status(500).json({ msg: "Aconteceu um erro no servidor, tente novamente mais tarde"})
         }
     }
